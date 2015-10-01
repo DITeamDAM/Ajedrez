@@ -124,7 +124,7 @@
 
         MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
 
-        MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
+        ' rama jaime en la master <--
 
 
     End Sub
