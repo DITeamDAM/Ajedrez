@@ -93,6 +93,9 @@
                     Me.Controls.Add(casilla)
 
 
+                    AddHandler casilla.MouseClick, AddressOf Colocar
+
+
 
                 End With
 
@@ -106,6 +109,16 @@
 
         Next
 
+
+
+    End Sub
+
+
+
+
+    Private Sub Colocar(sender As Object, e As EventArgs)
+
+        MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
 
 
     End Sub
