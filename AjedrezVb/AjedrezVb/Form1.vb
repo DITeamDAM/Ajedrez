@@ -124,6 +124,8 @@
 
         MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
 
+        MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
+
 
     End Sub
 
