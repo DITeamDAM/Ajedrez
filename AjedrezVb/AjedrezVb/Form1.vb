@@ -5,17 +5,17 @@
 
 
 
-        For i = 0 To 7 'i --> recorre x
+        For x = 0 To 7 'x --> recorre x
 
-            For j = 0 To 7 'j --> recorre y
+            For y = 0 To 7 'y --> recorre y
 
 
-
+                'LUIS -> Les he cambiado el nombre a las vars por x e y (Y)
 
                 Dim casilla As New PictureBox
                 With casilla
 
-                    .Name = "Casilla" & i & j
+                    .Name = "Casilla" & x & y
                     .Size = New System.Drawing.Size(75, 75)
                     .Location = New System.Drawing.Point(x, y)
                     .BorderStyle = BorderStyle.FixedSingle
@@ -24,78 +24,77 @@
 
 
 
-
-                    If i Mod 2 = 0 Then
+                    'Se diferencia el color de las casillas
+                    If x Mod 2 = 0 Then
                         .BackColor = Color.WhiteSmoke
-                        If j Mod 2 <> 0 Then
+                        If y Mod 2 <> 0 Then
                             .BackColor = Color.BurlyWood
                         End If
                     Else
                         '.BackColor = Color.Black
                         .BackColor = Color.BurlyWood
-                        If j Mod 2 <> 0 Then
+                        If y Mod 2 <> 0 Then
                             .BackColor = Color.WhiteSmoke
                         End If
                     End If
 
-                    If i = 1 Then
+
+                    'Se posicionan las piezas en los PictureBox
+                    'Aqui las negras
+                    If x = 1 Then
                         .Tag = 11
                         casilla.Load(Application.StartupPath & "/images/pn.png")
                     End If
-                    If i = 0 And (j = 0 Or j = 7) Then
+                    If x = 0 And (y = 0 Or y = 7) Then
                         .Tag = 12
                         casilla.Load(Application.StartupPath & "/images/tn.png")
                     End If
-                    If i = 0 And (j = 1 Or j = 6) Then
+                    If x = 0 And (y = 1 Or y = 6) Then
                         .Tag = 13
                         casilla.Load(Application.StartupPath & "/images/cn.png")
                     End If
-                    If i = 0 And (j = 2 Or j = 5) Then
+                    If x = 0 And (y = 2 Or y = 5) Then
                         .Tag = 14
                         casilla.Load(Application.StartupPath & "/images/an.png")
                     End If
-                    If i = 0 And (j = 3) Then
+                    If x = 0 And (y = 3) Then
                         .Tag = 15
                         casilla.Load(Application.StartupPath & "/images/qn.png")
                     End If
-                    If i = 0 And (j = 4) Then
+                    If x = 0 And (y = 4) Then
                         .Tag = 14
                         casilla.Load(Application.StartupPath & "/images/kn.png")
                     End If
 
-
-                    If i = 6 Then
+                    'Aqui las blancas
+                    If x = 6 Then
                         .Tag = 11
                         casilla.Load(Application.StartupPath & "/images/pb.png")
                     End If
-                    If i = 7 And (j = 0 Or j = 7) Then
+                    If x = 7 And (y = 0 Or y = 7) Then
                         .Tag = 12
                         casilla.Load(Application.StartupPath & "/images/tb.png")
                     End If
-                    If i = 7 And (j = 1 Or j = 6) Then
+                    If x = 7 And (y = 1 Or y = 6) Then
                         .Tag = 13
                         casilla.Load(Application.StartupPath & "/images/cb.png")
                     End If
-                    If i = 7 And (j = 2 Or j = 5) Then
+                    If x = 7 And (y = 2 Or y = 5) Then
                         .Tag = 14
                         casilla.Load(Application.StartupPath & "/images/ab.png")
                     End If
-                    If i = 7 And (j = 3) Then
+                    If x = 7 And (y = 3) Then
                         .Tag = 15
                         casilla.Load(Application.StartupPath & "/images/qb.png")
                     End If
-                    If i = 7 And (j = 4) Then
+                    If x = 7 And (y = 4) Then
                         .Tag = 14
                         casilla.Load(Application.StartupPath & "/images/kb.png")
                     End If
-
+                    'Hasta aqui se posicionan
 
                     Me.Controls.Add(casilla)
-
-
                     AddHandler casilla.MouseClick, AddressOf Colocar
-
-
 
                 End With
 
@@ -118,15 +117,20 @@
 
     Private Sub Colocar(sender As Object, e As EventArgs)
 
-        MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
+
+        Dim figura As PictureBox
+        Dim pos_Inicio As Integer
+        Dim pos_Fin As Integer
+
+        If (figura.Name = "") Then
+            MsgBox("nulo")
+        End If
+
 
         MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
 
-        MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
 
-        ' rama jaime en la master <--
-        ' 2
-
+        'prueba master jaime
 
     End Sub
 
