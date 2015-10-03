@@ -72,7 +72,7 @@
                         casilla.Load(Application.StartupPath & "/images/qn.png")
                     End If
                     If i = 0 And (j = 4) Then
-                        .Tag = 14
+                        .Tag = 16
                         casilla.Load(Application.StartupPath & "/images/kn.png")
                     End If
 
@@ -98,7 +98,7 @@
                         casilla.Load(Application.StartupPath & "/images/qb.png")
                     End If
                     If i = 7 And (j = 4) Then
-                        .Tag = 24
+                        .Tag = 26
                         casilla.Load(Application.StartupPath & "/images/kb.png")
                     End If
                     'Hasta aqui se posicionan
@@ -229,9 +229,7 @@
             Case 24
             Case 25
             Case 26
-            Case 0
-                MsgBox("Selecciona una figura")
-
+                Return MovRey26(figura, nCasilla)
 
 
         End Select
@@ -296,6 +294,55 @@
 
     End Function
 
+    Function MovRey26(ByVal rey As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+        Dim inicio As String
+
+        posInicial = rey.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+        inicio = posInicial.Substring(0, 1)
+
+        MsgBox(posInicial & " ,pos final: " & posFinal)
+        ' controlador de movimiento horizontal
+        If posFinal = posInicial - 1 Or posFinal = posInicial + 1 Then
+            If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                Return True
+            End If
+            If nuevaCasilla.Tag > 20 Then
+                Return False
+            Else
+                Return True
+            End If
+
+        End If
+        'controlador de movimiento vertical
+        If posFinal = posInicial + 10 Or posFinal = posInicial - 10 Then
+            If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                Return True
+            End If
+            If nuevaCasilla.Tag > 20 Then
+                Return False
+            Else
+                Return True
+            End If
+        End If
+        'controlador de movimiento diagonal
+        If posFinal = posInicial + 9 Or posFinal = posInicial + 11 Or posFinal = posInicial - 9 Or posFinal = posInicial - 11 Then
+            If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                Return True
+            End If
+            If nuevaCasilla.Tag > 20 Then
+                Return False
+            Else
+                Return True
+            End If
+
+        End If
+
+    End Function
 
 
 
