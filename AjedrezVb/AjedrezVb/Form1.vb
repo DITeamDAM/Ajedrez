@@ -1,6 +1,8 @@
 ﻿Public Class Form1
 
     Dim figura As PictureBox
+    Dim Color_Inicio As Color
+    Dim Color_Final As Color
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x As Integer 'posicion en x
@@ -141,39 +143,35 @@
             If figura Is Nothing Then
                 figura = sender
                 MsgBox("Figura guardada: " & figura.Name() & " Tag: " & figura.Tag())
+                Color_Inicio = figura.BackColor
                 figura.BackColor = Color.Red
             Else
                 MsgBox("Ya tienes una figura guardada")
+                'funcion para detectar si es del equipo contrario --> Comer; sino --> no deja moverse
             End If
 
+        Else
+            If figura IsNot Nothing Then
+                MsgBox("Moviendo figura")
+                Color_Final = sender.BackColor
+                sender.BackColor = Color.Green
 
+                sender.Tag = figura.Tag
+                figura.Tag = "0"
+                MsgBox(sender.Tag)
+                sender.ImageLocation = figura.ImageLocation
+                figura.ImageLocation = Nothing
+                figura.BackColor = Color_Inicio
+                sender.BackColor = Color_Final
+                figura = Nothing
+            Else
+                MsgBox("Pincha primero en una figura")
+            End If
 
 
         End If
 
 
-
-
-
-        'If figura IsNot Nothing Then
-        '    MsgBox("Ya tienes seleccionada una figura, selecciona una posicion para moverla")
-        'Else
-        '    If (sender.Tag <> "0") Then
-        '        figura = sender
-        '        MsgBox("Figura guardada:" & figura.Name() & " " & figura.Tag())
-        '    Else
-        '        If figura Is Nothing Then
-        '            MsgBox("Tienes que pinchar primero en una figura")
-        '        End If
-
-        '    End If
-        'End If
-
-
-        'MsgBox("Nombre: " & sender.Name & " Tag: " & sender.Tag)
-
-
-        'prueba master jaime
 
     End Sub
 
