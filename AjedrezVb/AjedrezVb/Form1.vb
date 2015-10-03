@@ -142,19 +142,23 @@
 
         Else                                                                                                        'Posicion pulsada es 0 --> Si hay figura --> moverse; sino --> Error --> Pinchar primero en una figura
             If figura IsNot Nothing Then                                                                            'Si tienes figura guardada (no null) --> Movemos la figura
-                MsgBox("Moviendo figura")
-                Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
-                sender.BackColor = Color.Green                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
-                sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
-                figura.Tag = "0"                                                                                    'Establecemos la posicion donde estaba la figura a 0 (la figura se mueve y deja libre su posicion inicial)
-                MsgBox(sender.Tag)
-                sender.ImageLocation = figura.ImageLocation                                                         'Establecemos la imagen de la posicion vacia a la imagen de la figura que se mueve
-                figura.ImageLocation = Nothing                                                                      'Quitamos la imagen de la figura de su posicion inicial (null)
-                figura.BackColor = Color_Inicio                                                                     'Establecemos el color de fondo de la posicion inicial a la del tablero
-                sender.BackColor = Color_Final                                                                      'Establecemos el color de la posicion a moverse a la del tablero (Creo que se puede prescindir esto junto al verde)
-                figura = Nothing                                                                                    'Resetamos la figura seleccionada para el siguiente movimiento
-            Else                                                                                                    'No hay figura guardada --> Error --> Pinchar primero una figura
-                MsgBox("Pincha primero en una figura")
+
+                If comprobador(figura, sender) Then
+
+                    MsgBox("Moviendo figura")
+                    Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
+                    sender.BackColor = Color.Green                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
+                    sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
+                    figura.Tag = "0"                                                                                    'Establecemos la posicion donde estaba la figura a 0 (la figura se mueve y deja libre su posicion inicial)
+                    MsgBox(sender.Tag)
+                    sender.ImageLocation = figura.ImageLocation                                                         'Establecemos la imagen de la posicion vacia a la imagen de la figura que se mueve
+                    figura.ImageLocation = Nothing                                                                      'Quitamos la imagen de la figura de su posicion inicial (null)
+                    figura.BackColor = Color_Inicio                                                                     'Establecemos el color de fondo de la posicion inicial a la del tablero
+                    sender.BackColor = Color_Final                                                                      'Establecemos el color de la posicion a moverse a la del tablero (Creo que se puede prescindir esto junto al verde)
+                    figura = Nothing                                                                                    'Resetamos la figura seleccionada para el siguiente movimiento
+                Else                                                                                                    'No hay figura guardada --> Error --> Pinchar primero una figura
+                    MsgBox("Pincha primero en una figura")
+                End If
             End If
 
 
@@ -163,6 +167,74 @@
 
 
     End Sub
+
+
+    Function comprobador(ByVal figura As PictureBox, ByVal nCasilla As PictureBox)
+        MsgBox(figura.Tag & "ESTO ES LA FUNCION COMPROBAR")
+        Select Case figura.Tag
+            Case 11
+                Return MovPeon11(figura, nCasilla)
+            Case 12
+                Return True
+            Case 13
+            Case 14
+            Case 15
+            Case 16
+            Case 21
+            Case 22
+            Case 23
+            Case 24
+            Case 25
+            Case 26
+
+
+
+        End Select
+
+
+
+
+    End Function
+
+    Function MovPeon11(ByVal peon As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+        Dim inicio As String
+
+        posInicial = peon.Name
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+        inicio = posInicial.Substring(0, 1)
+
+        MsgBox(posInicial & " ,pos final: " & posFinal)
+
+        If inicio = 6 Then
+            If posFinal = posInicial - 10 Then
+                Return True
+            End If
+            If posFinal = posInicial - 20 Then
+                Return True
+
+
+            End If
+        Else
+            If posFinal = posInicial - 10 Then
+                If nuevaCasilla.Tag > 20 Then
+                    Return False
+                Else
+                    Return True
+                End If
+
+
+            End If
+
+        End If
+
+
+    End Function
+
+
 
 
 
