@@ -78,27 +78,27 @@
 
                     'Aqui las blancas
                     If i = 6 Then
-                        .Tag = 11
+                        .Tag = 21
                         casilla.Load(Application.StartupPath & "/images/pb.png")
                     End If
                     If i = 7 And (j = 0 Or j = 7) Then
-                        .Tag = 12
+                        .Tag = 22
                         casilla.Load(Application.StartupPath & "/images/tb.png")
                     End If
                     If i = 7 And (j = 1 Or j = 6) Then
-                        .Tag = 13
+                        .Tag = 23
                         casilla.Load(Application.StartupPath & "/images/cb.png")
                     End If
                     If i = 7 And (j = 2 Or j = 5) Then
-                        .Tag = 14
+                        .Tag = 24
                         casilla.Load(Application.StartupPath & "/images/ab.png")
                     End If
                     If i = 7 And (j = 3) Then
-                        .Tag = 15
+                        .Tag = 25
                         casilla.Load(Application.StartupPath & "/images/qb.png")
                     End If
                     If i = 7 And (j = 4) Then
-                        .Tag = 14
+                        .Tag = 24
                         casilla.Load(Application.StartupPath & "/images/kb.png")
                     End If
                     'Hasta aqui se posicionan
@@ -130,22 +130,26 @@
 
 
         If (sender.Tag <> "0") Then                                                                                 'Si la posicion que pulsas es distinto de 0, es una figura
+            Dim tagFigura As String
+
             If figura Is Nothing Then                                                                               'Si no tenemos figura guardada (null) --> la guarda
                 figura = sender                                                                                     'Guardamos la figura
+                tagFigura = figura.Tag
                 MsgBox("Figura guardada: " & figura.Name() & " Tag: " & figura.Tag())
                 Color_Inicio = figura.BackColor                                                                     'Guardamos el color del tablero de la posicion de la figura
                 figura.BackColor = Color.Red                                                                        'Resaltamos la figura seleccionada en ese momento
             Else                                                                                                    'Si ya hay una figura seleccionada --> Teniendo una figura, Pulsas en otra figura. Comprobar si la figura que pulsas es una figura propia --> error, una figura enemiga --> comer
+
                 MsgBox("Ya tienes una figura guardada")
                 'Insertar funcion para detectar si es del equipo contrario --> Comer; sino --> no deja moverse
             End If
 
         Else                                                                                                        'Posicion pulsada es 0 --> Si hay figura --> moverse; sino --> Error --> Pinchar primero en una figura
-            If figura IsNot Nothing Then                                                                            'Si tienes figura guardada (no null) --> Movemos la figura
+            If comprobador(figura, sender) Then                                                                          'Si tienes figura guardada (no null) --> Movemos la figura
 
-                If comprobador(figura, sender) Then
 
-                    MsgBox("Moviendo figura")
+
+                MsgBox("Moviendo figura")
                     Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
                     sender.BackColor = Color.Green                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
                     sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
@@ -158,7 +162,7 @@
                     figura = Nothing                                                                                    'Resetamos la figura seleccionada para el siguiente movimiento
                 Else                                                                                                    'No hay figura guardada --> Error --> Pinchar primero una figura
                     MsgBox("Pincha primero en una figura")
-                End If
+
             End If
 
 
