@@ -129,42 +129,31 @@
 
 
 
-        Dim pos_Inicio As Integer
-        Dim pos_Fin As Integer
-
-
-        'Primero check if figura -> guardada; Si -> seleccionar posicion; No --> pincha en una figura;
-
-
-
-
-
-        If (sender.Tag <> "0") Then
-            If figura Is Nothing Then
-                figura = sender
+        If (sender.Tag <> "0") Then                                                                                 'Si la posicion que pulsas es distinto de 0, es una figura
+            If figura Is Nothing Then                                                                               'Si no tenemos figura guardada (null) --> la guarda
+                figura = sender                                                                                     'Guardamos la figura
                 MsgBox("Figura guardada: " & figura.Name() & " Tag: " & figura.Tag())
-                Color_Inicio = figura.BackColor
-                figura.BackColor = Color.Red
-            Else
+                Color_Inicio = figura.BackColor                                                                     'Guardamos el color del tablero de la posicion de la figura
+                figura.BackColor = Color.Red                                                                        'Resaltamos la figura seleccionada en ese momento
+            Else                                                                                                    'Si ya hay una figura seleccionada --> Teniendo una figura, Pulsas en otra figura. Comprobar si la figura que pulsas es una figura propia --> error, una figura enemiga --> comer
                 MsgBox("Ya tienes una figura guardada")
-                'funcion para detectar si es del equipo contrario --> Comer; sino --> no deja moverse
+                'Insertar funcion para detectar si es del equipo contrario --> Comer; sino --> no deja moverse
             End If
 
-        Else
-            If figura IsNot Nothing Then
+        Else                                                                                                        'Posicion pulsada es 0 --> Si hay figura --> moverse; sino --> Error --> Pinchar primero en una figura
+            If figura IsNot Nothing Then                                                                            'Si tienes figura guardada (no null) --> Movemos la figura
                 MsgBox("Moviendo figura")
-                Color_Final = sender.BackColor
-                sender.BackColor = Color.Green
-
-                sender.Tag = figura.Tag
-                figura.Tag = "0"
+                Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
+                sender.BackColor = Color.Green                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
+                sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
+                figura.Tag = "0"                                                                                    'Establecemos la posicion donde estaba la figura a 0 (la figura se mueve y deja libre su posicion inicial)
                 MsgBox(sender.Tag)
-                sender.ImageLocation = figura.ImageLocation
-                figura.ImageLocation = Nothing
-                figura.BackColor = Color_Inicio
-                sender.BackColor = Color_Final
-                figura = Nothing
-            Else
+                sender.ImageLocation = figura.ImageLocation                                                         'Establecemos la imagen de la posicion vacia a la imagen de la figura que se mueve
+                figura.ImageLocation = Nothing                                                                      'Quitamos la imagen de la figura de su posicion inicial (null)
+                figura.BackColor = Color_Inicio                                                                     'Establecemos el color de fondo de la posicion inicial a la del tablero
+                sender.BackColor = Color_Final                                                                      'Establecemos el color de la posicion a moverse a la del tablero (Creo que se puede prescindir esto junto al verde)
+                figura = Nothing                                                                                    'Resetamos la figura seleccionada para el siguiente movimiento
+            Else                                                                                                    'No hay figura guardada --> Error --> Pinchar primero una figura
                 MsgBox("Pincha primero en una figura")
             End If
 
