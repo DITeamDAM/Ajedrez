@@ -217,7 +217,7 @@
             Case 11
 
             Case 12
-                Return True
+                Return MovTorre21(figura, nCasilla)
             Case 13
             Case 14
             Case 15
@@ -225,7 +225,9 @@
             Case 21
                 Return MovPeon11(figura, nCasilla)
             Case 22
+                Return MovTorre21(figura, nCasilla)
             Case 23
+                Return MovCaballo23(figura, nCasilla)
             Case 24
             Case 25
             Case 26
@@ -294,16 +296,54 @@
 
     End Function
 
+
+    Function MovTorre21(ByVal torre As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posVertical_Inicial As String
+        Dim posVertical_Final As String
+        Dim posHorizontal_Inicial As String
+        Dim posHorizontal_Final As String
+
+        posVertical_Inicial = torre.Name                          'Calcula las posiciones tanto del inicio como del final
+        posVertical_Inicial = posVertical_Inicial.Substring(8)
+        posVertical_Final = nuevaCasilla.Name
+        posVertical_Final = posVertical_Final.Substring(8)
+
+
+        posHorizontal_Inicial = torre.Name                          'Calcula las posiciones tanto del inicio como del final
+        posHorizontal_Inicial = Mid(posHorizontal_Inicial, 8, 1)
+        posHorizontal_Final = nuevaCasilla.Name
+        posHorizontal_Final = Mid(posHorizontal_Final, 8, 1)
+
+        MsgBox("TORRE NAME: " & torre.Name)
+        MsgBox("CASILLA NAME: " & nuevaCasilla.Name)
+
+        'MsgBox(posVertical_Inicial & " ,pos final: " & posVertical_Final)
+        MsgBox(posHorizontal_Inicial & " ,pos final: " & posHorizontal_Final)
+
+        If posVertical_Inicial = posVertical_Final Then
+            Return True
+        End If
+
+        If posHorizontal_Inicial = posHorizontal_Final Then
+            Return True
+        End If
+
+
+
+
+    End Function
+
+
     Function MovRey26(ByVal rey As PictureBox, ByVal nuevaCasilla As PictureBox)
         Dim posInicial As String
         Dim posFinal As String
-        Dim inicio As String
+
 
         posInicial = rey.Name                          'Calcula las posiciones tanto del inicio como del final
         posInicial = posInicial.Substring(7)
         posFinal = nuevaCasilla.Name
         posFinal = posFinal.Substring(7)
-        inicio = posInicial.Substring(0, 1)
+
 
         MsgBox(posInicial & " ,pos final: " & posFinal)
         ' controlador de movimiento horizontal
@@ -344,7 +384,67 @@
 
     End Function
 
+    Function MovCaballo23(ByVal rey As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+
+
+        posInicial = rey.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+
+        'controlador vertical del caballo
+        If posFinal = posInicial + 21 Or posFinal = posInicial + 19 Or posFinal = posInicial - 21 Or posFinal = posInicial - 19 Then
+
+            If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                Return True
+            End If
+            If nuevaCasilla.Tag > 20 Then
+                Return False
+            Else
+                Return True
+            End If
+        End If
+        'controlador horizontal del caballo
+        If posFinal = posInicial + 12 Or posFinal = posInicial + 8 Or posFinal = posInicial - 12 Or posFinal = posInicial - 8 Then
+            If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                Return True
+            End If
+            If nuevaCasilla.Tag > 20 Then
+                Return False
+            Else
+                Return True
+            End If
+        End If
+
+    End Function
+
+
+    Function Interponer(ByVal figura As PictureBox, ByVal nuevaCasilla As PictureBox)
+
+
+        Dim posInicial As String
+        Dim posFinal As String
+
+
+        Dim posVertical_Inicial As String
+        Dim posVertical_Final As String
+        Dim posHorizontal_Inicial As String
+        Dim posHorizontal_Final As String
 
 
 
+        posInicial = figura.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        Dim contador As Integer = posInicial
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+
+
+        'comprobador vertical
+
+
+
+    End Function
 End Class
