@@ -226,6 +226,7 @@
                 Return MovPeon11(figura, nCasilla)
             Case 22
             Case 23
+                Return MovCaballo23(figura, nCasilla)
             Case 24
                 Return MovAlfil24(figura, nCasilla)
             Case 25
@@ -415,6 +416,44 @@
         Next
         Return False
     End Function
+
+
+    Function MovCaballo23(ByVal rey As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+
+
+        posInicial = rey.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+
+        'controlador vertical del caballo
+        If posFinal = posInicial + 21 Or posFinal = posInicial + 19 Or posFinal = posInicial - 21 Or posFinal = posInicial - 19 Then
+
+            If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                Return True
+            End If
+            If nuevaCasilla.Tag > 20 Then
+                Return False
+            Else
+                Return True
+            End If
+        End If
+        'controlador horizontal del caballo
+        If posFinal = posInicial + 12 Or posFinal = posInicial + 8 Or posFinal = posInicial - 12 Or posFinal = posInicial - 8 Then
+            If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                Return True
+            End If
+            If nuevaCasilla.Tag > 20 Then
+                Return False
+            Else
+                Return True
+            End If
+        End If
+
+    End Function
+
 
 
     Function MovAlfil24(ByVal alfil As PictureBox, ByVal nuevaCasilla As PictureBox)
