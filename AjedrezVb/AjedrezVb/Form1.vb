@@ -420,6 +420,52 @@
 
     End Function
 
+    Function MovReina(ByVal reina As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+        Dim posVertical_Inicial As String
+        Dim posVertical_Final As String
+        Dim posHorizontal_Inicial As String
+        Dim posHorizontal_Final As String
+
+
+        'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+
+
+        posVertical_Inicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
+        posVertical_Inicial = posVertical_Inicial.Substring(8)
+        posVertical_Final = nuevaCasilla.Name
+        posVertical_Final = posVertical_Final.Substring(8)
+
+
+        posHorizontal_Inicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
+        posHorizontal_Inicial = Mid(posHorizontal_Inicial, 8, 1)
+        posHorizontal_Final = nuevaCasilla.Name
+        posHorizontal_Final = Mid(posHorizontal_Final, 8, 1)
+
+        MsgBox("TORRE NAME: " & reina.Name)
+        MsgBox("CASILLA NAME: " & nuevaCasilla.Name)
+
+        'MsgBox(posVertical_Inicial & " ,pos final: " & posVertical_Final)
+        MsgBox(posHorizontal_Inicial & " ,pos final: " & posHorizontal_Final)
+
+        If posVertical_Inicial = posVertical_Final Then
+            Return True
+        End If
+
+        If posHorizontal_Inicial = posHorizontal_Final Then
+            Return True
+        End If
+
+
+
+
+
+    End Function
+
 
     Function Interponer(ByVal figura As PictureBox, ByVal nuevaCasilla As PictureBox)
 
@@ -440,6 +486,7 @@
         Dim contador As Integer = posInicial
         posFinal = nuevaCasilla.Name
         posFinal = posFinal.Substring(7)
+
 
 
         'comprobador vertical
