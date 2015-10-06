@@ -227,6 +227,7 @@
             Case 22
             Case 23
             Case 24
+                Return MovAlfil24(figura, nCasilla)
             Case 25
             Case 26
                 Return MovRey26(figura, nCasilla)
@@ -341,6 +342,96 @@
             End If
 
         End If
+    End Function
+
+    'Private Function checkDiagonalDe(ByVal cx, ByVal cy)
+    '    Dim suma = cx + cy
+
+    '    For Each objeto In Me.Controls
+    '        If TypeOf (objeto) Is System.Windows.Forms.PictureBox Then
+
+    '            Dim y As Integer = suma
+
+    '            For x = 0 To suma
+
+    '                If objeto.name = "img" & x & y Then
+    '                    If objeto.Tag = 1 Then
+    '                        Return False
+    '                    End If
+    '                End If
+    '                y -= 1
+
+    '            Next
+
+    '        End If
+    '    Next
+
+    '    Return True
+    'End Function
+    'Private Function checkDiagonalIz(ByVal cx, ByVal cy)
+    '    Dim resta As Integer
+    '    Dim fin As Integer
+
+    '    If cy > cx Then
+    '        resta = cy - cx
+    '        fin = 7
+    '    Else
+    '        resta = cx - cy
+    '        fin = 7 - resta
+    '    End If
+
+    '    For Each objeto In Me.Controls
+    '        If TypeOf (objeto) Is System.Windows.Forms.PictureBox Then
+
+    '            Dim x As Integer = (cy - resta)
+
+    '            For y = (cx - resta) To fin
+
+    '                If objeto.name = "img" & x & y Then
+    '                    If objeto.Tag = 1 Then
+    '                        Return False
+    '                    End If
+    '                End If
+
+    '            Next
+
+    '        End If
+    '    Next
+
+    '    Return True
+    'End Function
+
+
+    Function diagonalDe(ByVal posini As Integer, ByVal posfin As Integer, ByVal nuevaCasilla As PictureBox)
+
+        For salto As Integer = 1 To 8
+            If posfin = posini + (salto * (-9)) Then
+                MsgBox(posini & " - " & posfin)
+                If nuevaCasilla.Tag = 0 Then
+                    MsgBox("Se puede mover")
+                    Return True
+                End If
+            End If
+        Next
+        Return False
+    End Function
+
+
+    Function MovAlfil24(ByVal alfil As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+        Dim inicio As String
+
+        posInicial = alfil.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+        inicio = posInicial.Substring(0, 1)
+
+        Return diagonalDe(posInicial, posFinal, nuevaCasilla)
+
+
+
 
     End Function
 
@@ -348,3 +439,4 @@
 
 
 End Class
+
