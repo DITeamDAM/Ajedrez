@@ -3,24 +3,26 @@
     Dim figura As PictureBox
     Dim Color_Inicio As Color
     Dim Color_Final As Color
+    Dim blanca As Integer = 2
+    Dim negra As Integer = 1
+    Dim peon As Integer = 1
+    Dim torre As Integer = 2
+    Dim caballo As Integer = 3
+    Dim alfil As Integer = 4
+    Dim reina As Integer = 5
+    Dim rey As Integer = 6
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x As Integer 'posicion en x
         Dim y As Integer 'posicion en y
-
+        Dim colorNegro = Color.BurlyWood
+        Dim colorBlanco = Color.WhiteSmoke
 
 
 
         For i = 0 To 7 'i --> recorre x
-
             For j = 0 To 7 'j --> recorre y
-
-
-                'Jaime --> No cambiar las variables i-j por x-y porque bugea el bucle y adios form.
-                'Si quereis hacer multicomentario seleccionar lo que quereis comentar y --> (Ctr+K y Ctr+C);
-                'Para quitarlo (Ctr+K y Ctr+U); De nada :D
-
-
 
                 Dim casilla As New PictureBox
                 With casilla
@@ -33,98 +35,81 @@
                     .Tag = 0
 
 
-
                     'Se diferencia el color de las casillas
                     If i Mod 2 = 0 Then
-                        .BackColor = Color.WhiteSmoke
+                        .BackColor = colorBlanco
                         If j Mod 2 <> 0 Then
-                            .BackColor = Color.BurlyWood
+                            .BackColor = colorNegro
                         End If
                     Else
-                        '.BackColor = Color.Black
-                        .BackColor = Color.BurlyWood
+                        .BackColor = colorNegro
                         If j Mod 2 <> 0 Then
-                            .BackColor = Color.WhiteSmoke
+                            .BackColor = colorBlanco
                         End If
                     End If
 
 
-                    'Se posicionan las piezas en los PictureBox
-                    'Aqui las negras
-                    If i = 1 Then
-                        .Tag = 11
-                        casilla.Load(Application.StartupPath & "/images/pn.png")
-                    End If
-                    If i = 0 And (j = 0 Or j = 7) Then
-                        .Tag = 12
-                        casilla.Load(Application.StartupPath & "/images/tn.png")
-                    End If
-                    If i = 0 And (j = 1 Or j = 6) Then
-                        .Tag = 13
-                        casilla.Load(Application.StartupPath & "/images/cn.png")
-                    End If
-                    If i = 0 And (j = 2 Or j = 5) Then
-                        .Tag = 14
-                        casilla.Load(Application.StartupPath & "/images/an.png")
-                    End If
-                    If i = 0 And (j = 3) Then
-                        .Tag = 15
-                        casilla.Load(Application.StartupPath & "/images/qn.png")
-                    End If
-                    If i = 0 And (j = 4) Then
-                        .Tag = 16
-                        casilla.Load(Application.StartupPath & "/images/kn.png")
-                    End If
+                    Select Case i
+                        Case 0
+                            Select Case j
+                                Case 0, 7
+                                    setFigura(casilla, negra, torre)
+                                Case 1, 6
+                                    setFigura(casilla, negra, caballo)
+                                Case 2, 5
+                                    setFigura(casilla, negra, alfil)
+                                Case 3
+                                    setFigura(casilla, negra, reina)
+                                Case 4
+                                    setFigura(casilla, negra, rey)
+                                Case Else
+                                    .Tag = 0
+                            End Select
+                        Case 1
+                            setFigura(casilla, negra, peon)
+                        Case 6
+                            setFigura(casilla, blanca, peon)
+                        Case 7
+                            Select Case j
+                                Case 0, 7
+                                    setFigura(casilla, blanca, torre)
+                                Case 1, 6
+                                    setFigura(casilla, blanca, caballo)
+                                Case 2, 5
+                                    setFigura(casilla, blanca, alfil)
+                                Case 3
+                                    setFigura(casilla, blanca, reina)
+                                Case 4
+                                    setFigura(casilla, blanca, rey)
+                                Case Else
+                                    .Tag = 0
+                            End Select
+                    End Select
 
-                    'Aqui las blancas
-                    If i = 6 Then
-                        .Tag = 21
-                        casilla.Load(Application.StartupPath & "/images/pb.png")
-                    End If
-                    If i = 7 And (j = 0 Or j = 7) Then
-                        .Tag = 22
-                        casilla.Load(Application.StartupPath & "/images/tb.png")
-                    End If
-                    If i = 7 And (j = 1 Or j = 6) Then
-                        .Tag = 23
-                        casilla.Load(Application.StartupPath & "/images/cb.png")
-                    End If
-                    If i = 7 And (j = 2 Or j = 5) Then
-                        .Tag = 24
-                        casilla.Load(Application.StartupPath & "/images/ab.png")
-                    End If
-                    If i = 7 And (j = 3) Then
-                        .Tag = 25
-                        casilla.Load(Application.StartupPath & "/images/qb.png")
-                    End If
-                    If i = 7 And (j = 4) Then
-                        .Tag = 26
-                        casilla.Load(Application.StartupPath & "/images/kb.png")
-                    End If
-                    'Hasta aqui se posicionan
 
                     Me.Controls.Add(casilla)
                     AddHandler casilla.MouseClick, AddressOf Colocar
 
                 End With
 
-
-
                 x += 75
-
             Next
+
             x = 0
             y += 75
-
         Next
 
 
 
     End Sub
 
+    Private Sub setFigura(obj As PictureBox, color As Integer, tipo As Integer)
+        obj.Tag = color & tipo
+        obj.Load(Application.StartupPath & "/img/" & color & tipo & ".png")
+    End Sub
+
 
     Dim tagFigura As String
-
     Private Sub Colocar(sender As Object, e As EventArgs)
 
 
