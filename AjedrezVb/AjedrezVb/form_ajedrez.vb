@@ -1,4 +1,4 @@
-﻿Public Class Form1
+﻿Public Class form_ajedrez
 
     Dim figura As PictureBox
     Dim Color_Inicio As Color
@@ -34,8 +34,11 @@
                     .Name = "Casilla" & i & j
                     .Size = New System.Drawing.Size(75, 75)
                     .Location = New System.Drawing.Point(x, y)
-                    .BorderStyle = BorderStyle.FixedSingle
-                    .SizeMode = PictureBoxSizeMode.StretchImage
+                    '.BorderStyle = BorderStyle.FixedSingle
+                    .BorderStyle = BorderStyle.None
+                    .Padding = New Padding(0, 0, 0, 0)
+                    '.SizeMode = PictureBoxSizeMode.StretchImage
+                    .SizeMode = PictureBoxSizeMode.Normal
                     .Tag = 0
 
 
