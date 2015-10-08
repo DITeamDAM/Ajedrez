@@ -22,7 +22,7 @@
 
         'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
         Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
-        Dim colorBlanco = ColorTranslator.FromHtml("#EEEEEE")
+        Dim colorBlanco = ColorTranslator.FromHtml("#FEE8B9")
 
 
         For i = 0 To 7
