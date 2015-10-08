@@ -3,8 +3,11 @@
     Dim figura As PictureBox
     Dim Color_Inicio As Color
     Dim Color_Final As Color
+
+    'Asignacion de valores para cada caso
     Dim blanca As Integer = 2
     Dim negra As Integer = 1
+
     Dim peon As Integer = 1
     Dim torre As Integer = 2
     Dim caballo As Integer = 3
@@ -14,15 +17,16 @@
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim x As Integer 'posicion en x
-        Dim y As Integer 'posicion en y
-        Dim colorNegro = Color.BurlyWood
-        Dim colorBlanco = Color.WhiteSmoke
+        Dim x As Integer
+        Dim y As Integer
+
+        'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
+        Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
+        Dim colorBlanco = ColorTranslator.FromHtml("#F2F2F2")
 
 
-
-        For i = 0 To 7 'i --> recorre x
-            For j = 0 To 7 'j --> recorre y
+        For i = 0 To 7
+            For j = 0 To 7
 
                 Dim casilla As New PictureBox
                 With casilla
@@ -98,11 +102,9 @@
             x = 0
             y += 75
         Next
-
-
-
     End Sub
 
+    'Para crear las figuras segun los parametros, valido tambien para futuros usos en otros metodos
     Private Sub setFigura(obj As PictureBox, color As Integer, tipo As Integer)
         obj.Tag = color & tipo
         obj.Load(Application.StartupPath & "/img/" & color & tipo & ".png")
@@ -112,7 +114,9 @@
     Dim tagFigura As String
     Private Sub Colocar(sender As Object, e As EventArgs)
 
-
+        'Color al seleccionar y al soltar, tambien por colores hexadecimales
+        Dim colorSelected = ColorTranslator.FromHtml("#F3FC41")
+        Dim colorSoltado = ColorTranslator.FromHtml("#EEEEEE")
 
         If (sender.Tag <> "0") Then                                                                                 'Si la posicion que pulsas es distinto de 0, es una figura
 
@@ -122,7 +126,7 @@
                 tagFigura = tagFigura.Substring(0, 1)
                 MsgBox("Figura guardada: " & figura.Name() & " Tag: " & figura.Tag() & " TEAM: " & tagFigura)
                 Color_Inicio = figura.BackColor                                                                     'Guardamos el color del tablero de la posicion de la figura
-                figura.BackColor = Color.Red                                                                        'Resaltamos la figura seleccionada en ese momento
+                figura.BackColor = colorSelected                                                                        'Resaltamos la figura seleccionada en ese momento
                 'Si ya hay una figura seleccionada --> Teniendo una figura, Pulsas en otra figura. Comprobar si la figura que pulsas es una figura propia --> error, una figura enemiga --> comer
 
 
@@ -143,14 +147,14 @@
                 tagFigura = tagFigura.Substring(0, 1)
                 MsgBox("Figura guardada: " & figura.Name() & " Tag: " & figura.Tag() & " TEAM: " & tagFigura)
                 Color_Inicio = figura.BackColor                                                                     'Guardamos el color del tablero de la posicion de la figura
-                figura.BackColor = Color.Red
+                figura.BackColor = colorSelected
             End If
             'controlador para cuando seleccionamos una figura de otro equipo
             If tagFigura <> tagSender Then
                 If comprobador(figura, sender) Then
                     MsgBox("Moviendo figura")
                     Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
-                    sender.BackColor = Color.Green                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
+                    sender.BackColor = colorSoltado                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
                     sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
                     figura.Tag = "0"                                                                                    'Establecemos la posicion donde estaba la figura a 0 (la figura se mueve y deja libre su posicion inicial)
                     MsgBox(sender.Tag)
@@ -172,7 +176,7 @@
 
                     MsgBox("Moviendo figura")
                     Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
-                    sender.BackColor = Color.Green                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
+                    sender.BackColor = colorSoltado                                                                    'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
                     sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
                     figura.Tag = "0"                                                                                    'Establecemos la posicion donde estaba la figura a 0 (la figura se mueve y deja libre su posicion inicial)
                     MsgBox(sender.Tag)
