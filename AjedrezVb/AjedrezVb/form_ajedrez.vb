@@ -16,7 +16,7 @@
     Dim rey As Integer = 6
 
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x As Integer
         Dim y As Integer
 
@@ -202,14 +202,18 @@
 
     End Sub
 
+
+
+
     'filtro de figuras y sus movimientos
     Function comprobador(ByVal figura As PictureBox, ByVal nCasilla As PictureBox)
         MsgBox(figura.Tag & "ESTO ES LA FUNCION COMPROBAR")
+
         Select Case figura.Tag
             Case 11
 
             Case 12
-                Return True
+                Return MovTorre21(figura, nCasilla)
             Case 13
             Case 14
             Case 15
@@ -217,11 +221,14 @@
             Case 21
                 Return MovPeon11(figura, nCasilla)
             Case 22
+                Return MovTorre21(figura, nCasilla)
             Case 23
                 Return MovCaballo23(figura, nCasilla)
             Case 24
-                Return MovAlfil24(figura, nCasilla)
+                Return MovAlfil(figura, nCasilla)
             Case 25
+                Return MovReina(figura, nCasilla)
+
             Case 26
                 Return MovRey26(figura, nCasilla)
 
@@ -288,16 +295,54 @@
 
     End Function
 
+
+    Function MovTorre21(ByVal torre As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posVertical_Inicial As String
+        Dim posVertical_Final As String
+        Dim posHorizontal_Inicial As String
+        Dim posHorizontal_Final As String
+
+        posVertical_Inicial = torre.Name                          'Calcula las posiciones tanto del inicio como del final
+        posVertical_Inicial = posVertical_Inicial.Substring(8)
+        posVertical_Final = nuevaCasilla.Name
+        posVertical_Final = posVertical_Final.Substring(8)
+
+
+        posHorizontal_Inicial = torre.Name                          'Calcula las posiciones tanto del inicio como del final
+        posHorizontal_Inicial = Mid(posHorizontal_Inicial, 8, 1)
+        posHorizontal_Final = nuevaCasilla.Name
+        posHorizontal_Final = Mid(posHorizontal_Final, 8, 1)
+
+        MsgBox("TORRE NAME: " & torre.Name)
+        MsgBox("CASILLA NAME: " & nuevaCasilla.Name)
+
+        'MsgBox(posVertical_Inicial & " ,pos final: " & posVertical_Final)
+        MsgBox(posHorizontal_Inicial & " ,pos final: " & posHorizontal_Final)
+
+        If posVertical_Inicial = posVertical_Final Then
+            Return True
+        End If
+
+        If posHorizontal_Inicial = posHorizontal_Final Then
+            Return True
+        End If
+
+
+
+
+    End Function
+
+
     Function MovRey26(ByVal rey As PictureBox, ByVal nuevaCasilla As PictureBox)
         Dim posInicial As String
         Dim posFinal As String
-        Dim inicio As String
+
 
         posInicial = rey.Name                          'Calcula las posiciones tanto del inicio como del final
         posInicial = posInicial.Substring(7)
         posFinal = nuevaCasilla.Name
         posFinal = posFinal.Substring(7)
-        inicio = posInicial.Substring(0, 1)
+
 
         MsgBox(posInicial & " ,pos final: " & posFinal)
         ' controlador de movimiento horizontal
@@ -335,80 +380,8 @@
             End If
 
         End If
+
     End Function
-
-    'Private Function checkDiagonalDe(ByVal cx, ByVal cy)
-    '    Dim suma = cx + cy
-
-    '    For Each objeto In Me.Controls
-    '        If TypeOf (objeto) Is System.Windows.Forms.PictureBox Then
-
-    '            Dim y As Integer = suma
-
-    '            For x = 0 To suma
-
-    '                If objeto.name = "img" & x & y Then
-    '                    If objeto.Tag = 1 Then
-    '                        Return False
-    '                    End If
-    '                End If
-    '                y -= 1
-
-    '            Next
-
-    '        End If
-    '    Next
-
-    '    Return True
-    'End Function
-    'Private Function checkDiagonalIz(ByVal cx, ByVal cy)
-    '    Dim resta As Integer
-    '    Dim fin As Integer
-
-    '    If cy > cx Then
-    '        resta = cy - cx
-    '        fin = 7
-    '    Else
-    '        resta = cx - cy
-    '        fin = 7 - resta
-    '    End If
-
-    '    For Each objeto In Me.Controls
-    '        If TypeOf (objeto) Is System.Windows.Forms.PictureBox Then
-
-    '            Dim x As Integer = (cy - resta)
-
-    '            For y = (cx - resta) To fin
-
-    '                If objeto.name = "img" & x & y Then
-    '                    If objeto.Tag = 1 Then
-    '                        Return False
-    '                    End If
-    '                End If
-
-    '            Next
-
-    '        End If
-    '    Next
-
-    '    Return True
-    'End Function
-
-
-    Function diagonalDe(ByVal posini As Integer, ByVal posfin As Integer, ByVal nuevaCasilla As PictureBox)
-
-        For salto As Integer = 1 To 8
-            If posfin = posini + (salto * (-9)) Then
-                MsgBox(posini & " - " & posfin)
-                If nuevaCasilla.Tag = 0 Then
-                    MsgBox("Se puede mover")
-                    Return True
-                End If
-            End If
-        Next
-        Return False
-    End Function
-
 
     Function MovCaballo23(ByVal rey As PictureBox, ByVal nuevaCasilla As PictureBox)
         Dim posInicial As String
@@ -446,28 +419,119 @@
 
     End Function
 
-
-
-    Function MovAlfil24(ByVal alfil As PictureBox, ByVal nuevaCasilla As PictureBox)
+    Function MovReina(ByVal reina As PictureBox, ByVal nuevaCasilla As PictureBox)
         Dim posInicial As String
         Dim posFinal As String
-        Dim inicio As String
+        Dim posVertical_Inicial As String
+        Dim posVertical_Final As String
+        Dim posHorizontal_Inicial As String
+        Dim posHorizontal_Final As String
 
-        posInicial = alfil.Name                          'Calcula las posiciones tanto del inicio como del final
+
+        'Calcula las posiciones tanto del inicio como del final
+        posInicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
         posInicial = posInicial.Substring(7)
         posFinal = nuevaCasilla.Name
         posFinal = posFinal.Substring(7)
-        inicio = posInicial.Substring(0, 1)
 
-        Return diagonalDe(posInicial, posFinal, nuevaCasilla)
 
+        posVertical_Inicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
+        posVertical_Inicial = posVertical_Inicial.Substring(8)
+        posVertical_Final = nuevaCasilla.Name
+        posVertical_Final = posVertical_Final.Substring(8)
+
+
+        posHorizontal_Inicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
+        posHorizontal_Inicial = Mid(posHorizontal_Inicial, 8, 1)
+        posHorizontal_Final = nuevaCasilla.Name
+        posHorizontal_Final = Mid(posHorizontal_Final, 8, 1)
+
+        MsgBox("TORRE NAME: " & reina.Name)
+        MsgBox("CASILLA NAME: " & nuevaCasilla.Name)
+
+        'MsgBox(posVertical_Inicial & " ,pos final: " & posVertical_Final)
+        MsgBox(posHorizontal_Inicial & " ,pos final: " & posHorizontal_Final)
+
+        If posVertical_Inicial = posVertical_Final Then
+            Return True
+        End If
+
+        If posHorizontal_Inicial = posHorizontal_Final Then
+            Return True
+        End If
+
+        ' diagonal
+        For diagonal As Integer = 1 To 8
+            If posFinal = posInicial + diagonal * (-9) Or posFinal = posInicial + diagonal * (+9) Or posFinal = posInicial + diagonal * (-11) Or posFinal = posInicial + diagonal * (+11) Then
+                If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                    Return True
+                End If
+                If nuevaCasilla.Tag > 20 Then
+                    Return False
+                Else
+                    Return True
+                End If
+
+            End If
+
+        Next
 
 
 
     End Function
 
 
+    Function Interponer(ByVal figura As PictureBox, ByVal nuevaCasilla As PictureBox)
 
+
+        Dim posInicial As String
+        Dim posFinal As String
+
+
+        Dim posVertical_Inicial As String
+        Dim posVertical_Final As String
+        Dim posHorizontal_Inicial As String
+        Dim posHorizontal_Final As String
+
+
+
+        posInicial = figura.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        Dim contador As Integer = posInicial
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+
+
+
+        'comprobador vertical
+
+
+
+    End Function
+
+    Function MovAlfil(ByVal reina As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+
+        posInicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+
+        For diagonal As Integer = 1 To 8
+            If posFinal = posInicial + diagonal * (-9) Or posFinal = posInicial + diagonal * (+9) Or posFinal = posInicial + diagonal * (-11) Or posFinal = posInicial + diagonal * (+11) Then
+                If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                    Return True
+                End If
+                If nuevaCasilla.Tag > 20 Then
+                    Return False
+                Else
+                    Return True
+                End If
+
+            End If
+
+        Next
+    End Function
 
 End Class
-
