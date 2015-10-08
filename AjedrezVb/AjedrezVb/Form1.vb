@@ -213,6 +213,7 @@
     'filtro de figuras y sus movimientos
     Function comprobador(ByVal figura As PictureBox, ByVal nCasilla As PictureBox)
         MsgBox(figura.Tag & "ESTO ES LA FUNCION COMPROBAR")
+
         Select Case figura.Tag
             Case 11
 
@@ -229,7 +230,10 @@
             Case 23
                 Return MovCaballo23(figura, nCasilla)
             Case 24
+                Return MovAlfil(figura, nCasilla)
             Case 25
+                Return MovReina(figura, nCasilla)
+
             Case 26
                 Return MovRey26(figura, nCasilla)
 
@@ -430,6 +434,7 @@
 
 
         'Calcula las posiciones tanto del inicio como del final
+        posInicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
         posInicial = posInicial.Substring(7)
         posFinal = nuevaCasilla.Name
         posFinal = posFinal.Substring(7)
@@ -460,7 +465,21 @@
             Return True
         End If
 
+        ' diagonal
+        For diagonal As Integer = 1 To 8
+            If posFinal = posInicial + diagonal * (-9) Or posFinal = posInicial + diagonal * (+9) Or posFinal = posInicial + diagonal * (-11) Or posFinal = posInicial + diagonal * (+11) Then
+                If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                    Return True
+                End If
+                If nuevaCasilla.Tag > 20 Then
+                    Return False
+                Else
+                    Return True
+                End If
 
+            End If
+
+        Next
 
 
 
@@ -494,4 +513,30 @@
 
 
     End Function
+
+    Function MovAlfil(ByVal reina As PictureBox, ByVal nuevaCasilla As PictureBox)
+        Dim posInicial As String
+        Dim posFinal As String
+
+        posInicial = reina.Name                          'Calcula las posiciones tanto del inicio como del final
+        posInicial = posInicial.Substring(7)
+        posFinal = nuevaCasilla.Name
+        posFinal = posFinal.Substring(7)
+
+        For diagonal As Integer = 1 To 8
+            If posFinal = posInicial + diagonal * (-9) Or posFinal = posInicial + diagonal * (+9) Or posFinal = posInicial + diagonal * (-11) Or posFinal = posInicial + diagonal * (+11) Then
+                If nuevaCasilla.Tag > 10 And nuevaCasilla.Tag < 17 Then
+                    Return True
+                End If
+                If nuevaCasilla.Tag > 20 Then
+                    Return False
+                Else
+                    Return True
+                End If
+
+            End If
+
+        Next
+    End Function
+
 End Class
