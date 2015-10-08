@@ -22,7 +22,7 @@
 
         'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
         Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
-        Dim colorBlanco = ColorTranslator.FromHtml("#F2F2F2")
+        Dim colorBlanco = ColorTranslator.FromHtml("#EEEEEE")
 
 
         For i = 0 To 7
@@ -116,7 +116,7 @@
 
         'Color al seleccionar y al soltar, tambien por colores hexadecimales
         Dim colorSelected = ColorTranslator.FromHtml("#F3FC41")
-        Dim colorSoltado = ColorTranslator.FromHtml("#EEEEEE")
+        Dim colorSoltado = ColorTranslator.FromHtml("#4DFC41")
 
         If (sender.Tag <> "0") Then                                                                                 'Si la posicion que pulsas es distinto de 0, es una figura
 
