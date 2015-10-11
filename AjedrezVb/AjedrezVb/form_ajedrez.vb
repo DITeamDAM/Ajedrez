@@ -1,8 +1,5 @@
 ﻿Public Class form_ajedrez
 
-    Dim figura As PictureBox
-    Dim Color_Inicio As Color
-    Dim Color_Final As Color
 
     'Asignacion de valores para cada caso
     Dim blanca As Integer = 2
@@ -95,7 +92,7 @@
 
 
                     Me.Controls.Add(casilla)
-                    AddHandler casilla.MouseClick, AddressOf Colocar
+                    AddHandler casilla.MouseClick, AddressOf colocando
 
                 End With
 
@@ -456,94 +453,109 @@
 
 
 
-    Dim tagFigura As String
 
 
     'Color al seleccionar y al soltar, tambien por colores hexadecimales
-    Dim colorClick1st = ColorTranslator.FromHtml("#5DB3FF") '#f3fc41
-    Dim colorClick2nd = ColorTranslator.FromHtml("#57D837") '#4DFC41
+    Dim bgcolorClick1st = ColorTranslator.FromHtml("#5DB3FF") '#f3fc41
+    Dim bgcolorClick2nd = ColorTranslator.FromHtml("#57D837") '#4DFC41
 
-    Private Sub Colocar(sender As Object, e As EventArgs)
+    Dim colorClicked1st As Integer
+    Dim clicked1st As PictureBox = Nothing
 
-
-        If (sender.Tag <> "0") Then                                                                                 'Si la posicion que pulsas es distinto de 0, es una figura
-
-
-            If figura Is Nothing Then                                                                               'Si no tenemos figura guardada (null) --> la guarda
-                figura = sender
-                MsgBox("PRIMER IF")
-                Color_Inicio = figura.BackColor                                                                     'Guardamos el color del tablero de la posicion de la figura
-                figura.BackColor = colorClick1st                                                                        'Resaltamos la figura seleccionada en ese momento
-                'Si ya hay una figura seleccionada --> Teniendo una figura, Pulsas en otra figura. Comprobar si la figura que pulsas es una figura propia --> error, una figura enemiga --> comer
+    Dim color1st As Color
+    Dim color2nd As Color
 
 
+    Private Sub guardar1stClick(click As PictureBox)
+        clicked1st = click
+        colorClicked1st = getColor(clicked1st)
+        color1st = clicked1st.BackColor
+        clicked1st.BackColor = bgcolorClick1st
+    End Sub
 
-                'Insertar funcion para detectar si es del equipo contrario --> Comer; sino --> no deja moverse
-            End If
-            'calcula los tag de la nueva figura
-            Dim tagSender As String
-            tagSender = getColor(sender.Tag)
 
-            'controlador para cambiar  de figura
-            If tagFigura = getColor(sender.Tag) Then
-                'Guardamos la figura
-                figura.BackColor = Color_Inicio
-                figura = sender
-                tagFigura = figura.Tag
-                tagFigura = tagFigura.Substring(0, 1)
-                MsgBox("Figura guardada: " & figura.Name() & " Tag: " & figura.Tag() & " TEAM: " & tagFigura)
-                Color_Inicio = figura.BackColor                                                                     'Guardamos el color del tablero de la posicion de la figura
-                figura.BackColor = colorClick1st
-            End If
-            'controlador para cuando seleccionamos una figura de otro equipo CUANDO COME
-            If tagFigura <> getColor(sender.Tag) Then
-                If comprobador(figura, sender) Then
-                    MsgBox("COMIENDO")
-                    Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
-                    sender.BackColor = colorClick2nd                                                                      'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
-                    sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
-                    figura.Tag = "0"                                                                                    'Establecemos la posicion donde estaba la figura a 0 (la figura se mueve y deja libre su posicion inicial)
-                    MsgBox(sender.Tag)
-                    sender.ImageLocation = figura.ImageLocation                                                         'Establecemos la imagen de la posicion vacia a la imagen de la figura que se mueve
-                    figura.ImageLocation = Nothing                                                                      'Quitamos la imagen de la figura de su posicion inicial (null)
-                    figura.BackColor = Color_Inicio                                                                     'Establecemos el color de fondo de la posicion inicial a la del tablero
-                    sender.BackColor = Color_Final                                                                      'Establecemos el color de la posicion a moverse a la del tablero (Creo que se puede prescindir esto junto al verde)
-                    figura = Nothing
-                End If
+    'Dim ultimoMov As Integer = 0
+    Private Sub moverClick(click As PictureBox)
+        color2nd = click.BackColor
 
+        click.Tag = clicked1st.Tag
+        clicked1st.Tag = 0
+
+        'MsgBox(click.Tag)
+
+        click.ImageLocation = clicked1st.ImageLocation
+        clicked1st.ImageLocation = Nothing
+
+        clicked1st.BackColor = color1st
+        'click.BackColor = bgcolorClick2nd
+        click.BackColor = color2nd 'setea el color de fondo al soltar la pieza
+
+        clicked1st = Nothing
+
+        'ultimoMov = getPosicion(click)
+    End Sub
+
+
+    Dim primerclick As Boolean = True
+
+    Private Sub colocando(clicked2nd As PictureBox, e As EventArgs)
+
+        If (getColor(clicked2nd) <> 0) Then
+
+            If clicked1st Is Nothing Then
+                guardar1stClick(clicked2nd)
             End If
 
-        Else                                                                                                        'Posicion pulsada es 0 --> Si hay figura --> moverse; sino --> Error --> Pinchar primero en una figura
-            'Si tienes figura guardada (no null) --> Movemos la figura
-            If figura Is Nothing Then
-                MsgBox("Pincha primero en una figura")
+
+            Dim colorClicked2nd As Integer = getColor(clicked2nd)
+
+            'si es del mismo color
+            If colorClicked1st = colorClicked2nd Then
+                clicked1st.BackColor = color1st 'setea el color que habia antes de fondo
+                guardar1stClick(clicked2nd)
             Else
-                If comprobador(figura, sender) Then
-
-                    MsgBox("MOVIENDO LIBRE")
-                    Color_Final = sender.BackColor                                                                      'Guardamos el color de la posicion a la que nos movemos
-                    sender.BackColor = colorClick2nd                                                                    'Seteamos el color de la posicion a verde (creo que se puede prescindir, abajo lo volvemos a poner al default...)
-                    sender.Tag = figura.Tag                                                                             'Establecemos el tag de la imagen a la posicion que hemos pulsado (la figura se mueve y ocupa la posicion vacia)
-                    figura.Tag = "0"                                                                                    'Establecemos la posicion donde estaba la figura a 0 (la figura se mueve y deja libre su posicion inicial)
-                    MsgBox(sender.Tag)
-                    sender.ImageLocation = figura.ImageLocation                                                         'Establecemos la imagen de la posicion vacia a la imagen de la figura que se mueve
-                    figura.ImageLocation = Nothing                                                                      'Quitamos la imagen de la figura de su posicion inicial (null)
-                    figura.BackColor = Color_Inicio                                                                     'Establecemos el color de fondo de la posicion inicial a la del tablero
-                    sender.BackColor = Color_Final                                                                      'Establecemos el color de la posicion a moverse a la del tablero (Creo que se puede prescindir esto junto al verde)
-                    figura = Nothing                                                                                    'Resetamos la figura seleccionada para el siguiente movimiento
-                    'No hay figura guardada --> Error --> Pinchar primero una figura
-
+                If comprobador(clicked1st, clicked2nd) Then
+                    moverClick(clicked2nd)
                 End If
             End If
 
+        Else
 
-
+            If clicked1st IsNot Nothing Then
+                If comprobador(clicked1st, clicked2nd) Then
+                    moverClick(clicked2nd)
+                End If
+            Else
+                'MsgBox("Selecciona una pieza")
+            End If
 
         End If
 
 
+        'eventos aparte para el primer y segundo click
+        'If primerclick Then
+
+        '    'If ultimoMov <> 0 Then
+
+        '    '    For Each objeto In Me.Controls
+        '    '        If TypeOf (objeto) Is System.Windows.Forms.PictureBox Then
+        '    '            If getPosicion(objeto) = ultimoMov Then
+        '    '                objeto.BackColor = color2nd
+        '    '                Exit For
+        '    '            End If
+        '    '        End If
+        '    '    Next
+
+        '    'End If
+
+        '    primerclick = False
+        'Else
+
+        '    primerclick = True
+        'End If
 
     End Sub
+
 
 
 
