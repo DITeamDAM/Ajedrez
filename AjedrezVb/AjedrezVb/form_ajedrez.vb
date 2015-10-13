@@ -244,6 +244,10 @@
                             If getColor(click2nd) = 0 Then
                                 Return limite(getColor(click1st), getColor(click2nd))
                             End If
+                        Case getPosicion(click1st) - 11, getPosicion(click1st) - 9
+                            If getColor(click2nd) <> 0 Then
+                                Return limite(getColor(click1st), getColor(click2nd))
+                            End If
                     End Select
                 Else
                     Select Case getPosicion(click2nd)
@@ -262,6 +266,10 @@
                     Select Case getPosicion(click2nd)
                         Case getPosicion(click1st) + 10, getPosicion(click1st) + 20
                             If getColor(click2nd) = 0 Then
+                                Return limite(getColor(click1st), getColor(click2nd))
+                            End If
+                        Case getPosicion(click1st) + 11, getPosicion(click1st) + 9
+                            If getColor(click2nd) <> 0 Then
                                 Return limite(getColor(click1st), getColor(click2nd))
                             End If
                     End Select
@@ -439,7 +447,7 @@
 
 
 
-    Dim primerclick As Boolean = True
+    'Dim primerclick As Boolean = True
 
     Private Sub colocando(clicked2nd As PictureBox, e As EventArgs)
 
