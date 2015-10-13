@@ -139,7 +139,8 @@
     Private Function horizontal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
         Select Case getPosicion(click2nd)
-            Case getPosicion(click1st) - 10, getPosicion(click1st) + 10
+            Case getPosicion(click1st) - 10,
+                 getPosicion(click1st) + 10
 
                 Return limite(getColor(click1st), getColor(click2nd))
 
@@ -152,7 +153,8 @@
     Private Function vertical(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
         Select Case getPosicion(click2nd)
-            Case getPosicion(click1st) - 1, getPosicion(click1st) + 1
+            Case getPosicion(click1st) - 1,
+                 getPosicion(click1st) + 1
 
                 Return limite(getColor(click1st), getColor(click2nd))
 
@@ -166,7 +168,8 @@
 
         For horizontal As Integer = 1 To 8
             Select Case getPosicion(click2nd)
-                Case getPosicion(click1st) + horizontal * (-10), getPosicion(click1st) + horizontal * (+10)
+                Case getPosicion(click1st) + horizontal * (-10),
+                     getPosicion(click1st) + horizontal * (+10)
 
                     Return limite(getColor(click1st), getColor(click2nd))
 
@@ -181,7 +184,8 @@
 
         For horizontal As Integer = 1 To 8
             Select Case getPosicion(click2nd)
-                Case getPosicion(click1st) + horizontal * (-1), getPosicion(click1st) + horizontal * (+1)
+                Case getPosicion(click1st) + horizontal * (-1),
+                     getPosicion(click1st) + horizontal * (+1)
 
                     Return limite(getColor(click1st), getColor(click2nd))
 
@@ -195,7 +199,10 @@
     Private Function diagonal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
         Select Case getPosicion(click2nd)
-            Case getPosicion(click1st) - 9, getPosicion(click1st) + 9, getPosicion(click1st) - 11, getPosicion(click1st) + 11
+            Case getPosicion(click1st) - 9,
+                 getPosicion(click1st) + 9,
+                 getPosicion(click1st) - 11,
+                 getPosicion(click1st) + 11
 
                 Return limite(getColor(click1st), getColor(click2nd))
 
@@ -210,7 +217,10 @@
         For diagonal As Integer = 1 To 8
 
             Select Case getPosicion(click2nd)
-                Case getPosicion(click1st) + diagonal * (-9), getPosicion(click1st) + diagonal * (+9), getPosicion(click1st) + diagonal * (-11), getPosicion(click1st) + diagonal * (+11)
+                Case getPosicion(click1st) + diagonal * (-9),
+                     getPosicion(click1st) + diagonal * (+9),
+                     getPosicion(click1st) + diagonal * (-11),
+                     getPosicion(click1st) + diagonal * (+11)
 
                     Return limite(getColor(click1st), getColor(click2nd))
 
