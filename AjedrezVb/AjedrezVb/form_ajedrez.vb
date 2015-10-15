@@ -127,30 +127,16 @@
 
 
     Private Function getPosicionFila(obj As PictureBox)
-        Return CInt(CStr(obj.Name).Substring(1, 1)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
-    End Function
-
-
-    Private Function getPosicionColumna(obj As PictureBox)
         Return CInt(CStr(obj.Name).Substring(0, 1)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
     End Function
 
 
-    Private Function horizontal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
-        Select Case getPosicion(click2nd)
-            Case getPosicion(click1st) - 10,
-                 getPosicion(click1st) + 10
-
-                Return limite(getColor(click1st), getColor(click2nd))
-
-        End Select
-
-        Return False
+    Private Function getPosicionColumna(obj As PictureBox)
+        Return CInt(CStr(obj.Name).Substring(1, 1)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
     End Function
 
 
-    Private Function vertical(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function horizontal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
         Select Case getPosicion(click2nd)
             Case getPosicion(click1st) - 1,
@@ -164,12 +150,25 @@
     End Function
 
 
-    Private Function horizontales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function vertical(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
-        For horizontal As Integer = 1 To 8
+        Select Case getPosicion(click2nd)
+            Case getPosicion(click1st) - 10,
+                 getPosicion(click1st) + 10
+
+                Return limite(getColor(click1st), getColor(click2nd))
+
+        End Select
+
+        Return False
+    End Function
+
+
+    Private Function verticales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+
+        For vertical As Integer = 1 To 8
             Select Case getPosicion(click2nd)
-                Case getPosicion(click1st) + horizontal * (-10),
-                     getPosicion(click1st) + horizontal * (+10)
+                Case vertical & getPosicionColumna(click1st)
 
                     Return limite(getColor(click1st), getColor(click2nd))
 
@@ -180,16 +179,19 @@
     End Function
 
 
-    Private Function verticales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function horizontales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
         For horizontal As Integer = 1 To 8
+
             Select Case getPosicion(click2nd)
-                Case getPosicion(click1st) + horizontal * (-1),
-                     getPosicion(click1st) + horizontal * (+1)
+                Case getPosicionFila(click1st) & horizontal
 
                     Return limite(getColor(click1st), getColor(click2nd))
 
             End Select
+
+
+
         Next
 
         Return False
@@ -203,6 +205,7 @@
                  getPosicion(click1st) + 9,
                  getPosicion(click1st) - 11,
                  getPosicion(click1st) + 11
+
 
                 Return limite(getColor(click1st), getColor(click2nd))
 
@@ -221,6 +224,9 @@
                      getPosicion(click1st) + diagonal * (+9),
                      getPosicion(click1st) + diagonal * (-11),
                      getPosicion(click1st) + diagonal * (+11)
+
+                    'MsgBox(click1st.Tag)
+
 
                     Return limite(getColor(click1st), getColor(click2nd))
 
@@ -303,7 +309,7 @@
 
     Function MovTorre(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
-        If horizontales(click1st, click2nd) Or verticales(click1st, click2nd) Then
+        If verticales(click1st, click2nd) Or horizontales(click1st, click2nd) Then
             Return True
         End If
 
@@ -338,8 +344,7 @@
 
 
     Function MovReina(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
-        If horizontales(click1st, click2nd) Or verticales(click1st, click2nd) Or diagonales(click1st, click2nd) Then
+        If verticales(click1st, click2nd) OrElse diagonales(click1st, click2nd) OrElse horizontales(click1st, click2nd) Then
             Return True
         End If
 
