@@ -217,22 +217,91 @@
 
     Private Function diagonales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
-        For diagonal As Integer = 1 To 8
 
-            Select Case getPosicion(click2nd)
-                Case getPosicion(click1st) + diagonal * (-9),
-                     getPosicion(click1st) + diagonal * (+9),
-                     getPosicion(click1st) + diagonal * (-11),
-                     getPosicion(click1st) + diagonal * (+11)
+        'Select Case getPosicion(click2nd)
+        '    Case getPosicion(click1st) + diagonal() * (-9)
 
-                    'MsgBox(click1st.Tag)
+        '        While actual <> click2nd.Tag
+        '            If actual <> 0 Then
+        '                Return False
+
+        '            Else
+        '                If actual = click2nd.Tag And actual <> 0 Then
+        '                    Return True
+        '                End If
+
+        '            End If
+        '            actual -= 9
+        '        End While
+        '    Case getPosicion(click1st) + diagonal() * (+9),
+        '             getPosicion(click1st) + diagonal() * (-11),
+        '             getPosicion(click1st) + diagonal() * (+11)
+
+        '        'MsgBox(click1st.Tag)
 
 
-                    Return limite(getColor(click1st), getColor(click2nd))
+        '        Return limite(getColor(click1st), getColor(click2nd))
 
-            End Select
+        'End Select
 
+
+
+        'For diagonal As Integer = 1 To 8
+
+        '    Select Case getPosicion(click2nd)
+        '        Case getPosicion(click1st) + diagonal * (-9),
+        '             getPosicion(click1st) + diagonal * (+9),
+        '             getPosicion(click1st) + diagonal * (-11),
+        '             getPosicion(click1st) + diagonal * (+11)
+
+        '            'MsgBox(click1st.Tag)
+
+
+        '            Return limite(getColor(click1st), getColor(click2nd))
+
+        '    End Select
+
+        'Next
+
+
+
+        Dim fila1 = getPosicionFila(click1st)
+        Dim fila2 = getPosicionFila(click2nd)
+        Dim columna1 = getPosicionColumna(click1st)
+        Dim columna2 = getPosicionColumna(click2nd)
+
+        For fila = fila1 To fila2
+            For columna = columna1 To columna2
+
+
+                'Select Case getPosicion(click2nd)
+                '    Case getPosicion(click1st) + diagonal() * (-9),
+                '     getPosicion(click1st) + diagonal() * (+9),
+                '     getPosicion(click1st) + diagonal() * (-11),
+                '     getPosicion(click1st) + diagonal() * (+11)
+
+                '        'MsgBox(click1st.Tag)
+
+
+                '        Return limite(getColor(click1st), getColor(click2nd))
+
+                'End Select
+
+
+                Select Case getPosicion(click2nd)
+                    Case (fila & columna)
+
+                        'MsgBox(click1st.Tag)
+
+                        MsgBox(getPosicionFila(click2nd))
+
+                        Return limite(getColor(click1st), getColor(click2nd))
+
+                End Select
+
+            Next
         Next
+
 
         Return False
     End Function
