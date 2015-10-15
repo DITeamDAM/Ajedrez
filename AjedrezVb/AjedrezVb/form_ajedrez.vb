@@ -166,7 +166,7 @@
 
     Private Function verticales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
-        For vertical As Integer = 1 To 8
+        For vertical As Integer = 0 To 7
             Select Case getPosicion(click2nd)
                 Case vertical & getPosicionColumna(click1st)
 
@@ -181,7 +181,7 @@
 
     Private Function horizontales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
-        For horizontal As Integer = 1 To 8
+        For horizontal As Integer = 0 To 7
 
             Select Case getPosicion(click2nd)
                 Case getPosicionFila(click1st) & horizontal
@@ -254,7 +254,7 @@
         'CREO que algo se podrá refactorizar aun mas...
         Select Case getColor(click1st)
             Case blanca
-                If getPosicionColumna(click1st) = 6 Then
+                If getPosicionFila(click1st) = 6 Then
                     Select Case getPosicion(click2nd)
                         Case getPosicion(click1st) - 10, getPosicion(click1st) - 20
                             If getColor(click2nd) = 0 Then
@@ -278,7 +278,7 @@
                     End Select
                 End If
             Case negra
-                If getPosicionColumna(click1st) = 1 Then
+                If getPosicionFila(click1st) = 1 Then
                     Select Case getPosicion(click2nd)
                         Case getPosicion(click1st) + 10, getPosicion(click1st) + 20
                             If getColor(click2nd) = 0 Then
