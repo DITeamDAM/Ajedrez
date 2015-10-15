@@ -122,17 +122,17 @@
 
 
     Private Function getPosicion(obj As PictureBox)
-        Return CInt(CStr(obj.Name).Substring(0, 2)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
+        Return CInt(obj.Name.Substring(0, 2))
     End Function
 
 
     Private Function getPosicionFila(obj As PictureBox)
-        Return CInt(CStr(obj.Name).Substring(0, 1)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
+        Return CInt(obj.Name.Substring(0, 1))
     End Function
 
 
     Private Function getPosicionColumna(obj As PictureBox)
-        Return CInt(CStr(obj.Name).Substring(1, 1)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
+        Return CInt(obj.Name.Substring(1, 1))
     End Function
 
 
@@ -216,90 +216,45 @@
 
 
     Private Function diagonales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+        Dim direccion As Integer
+        Dim columna = getPosicionColumna(click1st)
+
+        If getPosicionFila(click1st) = getPosicionFila(click2nd) Or getPosicionColumna(click1st) = getPosicionColumna(click2nd) Then 'si los clicks son en las mismas filas o columnas devuelve false
+            Return False
+        ElseIf getPosicionFila(click1st) > getPosicionFila(click2nd) Then 'si la fila del primer click es mayor q la del segundo, se va decrementando, si no, se va incrementando
+            direccion = -1
+        Else
+            direccion = +1
+        End If
 
 
-        'Select Case getPosicion(click2nd)
-        '    Case getPosicion(click1st) + diagonal() * (-9)
-
-        '        While actual <> click2nd.Tag
-        '            If actual <> 0 Then
-        '                Return False
-
-        '            Else
-        '                If actual = click2nd.Tag And actual <> 0 Then
-        '                    Return True
-        '                End If
-
-        '            End If
-        '            actual -= 9
-        '        End While
-        '    Case getPosicion(click1st) + diagonal() * (+9),
-        '             getPosicion(click1st) + diagonal() * (-11),
-        '             getPosicion(click1st) + diagonal() * (+11)
-
-        '        'MsgBox(click1st.Tag)
+        For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion 'fila va desde el primer click hasta el segundo, con incremento o de cremento de 1 dependiendo de la direccion (hecha arriba)
 
 
-        '        Return limite(getColor(click1st), getColor(click2nd))
-
-        'End Select
-
-
-
-        'For diagonal As Integer = 1 To 8
-
-        '    Select Case getPosicion(click2nd)
-        '        Case getPosicion(click1st) + diagonal * (-9),
-        '             getPosicion(click1st) + diagonal * (+9),
-        '             getPosicion(click1st) + diagonal * (-11),
-        '             getPosicion(click1st) + diagonal * (+11)
-
-        '            'MsgBox(click1st.Tag)
+            If (fila & columna) <> getPosicion(click1st) Then 'busca en el recorrido todos los picturebox si no es el mismo del primer click
+                For Each objeto As PictureBox In Me.Controls
+                    If CInt(objeto.Name) = (fila & columna) Then
+                        'MsgBox(objeto.Name & ", " & objeto.Tag)
+                        If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                            'MsgBox("hay una ficha en medio")
+                            Return False
+                        End If
+                    End If
+                Next
+            End If
 
 
-        '            Return limite(getColor(click1st), getColor(click2nd))
-
-        '    End Select
-
-        'Next
-
+            Select Case getPosicion(click2nd) 'si la posicion de destino coincide con el posible recorrido, la suelta ahi
+                Case (fila & columna)
+                    Return limite(getColor(click1st), getColor(click2nd))
+            End Select
 
 
-        Dim fila1 = getPosicionFila(click1st)
-        Dim fila2 = getPosicionFila(click2nd)
-        Dim columna1 = getPosicionColumna(click1st)
-        Dim columna2 = getPosicionColumna(click2nd)
-
-        For fila = fila1 To fila2
-            For columna = columna1 To columna2
-
-
-                'Select Case getPosicion(click2nd)
-                '    Case getPosicion(click1st) + diagonal() * (-9),
-                '     getPosicion(click1st) + diagonal() * (+9),
-                '     getPosicion(click1st) + diagonal() * (-11),
-                '     getPosicion(click1st) + diagonal() * (+11)
-
-                '        'MsgBox(click1st.Tag)
-
-
-                '        Return limite(getColor(click1st), getColor(click2nd))
-
-                'End Select
-
-
-                Select Case getPosicion(click2nd)
-                    Case (fila & columna)
-
-                        'MsgBox(click1st.Tag)
-
-                        MsgBox(getPosicionFila(click2nd))
-
-                        Return limite(getColor(click1st), getColor(click2nd))
-
-                End Select
-
-            Next
+            If columna < getPosicionColumna(click2nd) Then 'si la columna del primer click es menor que la del segundo, se incrementa, si no, se decrementa 
+                columna += 1
+            Else
+                columna -= 1
+            End If
         Next
 
 
