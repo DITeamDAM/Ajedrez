@@ -165,14 +165,37 @@
 
 
     Private Function verticales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+        Dim direccion As Integer
+        Dim columna As Integer = getPosicionColumna(click1st)
 
-        For vertical As Integer = 0 To 7
+        If getPosicionFila(click1st) = getPosicionFila(click2nd) Or getPosicionColumna(click1st) <> getPosicionColumna(click2nd) Then
+            Return False
+        ElseIf getPosicionFila(click1st) > getPosicionFila(click2nd) Then
+            direccion = -1
+        Else
+            direccion = +1
+        End If
+
+        For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                For Each objeto As PictureBox In Me.Controls
+                    If CInt(objeto.Name) = (fila & columna) Then
+                        'MsgBox(objeto.Name & ", " & objeto.Tag)
+                        If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                            'MsgBox("hay una ficha en medio")
+
+                            Return False
+                        End If
+                    End If
+                Next
+            End If
+
             Select Case getPosicion(click2nd)
-                Case vertical & getPosicionColumna(click1st)
-
+                Case fila & columna
                     Return limite(getColor(click1st), getColor(click2nd))
-
             End Select
+
         Next
 
         Return False
@@ -180,17 +203,36 @@
 
 
     Private Function horizontales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+        Dim direccion As Integer
+        Dim fila As Integer = getPosicionFila(click1st)
 
-        For horizontal As Integer = 0 To 7
+        If getPosicionFila(click1st) <> getPosicionFila(click2nd) Or getPosicionColumna(click1st) = getPosicionColumna(click2nd) Then
+            Return False
+        ElseIf getPosicionColumna(click1st) > getPosicionColumna(click2nd) Then
+            direccion = -1
+        Else
+            direccion = +1
+        End If
+
+        For columna = getPosicionColumna(click1st) To getPosicionColumna(click2nd) Step direccion
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                For Each objeto As PictureBox In Me.Controls
+                    If CInt(objeto.Name) = (fila & columna) Then
+                        MsgBox(objeto.Name & ", " & objeto.Tag)
+                        If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                            'MsgBox("hay una ficha en medio")
+
+                            Return False
+                        End If
+                    End If
+                Next
+            End If
 
             Select Case getPosicion(click2nd)
-                Case getPosicionFila(click1st) & horizontal
-
+                Case fila & columna
                     Return limite(getColor(click1st), getColor(click2nd))
-
             End Select
-
-
 
         Next
 
@@ -234,7 +276,7 @@
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
                 For Each objeto As PictureBox In Me.Controls
                     If CInt(objeto.Name) = (fila & columna) Then
-                        MsgBox(objeto.Name & ", " & objeto.Tag)
+                        'MsgBox(objeto.Name & ", " & objeto.Tag)
                         If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
                             'MsgBox("hay una ficha en medio")
 
