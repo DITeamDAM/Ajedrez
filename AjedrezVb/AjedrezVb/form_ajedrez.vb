@@ -254,7 +254,7 @@
         'CREO que algo se podrá refactorizar aun mas...
         Select Case getColor(click1st)
             Case blanca
-                If getPosicionColumna(click1st) = 6 Then
+                If getPosicionFila(click1st) = 6 Then
                     Select Case getPosicion(click2nd)
                         Case getPosicion(click1st) - 10, getPosicion(click1st) - 20
                             If getColor(click2nd) = 0 Then
