@@ -231,20 +231,18 @@
         For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion 'fila va desde el primer click hasta el segundo, con incremento o de cremento de 1 dependiendo de la direccion (hecha arriba)
 
 
-            If (fila & columna) <> getPosicion(click1st) Then 'busca en el recorrido todos los picturebox si no es el mismo del primer click
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
                 For Each objeto As PictureBox In Me.Controls
                     If CInt(objeto.Name) = (fila & columna) Then
-                        'MsgBox(objeto.Name & ", " & objeto.Tag)
+                        MsgBox(objeto.Name & ", " & objeto.Tag)
                         If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
                             'MsgBox("hay una ficha en medio")
-
 
                             Return False
                         End If
                     End If
                 Next
             End If
-
 
             Select Case getPosicion(click2nd) 'si la posicion de destino coincide con el posible recorrido, la suelta ahi
                 Case (fila & columna)
