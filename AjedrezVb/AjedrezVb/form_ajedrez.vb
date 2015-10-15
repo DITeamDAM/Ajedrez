@@ -237,6 +237,11 @@
                         'MsgBox(objeto.Name & ", " & objeto.Tag)
                         If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
                             'MsgBox("hay una ficha en medio")
+
+                            If limite(getColor(click1st), getColor(click2nd)) Then 'pero si el que se encuentra es del otro equipo, se la come
+                                Return True
+                            End If
+
                             Return False
                         End If
                     End If
