@@ -166,7 +166,7 @@
 
     Private Function verticales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
-        For vertical As Integer = 1 To 8
+        For vertical As Integer = 0 To 7
             Select Case getPosicion(click2nd)
                 Case vertical & getPosicionColumna(click1st)
 
@@ -181,7 +181,7 @@
 
     Private Function horizontales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
-        For horizontal As Integer = 1 To 8
+        For horizontal As Integer = 0 To 7
 
             Select Case getPosicion(click2nd)
                 Case getPosicionFila(click1st) & horizontal
