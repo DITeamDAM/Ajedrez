@@ -278,7 +278,7 @@
                     End Select
                 End If
             Case negra
-                If getPosicionColumna(click1st) = 1 Then
+                If getPosicionFila(click1st) = 1 Then
                     Select Case getPosicion(click2nd)
                         Case getPosicion(click1st) + 10, getPosicion(click1st) + 20
                             If getColor(click2nd) = 0 Then
