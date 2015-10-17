@@ -14,6 +14,8 @@
 
     Dim turno As Boolean = True
 
+    Dim arrayCas(8, 8) As PictureBox
+
 
     Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x As Integer
@@ -37,6 +39,9 @@
                     .Padding = New Padding(0, 0, 0, 0)
                     .SizeMode = PictureBoxSizeMode.Normal
                     .Tag = 0
+
+
+
 
 
                     'Se diferencia el color de las casillas
@@ -91,6 +96,9 @@
                     End Select
 
 
+
+                    arrayCas(i, j) = casilla
+
                     Me.Controls.Add(casilla)
                     AddHandler casilla.MouseClick, AddressOf colocando
 
@@ -102,6 +110,9 @@
             x = 0
             y += 75
         Next
+
+
+
     End Sub
 
     'Para crear las figuras segun los parametros, valido tambien para futuros usos en otros metodos
@@ -178,23 +189,34 @@
 
         For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion
 
-            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-                For Each objeto As PictureBox In Me.Controls
-                    If CInt(objeto.Name) = (fila & columna) Then
-                        'MsgBox(objeto.Name & ", " & objeto.Tag)
-                        If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-                            'MsgBox("hay una ficha en medio")
+            'If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+            '    For Each objeto As PictureBox In Me.Controls
+            '        If CInt(objeto.Name) = (fila & columna) Then
+            '            'MsgBox(objeto.Name & ", " & objeto.Tag)
+            '            If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+            '                'MsgBox("hay una ficha en medio")
 
-                            Return False
-                        End If
-                    End If
-                Next
+            '                Return False
+            '            End If
+            '        End If
+            '    Next
+            'End If
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                'MsgBox(getPosicion(arrayCas(fila, columna)) & ", " & getColor(arrayCas(fila, columna)))
+                If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                    'MsgBox("hay una ficha en medio")
+                    Return False
+                End If
             End If
+
 
             Select Case getPosicion(click2nd)
                 Case fila & columna
                     Return limite(getColor(click1st), getColor(click2nd))
             End Select
+
+
 
         Next
 
@@ -216,17 +238,26 @@
 
         For columna = getPosicionColumna(click1st) To getPosicionColumna(click2nd) Step direccion
 
-            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-                For Each objeto As PictureBox In Me.Controls
-                    If CInt(objeto.Name) = (fila & columna) Then
-                        MsgBox(objeto.Name & ", " & objeto.Tag)
-                        If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-                            'MsgBox("hay una ficha en medio")
+            'If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+            '    For Each objeto As PictureBox In Me.Controls
+            '        If CInt(objeto.Name) = (fila & columna) Then
+            '            'MsgBox(objeto.Name & ", " & objeto.Tag)
+            '            If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+            '                'MsgBox("hay una ficha en medio")
 
-                            Return False
-                        End If
-                    End If
-                Next
+            '                Return False
+            '            End If
+            '        End If
+            '    Next
+            'End If
+
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                'MsgBox(getPosicion(arrayCas(fila, columna)) & ", " & getColor(arrayCas(fila, columna)))
+                If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                    'MsgBox("hay una ficha en medio")
+                    Return False
+                End If
             End If
 
             Select Case getPosicion(click2nd)
@@ -273,17 +304,26 @@
         For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion 'fila va desde el primer click hasta el segundo, con incremento o de cremento de 1 dependiendo de la direccion (hecha arriba)
 
 
-            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-                For Each objeto As PictureBox In Me.Controls
-                    If CInt(objeto.Name) = (fila & columna) Then
-                        'MsgBox(objeto.Name & ", " & objeto.Tag)
-                        If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-                            'MsgBox("hay una ficha en medio")
+            'If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+            '    For Each objeto As PictureBox In Me.Controls
+            '        If CInt(objeto.Name) = (fila & columna) Then
+            '            'MsgBox(objeto.Name & ", " & objeto.Tag)
+            '            If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+            '                'MsgBox("hay una ficha en medio")
 
-                            Return False
-                        End If
-                    End If
-                Next
+            '                Return False
+            '            End If
+            '        End If
+            '    Next
+            'End If
+
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                'MsgBox(getPosicion(arrayCas(fila, columna)) & ", " & getColor(arrayCas(fila, columna)))
+                If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                    'MsgBox("hay una ficha en medio")
+                    Return False
+                End If
             End If
 
             Select Case getPosicion(click2nd) 'si la posicion de destino coincide con el posible recorrido, la suelta ahi
@@ -469,7 +509,9 @@
     End Sub
 
 
-    'Dim ultimoMov As Integer = 0
+    Dim ultimoMov As Integer = 0
+    Dim ultimoMovF As Integer = 0
+    Dim ultimoMovC As Integer = 0
     Private Sub moverClick(click As PictureBox)
         color2nd = click.BackColor
 
@@ -482,21 +524,43 @@
         clicked1st.ImageLocation = Nothing
 
         clicked1st.BackColor = color1st
-        'click.BackColor = bgcolorClick2nd
-        click.BackColor = color2nd 'setea el color de fondo al soltar la pieza
+        click.BackColor = bgcolorClick2nd
+        'click.BackColor = color2nd 'setea el color de fondo al soltar la pieza
 
         clicked1st = Nothing
 
-        'ultimoMov = getPosicion(click)
+        ultimoMov = getPosicion(click)
+        ultimoMovF = getPosicionFila(click)
+        ultimoMovC = getPosicionColumna(click)
+        turno = True
     End Sub
 
 
+
+    Dim primerclick As Boolean = True
 
     Private Sub mover(clicked2nd As PictureBox)
         If (getColor(clicked2nd) <> 0) Then
 
             If clicked1st Is Nothing Then
                 guardarPieza(clicked2nd)
+            End If
+
+
+            ''marca el ultimo movimiento
+            'If ultimoMov <> 0 Then 'si es el primer movimiento de todos, que no haga nada
+            '    For Each objeto As PictureBox In Me.Controls
+            '        If getPosicion(objeto) = ultimoMov Then
+            '            objeto.BackColor = color2nd
+            '            Exit For
+            '        End If
+            '    Next
+            'End If
+
+
+            'marca el ultimo movimiento
+            If ultimoMov <> 0 Then 'si es el primer movimiento de todos, que no haga nada
+                arrayCas(ultimoMovF, ultimoMovC).BackColor = color2nd
             End If
 
 
@@ -519,6 +583,7 @@
                     moverClick(clicked2nd)
                 End If
             Else
+                primerclick = True
                 'MsgBox("Selecciona una pieza")
             End If
 
@@ -528,34 +593,42 @@
 
 
 
-    'Dim primerclick As Boolean = True
-
-    Private Sub colocando(clicked2nd As PictureBox, e As EventArgs)
-
-        mover(clicked2nd)
+    Private Sub colocando(clicked As PictureBox, e As EventArgs)
 
 
-        'eventos aparte para el primer y segundo click
-        'If primerclick Then
+        'If getColor(clicked) = blanca Then
 
-        '    'If ultimoMov <> 0 Then
+        '    MsgBox("clickeado a la blanca")
 
-        '    '    For Each objeto In Me.Controls
-        '    '        If TypeOf (objeto) Is System.Windows.Forms.PictureBox Then
-        '    '            If getPosicion(objeto) = ultimoMov Then
-        '    '                objeto.BackColor = color2nd
-        '    '                Exit For
-        '    '            End If
-        '    '        End If
-        '    '    Next
+        'ElseIf getColor(clicked) = negra
 
-        '    'End If
 
-        '    primerclick = False
-        'Else
+        '    MsgBox("clickeado a la negra")
 
-        '    primerclick = True
         'End If
+
+
+
+
+        If primerclick Then
+            'MsgBox("primer click")
+            primerclick = False
+
+
+
+
+            If turno Then
+                mover(clicked)
+            Else
+                primerclick = True
+            End If
+
+
+        Else
+            'MsgBox("segundo click")
+            mover(clicked)
+            primerclick = True
+        End If
 
     End Sub
 
