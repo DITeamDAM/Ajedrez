@@ -632,9 +632,7 @@
 
     End Sub
 
+    Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles panel_ajedrez.Paint
 
-
-
-
-
+    End Sub
 End Class
