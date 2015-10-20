@@ -598,10 +598,8 @@
 
 
         If primerclick Then
-            MsgBox("primer click" & primerclick)
+            ' MsgBox("primer click" & primerclick)
             primerclick = False
-
-
 
 
 
@@ -635,17 +633,24 @@
 
 
         Else
-            MsgBox("segundo click" & primerclick)
-            If getColor(clicked) = 2 And getColor(clicked1st) Then
-                turno = True
-            End If
-            If getColor(clicked) = 1 And getColor(clicked1st) Then
+            primerclick = True
+            ' MsgBox("segundo click" & primerclick)
+
+            If getColor(clicked) = 2 And getColor(clicked1st) = 2 Then
                 turno = False
+                primerclick = False
+            End If
+            If getColor(clicked) = 1 And getColor(clicked1st) = 1 Then
+                turno = True
+                primerclick = False
+            End If
+            If comprobador(clicked1st, clicked) = False Then
+                primerclick = False
             End If
 
 
             mover(clicked)
-                primerclick = True
+
             End If
 
     End Sub
