@@ -532,7 +532,7 @@
         ultimoMov = getPosicion(click)
         ultimoMovF = getPosicionFila(click)
         ultimoMovC = getPosicionColumna(click)
-        turno = True
+        'turno = True
     End Sub
 
 
@@ -596,48 +596,61 @@
     Private Sub colocando(clicked As PictureBox, e As EventArgs)
 
 
-        If getColor(clicked) = blanca Then
+        'If getColor(clicked) = blanca Then
 
-            MsgBox("clickeado a la blanca")
+        '    MsgBox("clickeado a la blanca")
 
-        ElseIf getColor(clicked) = negra
+        'ElseIf getColor(clicked) = negra
 
 
-            MsgBox("clickeado a la negra")
+        '    MsgBox("clickeado a la negra")
 
-        End If
+        'End If
 
 
 
 
         If primerclick Then
-            MsgBox("primer click")
+            'MsgBox("primer click")
             primerclick = False
 
 
 
 
-            If turno Then
-                If (clicked.Tag) = "21" Then
-                    turno = False
-                    mover(clicked)
-                    MsgBox("pinchado")
 
+            If turno Then
+                If getColor(clicked) = 2 Then
+                    'MsgBox("moviendo blanca")
+                    mover(clicked)
+                    turno = False
+                Else
+                    MsgBox("Mueve una figura blanca!")
+                    primerclick = True
                 End If
+
+
 
             Else
-                If (clicked.Tag) = "11" Then
-                    turno = True
+                If getColor(clicked) = 1 Then
+                    'MsgBox("moviendo negra")
                     mover(clicked)
-                    MsgBox("pinchado negra")
+                    turno = True
+                Else
+                    MsgBox("Mueve una figura negra!")
+                    primerclick = True
 
                 End If
-                primerclick = True
+
+
+
+                'primerclick = True
             End If
 
 
         Else
-            MsgBox("segundo click")
+            'MsgBox("segundo click")
+
+
             mover(clicked)
             primerclick = True
         End If
