@@ -596,22 +596,9 @@
     Private Sub colocando(clicked As PictureBox, e As EventArgs)
 
 
-        'If getColor(clicked) = blanca Then
-
-        '    MsgBox("clickeado a la blanca")
-
-        'ElseIf getColor(clicked) = negra
-
-
-        '    MsgBox("clickeado a la negra")
-
-        'End If
-
-
-
 
         If primerclick Then
-            'MsgBox("primer click")
+            MsgBox("primer click" & primerclick)
             primerclick = False
 
 
@@ -648,12 +635,18 @@
 
 
         Else
-            'MsgBox("segundo click")
+            MsgBox("segundo click" & primerclick)
+            If getColor(clicked) = 2 And getColor(clicked1st) Then
+                turno = True
+            End If
+            If getColor(clicked) = 1 And getColor(clicked1st) Then
+                turno = False
+            End If
 
 
             mover(clicked)
-            primerclick = True
-        End If
+                primerclick = True
+            End If
 
     End Sub
 
