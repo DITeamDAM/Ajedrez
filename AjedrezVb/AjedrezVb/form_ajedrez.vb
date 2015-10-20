@@ -438,11 +438,23 @@
         clicked1st = Nothing
 
         ultimoMov = getPosicion(click)
-        ultimoMovF = getPosicionFila(click)
-        ultimoMovC = getPosicionColumna(click)
-        turno = True
+
+        If getColor(click) = negra Then
+            panel_ajedrez.BackColor = ColorTranslator.FromHtml("#E7E7E7")
+        End If
+        If getColor(click) = blanca Then
+            panel_ajedrez.BackColor = ColorTranslator.FromHtml("#242424")
+        End If
+
     End Sub
 
+
+    Private Function getFilaInt(num As Integer)
+        Return CInt(CStr(num).Substring(0, 1))
+    End Function
+    Private Function getColumnaInt(num As Integer)
+        Return CInt(CStr(num).Substring(1, 1))
+    End Function
 
 
     Dim primerclick As Boolean = True
@@ -458,7 +470,7 @@
 
             'marca el ultimo movimiento
             If ultimoMov <> 0 Then 'si es el primer movimiento de todos, que no haga nada
-                arrayCas(ultimoMovF, ultimoMovC).BackColor = color2nd
+                arrayCas(getFilaInt(ultimoMov), getColumnaInt(ultimoMov)).BackColor = color2nd
             End If
 
 
@@ -493,39 +505,49 @@
 
     Private Sub colocando(clicked As PictureBox, e As EventArgs)
 
-
-        'If getColor(clicked) = blanca Then
-
-        '    MsgBox("clickeado a la blanca")
-
-        'ElseIf getColor(clicked) = negra
-
-
-        '    MsgBox("clickeado a la negra")
-
-        'End If
-
-
-
-
         If primerclick Then
-            'MsgBox("primer click")
             primerclick = False
 
-
-
-
             If turno Then
-                mover(clicked)
+
+                If getColor(clicked) = blanca Then
+                    mover(clicked)
+                    turno = False
+                Else
+                    'MsgBox("Mueve una figura blanca!")
+                    primerclick = True
+                End If
+
             Else
-                primerclick = True
+
+                If getColor(clicked) = negra Then
+                    mover(clicked)
+                    turno = True
+                Else
+                    'MsgBox("Mueve una figura negra!")
+                    primerclick = True
+                End If
+
             End If
 
-
         Else
-            'MsgBox("segundo click")
-            mover(clicked)
             primerclick = True
+
+            If getColor(clicked) = blanca And getColor(clicked1st) = blanca Then
+                turno = False
+                primerclick = False
+            End If
+
+            If getColor(clicked) = negra And getColor(clicked1st) = negra Then
+                turno = True
+                primerclick = False
+            End If
+
+            If comprobador(clicked1st, clicked) = False Then
+                primerclick = False
+            End If
+
+            mover(clicked)
         End If
 
     End Sub
@@ -606,7 +628,4 @@
         End If
     End Sub
 
-
-
-    'color de fondo del panel cuando estan las negras en hexadecimal 242424
 End Class
