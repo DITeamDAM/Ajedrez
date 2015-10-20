@@ -25,47 +25,47 @@ Partial Class form_ajedrez
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form_ajedrez))
         Me.panel_ajedrez = New System.Windows.Forms.Panel()
         Me.ms_principal = New System.Windows.Forms.MenuStrip()
-        Me.ArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ms_nuevapartida = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ms_salir = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ms_archivo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ms_archivo_nuevapartida = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ms_archivo_salir = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_principal.SuspendLayout()
         Me.SuspendLayout()
         '
         'panel_ajedrez
         '
-        Me.panel_ajedrez.BackColor = System.Drawing.ColorTranslator.FromHtml("#E7E7E7") '4B3838
-        Me.panel_ajedrez.Location = New System.Drawing.Point(601, 24)
+        Me.panel_ajedrez.BackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(231, Byte), Integer))
+        Me.panel_ajedrez.Location = New System.Drawing.Point(601, 25)
         Me.panel_ajedrez.Name = "panel_ajedrez"
         Me.panel_ajedrez.Size = New System.Drawing.Size(150, 600)
         Me.panel_ajedrez.TabIndex = 0
         '
         'ms_principal
         '
-        Me.ms_principal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArchivoToolStripMenuItem})
+        Me.ms_principal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_archivo})
         Me.ms_principal.Location = New System.Drawing.Point(0, 0)
         Me.ms_principal.Name = "ms_principal"
-        Me.ms_principal.Size = New System.Drawing.Size(751, 24)
+        Me.ms_principal.Size = New System.Drawing.Size(752, 24)
         Me.ms_principal.TabIndex = 1
         Me.ms_principal.Text = "MenuStrip1"
         '
-        'ArchivoToolStripMenuItem
+        'ms_archivo
         '
-        Me.ArchivoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_nuevapartida, Me.ms_salir})
-        Me.ArchivoToolStripMenuItem.Name = "ArchivoToolStripMenuItem"
-        Me.ArchivoToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
-        Me.ArchivoToolStripMenuItem.Text = "Archivo"
+        Me.ms_archivo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_archivo_nuevapartida, Me.ms_archivo_salir})
+        Me.ms_archivo.Name = "ms_archivo"
+        Me.ms_archivo.Size = New System.Drawing.Size(60, 20)
+        Me.ms_archivo.Text = "Archivo"
         '
-        'ms_nuevapartida
+        'ms_archivo_nuevapartida
         '
-        Me.ms_nuevapartida.Name = "ms_nuevapartida"
-        Me.ms_nuevapartida.Size = New System.Drawing.Size(152, 22)
-        Me.ms_nuevapartida.Text = "Nueva partida"
+        Me.ms_archivo_nuevapartida.Name = "ms_archivo_nuevapartida"
+        Me.ms_archivo_nuevapartida.Size = New System.Drawing.Size(152, 22)
+        Me.ms_archivo_nuevapartida.Text = "Nueva partida"
         '
-        'ms_salir
+        'ms_archivo_salir
         '
-        Me.ms_salir.Name = "ms_salir"
-        Me.ms_salir.Size = New System.Drawing.Size(152, 22)
-        Me.ms_salir.Text = "Salir"
+        Me.ms_archivo_salir.Name = "ms_archivo_salir"
+        Me.ms_archivo_salir.Size = New System.Drawing.Size(152, 22)
+        Me.ms_archivo_salir.Text = "Salir"
         '
         'form_ajedrez
         '
@@ -73,7 +73,7 @@ Partial Class form_ajedrez
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.Gray
-        Me.ClientSize = New System.Drawing.Size(751, 624)
+        Me.ClientSize = New System.Drawing.Size(751, 625)
         Me.Controls.Add(Me.panel_ajedrez)
         Me.Controls.Add(Me.ms_principal)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -90,7 +90,7 @@ Partial Class form_ajedrez
 
     Friend WithEvents panel_ajedrez As Panel
     Friend WithEvents ms_principal As MenuStrip
-    Friend WithEvents ArchivoToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ms_nuevapartida As ToolStripMenuItem
-    Friend WithEvents ms_salir As ToolStripMenuItem
+    Friend WithEvents ms_archivo As ToolStripMenuItem
+    Friend WithEvents ms_archivo_nuevapartida As ToolStripMenuItem
+    Friend WithEvents ms_archivo_salir As ToolStripMenuItem
 End Class

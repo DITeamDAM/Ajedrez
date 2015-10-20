@@ -36,7 +36,7 @@
 
                     .Name = i & j
                     .Size = New System.Drawing.Size(75, 75)
-                    .Location = New System.Drawing.Point(x, y + 24)
+                    .Location = New System.Drawing.Point(x, y + 25)
                     .BorderStyle = BorderStyle.None
                     .Padding = New Padding(0, 0, 0, 0)
                     .SizeMode = PictureBoxSizeMode.Normal
@@ -698,7 +698,11 @@
     End Sub
 
 
-    Private Sub ms_nuevapartida_Click(sender As Object, e As EventArgs) Handles ms_nuevapartida.Click
+    Private Sub ms_nuevapartida_Click(sender As Object, e As EventArgs) Handles ms_archivo_nuevapartida.Click
         reset()
+    End Sub
+
+    Private Sub ms_archivo_salir_Click(sender As Object, e As EventArgs) Handles ms_archivo_salir.Click
+        End
     End Sub
 End Class
