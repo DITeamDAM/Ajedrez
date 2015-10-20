@@ -15,18 +15,18 @@
     Dim turno As Boolean = True
 
 
+    'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
+    Dim colorNegroTablero = ColorTranslator.FromHtml("#C6932D")
+    Dim colorBlancoTablrero = ColorTranslator.FromHtml("#FEE8B9")
 
     Dim arrayCas(8, 8) As PictureBox
+    Dim arrayTablero(8, 8) As PictureBox
 
 
 
     Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x As Integer
         Dim y As Integer
-
-        'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
-        Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
-        Dim colorBlanco = ColorTranslator.FromHtml("#FEE8B9")
 
         For i = 0 To 7
             For j = 0 To 7
@@ -42,62 +42,10 @@
                     .SizeMode = PictureBoxSizeMode.Normal
                     .Tag = 0
 
-
-                    'Se diferencia el color de las casillas
-                    If i Mod 2 = 0 Then
-                        .BackColor = colorBlanco
-                        If j Mod 2 <> 0 Then
-                            .BackColor = colorNegro
-                        End If
-                    Else
-                        .BackColor = colorNegro
-                        If j Mod 2 <> 0 Then
-                            .BackColor = colorBlanco
-                        End If
-                    End If
-
-
-
-                    Select Case i
-                        Case 0
-                            Select Case j
-                                Case 0, 7
-                                    setFigura(casilla, negra, torre)
-                                Case 1, 6
-                                    setFigura(casilla, negra, caballo)
-                                Case 2, 5
-                                    setFigura(casilla, negra, alfil)
-                                Case 3
-                                    setFigura(casilla, negra, reina)
-                                Case 4
-                                    setFigura(casilla, negra, rey)
-                                Case Else
-                                    .Tag = 0
-                            End Select
-                        Case 1
-                            setFigura(casilla, negra, peon)
-                        Case 6
-                            setFigura(casilla, blanca, peon)
-                        Case 7
-                            Select Case j
-                                Case 0, 7
-                                    setFigura(casilla, blanca, torre)
-                                Case 1, 6
-                                    setFigura(casilla, blanca, caballo)
-                                Case 2, 5
-                                    setFigura(casilla, blanca, alfil)
-                                Case 3
-                                    setFigura(casilla, blanca, reina)
-                                Case 4
-                                    setFigura(casilla, blanca, rey)
-                                Case Else
-                                    .Tag = 0
-                            End Select
-                    End Select
-
-
-
                     arrayCas(i, j) = casilla
+                    arrayTablero(i, j) = casilla
+
+                    setTablero(i, j)
 
                     Me.Controls.Add(casilla)
                     AddHandler casilla.MouseClick, AddressOf colocando
@@ -111,7 +59,7 @@
             y += 75
         Next
 
-
+        reset()
 
     End Sub
 
@@ -189,19 +137,6 @@
 
         For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion
 
-            'If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-            '    For Each objeto As PictureBox In Me.Controls
-            '        If CInt(objeto.Name) = (fila & columna) Then
-            '            'MsgBox(objeto.Name & ", " & objeto.Tag)
-            '            If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-            '                'MsgBox("hay una ficha en medio")
-
-            '                Return False
-            '            End If
-            '        End If
-            '    Next
-            'End If
-
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
                 'MsgBox(getPosicion(arrayCas(fila, columna)) & ", " & getColor(arrayCas(fila, columna)))
                 If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
@@ -237,19 +172,6 @@
         End If
 
         For columna = getPosicionColumna(click1st) To getPosicionColumna(click2nd) Step direccion
-
-            'If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-            '    For Each objeto As PictureBox In Me.Controls
-            '        If CInt(objeto.Name) = (fila & columna) Then
-            '            'MsgBox(objeto.Name & ", " & objeto.Tag)
-            '            If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-            '                'MsgBox("hay una ficha en medio")
-
-            '                Return False
-            '            End If
-            '        End If
-            '    Next
-            'End If
 
 
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
@@ -302,20 +224,6 @@
 
 
         For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion 'fila va desde el primer click hasta el segundo, con incremento o de cremento de 1 dependiendo de la direccion (hecha arriba)
-
-
-            'If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-            '    For Each objeto As PictureBox In Me.Controls
-            '        If CInt(objeto.Name) = (fila & columna) Then
-            '            'MsgBox(objeto.Name & ", " & objeto.Tag)
-            '            If getColor(objeto) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-            '                'MsgBox("hay una ficha en medio")
-
-            '                Return False
-            '            End If
-            '        End If
-            '    Next
-            'End If
 
 
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
@@ -547,16 +455,6 @@
             End If
 
 
-            ''marca el ultimo movimiento
-            'If ultimoMov <> 0 Then 'si es el primer movimiento de todos, que no haga nada
-            '    For Each objeto As PictureBox In Me.Controls
-            '        If getPosicion(objeto) = ultimoMov Then
-            '            objeto.BackColor = color2nd
-            '            Exit For
-            '        End If
-            '    Next
-            'End If
-
 
             'marca el ultimo movimiento
             If ultimoMov <> 0 Then 'si es el primer movimiento de todos, que no haga nada
@@ -632,12 +530,23 @@
 
     End Sub
 
+    Private Sub setTablero(x As Integer, y As Integer)
+
+        If x Mod 2 = 0 Then
+            arrayCas(x, y).BackColor = colorBlancoTablrero
+            If y Mod 2 <> 0 Then
+                arrayCas(x, y).BackColor = colorNegroTablero
+            End If
+        Else
+            arrayCas(x, y).BackColor = colorNegroTablero
+            If y Mod 2 <> 0 Then
+                arrayCas(x, y).BackColor = colorBlancoTablrero
+            End If
+        End If
+    End Sub
+
 
     Private Sub reset()
-
-        'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
-        Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
-        Dim colorBlanco = ColorTranslator.FromHtml("#FEE8B9")
 
         For x = 0 To 7
             For y = 0 To 7
@@ -645,20 +554,7 @@
                 arrayCas(x, y).ImageLocation = Nothing
                 arrayCas(x, y).Tag = 0
 
-
-
-                If x Mod 2 = 0 Then
-                    arrayCas(x, y).BackColor = colorBlanco
-                    If y Mod 2 <> 0 Then
-                        arrayCas(x, y).BackColor = colorNegro
-                    End If
-                Else
-                    arrayCas(x, y).BackColor = colorNegro
-                    If y Mod 2 <> 0 Then
-                        arrayCas(x, y).BackColor = colorBlanco
-                    End If
-                End If
-
+                setTablero(x, y)
 
                 Select Case x
                     Case 0
@@ -699,10 +595,18 @@
 
 
     Private Sub ms_nuevapartida_Click(sender As Object, e As EventArgs) Handles ms_archivo_nuevapartida.Click
-        reset()
+        If MsgBox("¿Estás seguro que quieres abandonar la partida actual?", MsgBoxStyle.YesNo) <> 7 Then
+            reset()
+        End If
     End Sub
 
     Private Sub ms_archivo_salir_Click(sender As Object, e As EventArgs) Handles ms_archivo_salir.Click
-        End
+        If MsgBox("¿Estás seguro que quieres salir del juego?", MsgBoxStyle.YesNo) <> 7 Then
+            End
+        End If
     End Sub
+
+
+
+    'color de fondo del panel cuando estan las negras en hexadecimal 242424
 End Class
