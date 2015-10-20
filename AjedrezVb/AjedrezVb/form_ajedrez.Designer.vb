@@ -24,27 +24,48 @@ Partial Class form_ajedrez
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form_ajedrez))
         Me.panel_ajedrez = New System.Windows.Forms.Panel()
-        Me.btn_reset = New System.Windows.Forms.Button()
-        Me.panel_ajedrez.SuspendLayout()
+        Me.ms_principal = New System.Windows.Forms.MenuStrip()
+        Me.ArchivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ms_nuevapartida = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ms_salir = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ms_principal.SuspendLayout()
         Me.SuspendLayout()
         '
         'panel_ajedrez
         '
-        Me.panel_ajedrez.BackColor = System.Drawing.Color.White
-        Me.panel_ajedrez.Controls.Add(Me.btn_reset)
-        Me.panel_ajedrez.Location = New System.Drawing.Point(601, 0)
+        Me.panel_ajedrez.BackColor = System.Drawing.ColorTranslator.FromHtml("#E7E7E7") '4B3838
+        Me.panel_ajedrez.Location = New System.Drawing.Point(601, 24)
         Me.panel_ajedrez.Name = "panel_ajedrez"
         Me.panel_ajedrez.Size = New System.Drawing.Size(150, 600)
         Me.panel_ajedrez.TabIndex = 0
         '
-        'btn_reset
+        'ms_principal
         '
-        Me.btn_reset.Location = New System.Drawing.Point(16, 554)
-        Me.btn_reset.Name = "btn_reset"
-        Me.btn_reset.Size = New System.Drawing.Size(122, 34)
-        Me.btn_reset.TabIndex = 0
-        Me.btn_reset.Text = "Reset"
-        Me.btn_reset.UseVisualStyleBackColor = True
+        Me.ms_principal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArchivoToolStripMenuItem})
+        Me.ms_principal.Location = New System.Drawing.Point(0, 0)
+        Me.ms_principal.Name = "ms_principal"
+        Me.ms_principal.Size = New System.Drawing.Size(751, 24)
+        Me.ms_principal.TabIndex = 1
+        Me.ms_principal.Text = "MenuStrip1"
+        '
+        'ArchivoToolStripMenuItem
+        '
+        Me.ArchivoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_nuevapartida, Me.ms_salir})
+        Me.ArchivoToolStripMenuItem.Name = "ArchivoToolStripMenuItem"
+        Me.ArchivoToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
+        Me.ArchivoToolStripMenuItem.Text = "Archivo"
+        '
+        'ms_nuevapartida
+        '
+        Me.ms_nuevapartida.Name = "ms_nuevapartida"
+        Me.ms_nuevapartida.Size = New System.Drawing.Size(152, 22)
+        Me.ms_nuevapartida.Text = "Nueva partida"
+        '
+        'ms_salir
+        '
+        Me.ms_salir.Name = "ms_salir"
+        Me.ms_salir.Size = New System.Drawing.Size(152, 22)
+        Me.ms_salir.Text = "Salir"
         '
         'form_ajedrez
         '
@@ -52,17 +73,24 @@ Partial Class form_ajedrez
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.Gray
-        Me.ClientSize = New System.Drawing.Size(751, 600)
+        Me.ClientSize = New System.Drawing.Size(751, 624)
         Me.Controls.Add(Me.panel_ajedrez)
+        Me.Controls.Add(Me.ms_principal)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.ms_principal
         Me.Name = "form_ajedrez"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Ajedrez"
-        Me.panel_ajedrez.ResumeLayout(False)
+        Me.ms_principal.ResumeLayout(False)
+        Me.ms_principal.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents panel_ajedrez As Panel
-    Friend WithEvents btn_reset As Button
+    Friend WithEvents ms_principal As MenuStrip
+    Friend WithEvents ArchivoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ms_nuevapartida As ToolStripMenuItem
+    Friend WithEvents ms_salir As ToolStripMenuItem
 End Class

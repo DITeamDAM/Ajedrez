@@ -14,7 +14,10 @@
 
     Dim turno As Boolean = True
 
+
+
     Dim arrayCas(8, 8) As PictureBox
+
 
 
     Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -25,7 +28,6 @@
         Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
         Dim colorBlanco = ColorTranslator.FromHtml("#FEE8B9")
 
-
         For i = 0 To 7
             For j = 0 To 7
 
@@ -34,14 +36,11 @@
 
                     .Name = i & j
                     .Size = New System.Drawing.Size(75, 75)
-                    .Location = New System.Drawing.Point(x, y)
+                    .Location = New System.Drawing.Point(x, y + 24)
                     .BorderStyle = BorderStyle.None
                     .Padding = New Padding(0, 0, 0, 0)
                     .SizeMode = PictureBoxSizeMode.Normal
                     .Tag = 0
-
-
-
 
 
                     'Se diferencia el color de las casillas
@@ -56,6 +55,7 @@
                             .BackColor = colorBlanco
                         End If
                     End If
+
 
 
                     Select Case i
@@ -632,4 +632,73 @@
 
     End Sub
 
+
+    Private Sub reset()
+
+        'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
+        Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
+        Dim colorBlanco = ColorTranslator.FromHtml("#FEE8B9")
+
+        For x = 0 To 7
+            For y = 0 To 7
+
+                arrayCas(x, y).ImageLocation = Nothing
+                arrayCas(x, y).Tag = 0
+
+
+
+                If x Mod 2 = 0 Then
+                    arrayCas(x, y).BackColor = colorBlanco
+                    If y Mod 2 <> 0 Then
+                        arrayCas(x, y).BackColor = colorNegro
+                    End If
+                Else
+                    arrayCas(x, y).BackColor = colorNegro
+                    If y Mod 2 <> 0 Then
+                        arrayCas(x, y).BackColor = colorBlanco
+                    End If
+                End If
+
+
+                Select Case x
+                    Case 0
+                        Select Case y
+                            Case 0, 7
+                                setFigura(arrayCas(x, y), negra, torre)
+                            Case 1, 6
+                                setFigura(arrayCas(x, y), negra, caballo)
+                            Case 2, 5
+                                setFigura(arrayCas(x, y), negra, alfil)
+                            Case 3
+                                setFigura(arrayCas(x, y), negra, reina)
+                            Case 4
+                                setFigura(arrayCas(x, y), negra, rey)
+                        End Select
+                    Case 1
+                        setFigura(arrayCas(x, y), negra, peon)
+                    Case 6
+                        setFigura(arrayCas(x, y), blanca, peon)
+                    Case 7
+                        Select Case y
+                            Case 0, 7
+                                setFigura(arrayCas(x, y), blanca, torre)
+                            Case 1, 6
+                                setFigura(arrayCas(x, y), blanca, caballo)
+                            Case 2, 5
+                                setFigura(arrayCas(x, y), blanca, alfil)
+                            Case 3
+                                setFigura(arrayCas(x, y), blanca, reina)
+                            Case 4
+                                setFigura(arrayCas(x, y), blanca, rey)
+                        End Select
+                End Select
+
+            Next
+        Next
+    End Sub
+
+
+    Private Sub ms_nuevapartida_Click(sender As Object, e As EventArgs) Handles ms_nuevapartida.Click
+        reset()
+    End Sub
 End Class
