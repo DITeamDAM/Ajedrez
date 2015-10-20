@@ -23,7 +23,6 @@
     Dim arrayTablero(8, 8) As PictureBox
 
 
-
     Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x As Integer
         Dim y As Integer
@@ -69,7 +68,6 @@
         obj.Load(Application.StartupPath & "/img/" & color & tipo & ".png")
     End Sub
 
-
     Private Function getColor(obj As PictureBox)
         Return CInt(CStr(obj.Tag).Substring(0, 1))
     End Function
@@ -93,6 +91,58 @@
     Private Function getPosicionColumna(obj As PictureBox)
         Return CInt(obj.Name.Substring(1, 1))
     End Function
+
+
+    Private Sub reset()
+
+        For x = 0 To 7
+            For y = 0 To 7
+
+                arrayCas(x, y).ImageLocation = Nothing
+                arrayCas(x, y).Tag = 0
+
+                setTablero(x, y)
+
+                Select Case x
+                    Case 0
+                        Select Case y
+                            Case 0, 7
+                                setFigura(arrayCas(x, y), negra, torre)
+                            Case 1, 6
+                                setFigura(arrayCas(x, y), negra, caballo)
+                            Case 2, 5
+                                setFigura(arrayCas(x, y), negra, alfil)
+                            Case 3
+                                setFigura(arrayCas(x, y), negra, reina)
+                            Case 4
+                                setFigura(arrayCas(x, y), negra, rey)
+                        End Select
+                    Case 1
+                        setFigura(arrayCas(x, y), negra, peon)
+                    Case 6
+                        setFigura(arrayCas(x, y), blanca, peon)
+                    Case 7
+                        Select Case y
+                            Case 0, 7
+                                setFigura(arrayCas(x, y), blanca, torre)
+                            Case 1, 6
+                                setFigura(arrayCas(x, y), blanca, caballo)
+                            Case 2, 5
+                                setFigura(arrayCas(x, y), blanca, alfil)
+                            Case 3
+                                setFigura(arrayCas(x, y), blanca, reina)
+                            Case 4
+                                setFigura(arrayCas(x, y), blanca, rey)
+                        End Select
+                End Select
+
+            Next
+        Next
+
+
+        'Resetea el color inicial del panel lateral
+        panel_ajedrez.BackColor = ColorTranslator.FromHtml("#E7E7E7")
+    End Sub
 
 
     Private Function horizontal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
@@ -138,9 +188,7 @@
         For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion
 
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-                'MsgBox(getPosicion(arrayCas(fila, columna)) & ", " & getColor(arrayCas(fila, columna)))
                 If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-                    'MsgBox("hay una ficha en medio")
                     Return False
                 End If
             End If
@@ -175,9 +223,7 @@
 
 
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-                'MsgBox(getPosicion(arrayCas(fila, columna)) & ", " & getColor(arrayCas(fila, columna)))
                 If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-                    'MsgBox("hay una ficha en medio")
                     Return False
                 End If
             End If
@@ -227,9 +273,7 @@
 
 
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
-                'MsgBox(getPosicion(arrayCas(fila, columna)) & ", " & getColor(arrayCas(fila, columna)))
                 If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-                    'MsgBox("hay una ficha en medio")
                     Return False
                 End If
             End If
@@ -358,6 +402,7 @@
 
 
     Function MovReina(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+
         If verticales(click1st, click2nd) OrElse diagonales(click1st, click2nd) OrElse horizontales(click1st, click2nd) Then
             Return True
         End If
@@ -417,43 +462,38 @@
     End Sub
 
 
-    Dim ultimoMov As Integer = 0
-    Dim ultimoMovF As Integer = 0
-    Dim ultimoMovC As Integer = 0
+    Dim ultimoMov As String = "-1"
     Private Sub moverClick(click As PictureBox)
         color2nd = click.BackColor
 
         click.Tag = clicked1st.Tag
         clicked1st.Tag = 0
 
-        'MsgBox(click.Tag)
-
         click.ImageLocation = clicked1st.ImageLocation
         clicked1st.ImageLocation = Nothing
 
         clicked1st.BackColor = color1st
         click.BackColor = bgcolorClick2nd
-        'click.BackColor = color2nd 'setea el color de fondo al soltar la pieza
 
         clicked1st = Nothing
 
-        ultimoMov = getPosicion(click)
+        ultimoMov = click.Name
 
         If getColor(click) = negra Then
             panel_ajedrez.BackColor = ColorTranslator.FromHtml("#E7E7E7")
         End If
         If getColor(click) = blanca Then
-            panel_ajedrez.BackColor = ColorTranslator.FromHtml("#242424")
+            panel_ajedrez.BackColor = ColorTranslator.FromHtml("#3F3F3F")
         End If
 
     End Sub
 
 
-    Private Function getFilaInt(num As Integer)
-        Return CInt(CStr(num).Substring(0, 1))
+    Private Function getFilaInt(num As String)
+        Return CInt(num.Substring(0, 1))
     End Function
-    Private Function getColumnaInt(num As Integer)
-        Return CInt(CStr(num).Substring(1, 1))
+    Private Function getColumnaInt(num As String)
+        Return CInt(num.Substring(1, 1))
     End Function
 
 
@@ -467,9 +507,8 @@
             End If
 
 
-
             'marca el ultimo movimiento
-            If ultimoMov <> 0 Then 'si es el primer movimiento de todos, que no haga nada
+            If ultimoMov <> "-1" Then 'si es el primer movimiento de todos, que no haga nada
                 arrayCas(getFilaInt(ultimoMov), getColumnaInt(ultimoMov)).BackColor = color2nd
             End If
 
@@ -499,8 +538,6 @@
 
         End If
     End Sub
-
-
 
 
     Private Sub colocando(clicked As PictureBox, e As EventArgs)
@@ -568,59 +605,12 @@
     End Sub
 
 
-    Private Sub reset()
-
-        For x = 0 To 7
-            For y = 0 To 7
-
-                arrayCas(x, y).ImageLocation = Nothing
-                arrayCas(x, y).Tag = 0
-
-                setTablero(x, y)
-
-                Select Case x
-                    Case 0
-                        Select Case y
-                            Case 0, 7
-                                setFigura(arrayCas(x, y), negra, torre)
-                            Case 1, 6
-                                setFigura(arrayCas(x, y), negra, caballo)
-                            Case 2, 5
-                                setFigura(arrayCas(x, y), negra, alfil)
-                            Case 3
-                                setFigura(arrayCas(x, y), negra, reina)
-                            Case 4
-                                setFigura(arrayCas(x, y), negra, rey)
-                        End Select
-                    Case 1
-                        setFigura(arrayCas(x, y), negra, peon)
-                    Case 6
-                        setFigura(arrayCas(x, y), blanca, peon)
-                    Case 7
-                        Select Case y
-                            Case 0, 7
-                                setFigura(arrayCas(x, y), blanca, torre)
-                            Case 1, 6
-                                setFigura(arrayCas(x, y), blanca, caballo)
-                            Case 2, 5
-                                setFigura(arrayCas(x, y), blanca, alfil)
-                            Case 3
-                                setFigura(arrayCas(x, y), blanca, reina)
-                            Case 4
-                                setFigura(arrayCas(x, y), blanca, rey)
-                        End Select
-                End Select
-
-            Next
-        Next
-    End Sub
-
-
     Private Sub ms_nuevapartida_Click(sender As Object, e As EventArgs) Handles ms_archivo_nuevapartida.Click
         If MsgBox("¿Estás seguro que quieres abandonar la partida actual?", MsgBoxStyle.YesNo) <> 7 Then
             reset()
         End If
     End Sub
+
 
     Private Sub ms_archivo_salir_Click(sender As Object, e As EventArgs) Handles ms_archivo_salir.Click
         If MsgBox("¿Estás seguro que quieres salir del juego?", MsgBoxStyle.YesNo) <> 7 Then
