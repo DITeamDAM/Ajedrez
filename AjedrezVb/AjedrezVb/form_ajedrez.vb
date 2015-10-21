@@ -519,6 +519,18 @@
                 guardarPieza(clicked2nd)
             Else 'si no, la come
                 If comprobador(clicked1st, clicked2nd) Then
+                    If (getTipo(clicked2nd) = 6) Then
+                        If (getColor(clicked2nd) = blanca) Then
+                            MsgBox("La partida ha terminado, el equipo ganador es el Negro")
+                            reset()
+                            Exit Sub
+                        Else
+                            MsgBox("La partida ha terminado, el equipo ganador es el Blanco")
+                            reset()
+                            Exit Sub
+                        End If
+
+                    End If
                     moverClick(clicked2nd)
                 End If
             End If
