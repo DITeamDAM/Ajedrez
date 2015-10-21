@@ -30,7 +30,7 @@ Partial Class form_ajedrez
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(120, 0)
+        Me.ClientSize = New System.Drawing.Size(651, 444)
         Me.Name = "form_ajedrez"
         Me.Text = "Form1"
         Me.ResumeLayout(False)

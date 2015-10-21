@@ -1,6 +1,5 @@
 ﻿Public Class form_ajedrez
 
-
     'Asignacion de valores para cada caso
     Dim blanca As Integer = 2
     Dim negra As Integer = 1
@@ -13,16 +12,21 @@
     Dim rey As Integer = 6
 
     Dim turno As Boolean = True
+    Dim clicked1st As PictureBox = Nothing
+    Dim ultimoMov As String = "-1"
+
+
+    'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
+    Dim colorNegroTablero = ColorTranslator.FromHtml("#C6932D")
+    Dim colorBlancoTablrero = ColorTranslator.FromHtml("#FEE8B9")
+
+    Dim arrayCas(7, 7) As PictureBox
+    Dim arrayTablero(7, 7) As PictureBox
 
 
     Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim x As Integer
         Dim y As Integer
-
-        'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
-        Dim colorNegro = ColorTranslator.FromHtml("#C6932D")
-        Dim colorBlanco = ColorTranslator.FromHtml("#FEE8B9")
-
 
         For i = 0 To 7
             For j = 0 To 7
@@ -32,64 +36,16 @@
 
                     .Name = i & j
                     .Size = New System.Drawing.Size(75, 75)
-                    .Location = New System.Drawing.Point(x, y)
+                    .Location = New System.Drawing.Point(x, y + 25)
                     .BorderStyle = BorderStyle.None
                     .Padding = New Padding(0, 0, 0, 0)
                     .SizeMode = PictureBoxSizeMode.Normal
                     .Tag = 0
 
+                    arrayCas(i, j) = casilla
+                    arrayTablero(i, j) = casilla
 
-                    'Se diferencia el color de las casillas
-                    If i Mod 2 = 0 Then
-                        .BackColor = colorBlanco
-                        If j Mod 2 <> 0 Then
-                            .BackColor = colorNegro
-                        End If
-                    Else
-                        .BackColor = colorNegro
-                        If j Mod 2 <> 0 Then
-                            .BackColor = colorBlanco
-                        End If
-                    End If
-
-
-                    Select Case i
-                        Case 0
-                            Select Case j
-                                Case 0, 7
-                                    setFigura(casilla, negra, torre)
-                                Case 1, 6
-                                    setFigura(casilla, negra, caballo)
-                                Case 2, 5
-                                    setFigura(casilla, negra, alfil)
-                                Case 3
-                                    setFigura(casilla, negra, reina)
-                                Case 4
-                                    setFigura(casilla, negra, rey)
-                                Case Else
-                                    .Tag = 0
-                            End Select
-                        Case 1
-                            setFigura(casilla, negra, peon)
-                        Case 6
-                            setFigura(casilla, blanca, peon)
-                        Case 7
-                            Select Case j
-                                Case 0, 7
-                                    setFigura(casilla, blanca, torre)
-                                Case 1, 6
-                                    setFigura(casilla, blanca, caballo)
-                                Case 2, 5
-                                    setFigura(casilla, blanca, alfil)
-                                Case 3
-                                    setFigura(casilla, blanca, reina)
-                                Case 4
-                                    setFigura(casilla, blanca, rey)
-                                Case Else
-                                    .Tag = 0
-                            End Select
-                    End Select
-
+                    setTablero(i, j)
 
                     Me.Controls.Add(casilla)
                     AddHandler casilla.MouseClick, AddressOf colocando
@@ -102,6 +58,9 @@
             x = 0
             y += 75
         Next
+
+        reset()
+
     End Sub
 
     'Para crear las figuras segun los parametros, valido tambien para futuros usos en otros metodos
@@ -109,7 +68,6 @@
         obj.Tag = color & tipo
         obj.Load(Application.StartupPath & "/img/" & color & tipo & ".png")
     End Sub
-
 
     Private Function getColor(obj As PictureBox)
         Return CInt(CStr(obj.Tag).Substring(0, 1))
@@ -122,18 +80,73 @@
 
 
     Private Function getPosicion(obj As PictureBox)
-        Return CInt(CStr(obj.Name).Substring(0, 2)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
+        Return CInt(obj.Name.Substring(0, 2))
     End Function
 
 
     Private Function getPosicionFila(obj As PictureBox)
-        Return CInt(CStr(obj.Name).Substring(0, 1)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
+        Return CInt(obj.Name.Substring(0, 1))
     End Function
 
 
     Private Function getPosicionColumna(obj As PictureBox)
-        Return CInt(CStr(obj.Name).Substring(1, 1)) 'Cambiar esto (poner el numero de caracter segun el nombre, que sera simplemente el numero) cuando cambie el nombre en la creacion del objeto
+        Return CInt(obj.Name.Substring(1, 1))
     End Function
+
+
+    Private Sub reset()
+
+        clicked1st = Nothing
+        ultimoMov = "-1"
+
+        For x = 0 To 7
+            For y = 0 To 7
+
+                arrayCas(x, y).ImageLocation = Nothing
+                arrayCas(x, y).Tag = 0
+
+                setTablero(x, y)
+
+                Select Case x
+                    Case 0
+                        Select Case y
+                            Case 0, 7
+                                setFigura(arrayCas(x, y), negra, torre)
+                            Case 1, 6
+                                setFigura(arrayCas(x, y), negra, caballo)
+                            Case 2, 5
+                                setFigura(arrayCas(x, y), negra, alfil)
+                            Case 3
+                                setFigura(arrayCas(x, y), negra, reina)
+                            Case 4
+                                setFigura(arrayCas(x, y), negra, rey)
+                        End Select
+                    Case 1
+                        setFigura(arrayCas(x, y), negra, peon)
+                    Case 6
+                        setFigura(arrayCas(x, y), blanca, peon)
+                    Case 7
+                        Select Case y
+                            Case 0, 7
+                                setFigura(arrayCas(x, y), blanca, torre)
+                            Case 1, 6
+                                setFigura(arrayCas(x, y), blanca, caballo)
+                            Case 2, 5
+                                setFigura(arrayCas(x, y), blanca, alfil)
+                            Case 3
+                                setFigura(arrayCas(x, y), blanca, reina)
+                            Case 4
+                                setFigura(arrayCas(x, y), blanca, rey)
+                        End Select
+                End Select
+
+            Next
+        Next
+
+
+        'Resetea el color inicial del panel lateral
+        ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
+    End Sub
 
 
     Private Function horizontal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
@@ -165,14 +178,30 @@
 
 
     Private Function verticales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+        Dim direccion As Integer
+        Dim columna As Integer = getPosicionColumna(click1st)
 
-        For vertical As Integer = 0 To 7
+        If getPosicionFila(click1st) = getPosicionFila(click2nd) Or getPosicionColumna(click1st) <> getPosicionColumna(click2nd) Then
+            Return False
+        ElseIf getPosicionFila(click1st) > getPosicionFila(click2nd) Then
+            direccion = -1
+        Else
+            direccion = +1
+        End If
+
+        For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                    Return False
+                End If
+            End If
+
             Select Case getPosicion(click2nd)
-                Case vertical & getPosicionColumna(click1st)
-
+                Case fila & columna
                     Return limite(getColor(click1st), getColor(click2nd))
-
             End Select
+
         Next
 
         Return False
@@ -180,17 +209,30 @@
 
 
     Private Function horizontales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+        Dim direccion As Integer
+        Dim fila As Integer = getPosicionFila(click1st)
 
-        For horizontal As Integer = 0 To 7
+        If getPosicionFila(click1st) <> getPosicionFila(click2nd) Or getPosicionColumna(click1st) = getPosicionColumna(click2nd) Then
+            Return False
+        ElseIf getPosicionColumna(click1st) > getPosicionColumna(click2nd) Then
+            direccion = -1
+        Else
+            direccion = +1
+        End If
+
+        For columna = getPosicionColumna(click1st) To getPosicionColumna(click2nd) Step direccion
+
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                    Return False
+                End If
+            End If
 
             Select Case getPosicion(click2nd)
-                Case getPosicionFila(click1st) & horizontal
-
+                Case fila & columna
                     Return limite(getColor(click1st), getColor(click2nd))
-
             End Select
-
-
 
         Next
 
@@ -216,21 +258,36 @@
 
 
     Private Function diagonales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+        Dim direccion As Integer
+        Dim columna = getPosicionColumna(click1st)
 
-        For diagonal As Integer = 1 To 8
-
-            Select Case getPosicion(click2nd)
-                Case getPosicion(click1st) + diagonal * (-9),
-                     getPosicion(click1st) + diagonal * (+9),
-                     getPosicion(click1st) + diagonal * (-11),
-                     getPosicion(click1st) + diagonal * (+11)
-
-                    'MsgBox(click1st.Tag)
+        If getPosicionFila(click1st) = getPosicionFila(click2nd) Or getPosicionColumna(click1st) = getPosicionColumna(click2nd) Then 'si los clicks son en las mismas filas o columnas devuelve false
+            Return False
+        ElseIf getPosicionFila(click1st) > getPosicionFila(click2nd) Then 'si la fila del primer click es mayor q la del segundo, se va decrementando, si no, se va incrementando
+            direccion = -1
+        Else
+            direccion = +1
+        End If
 
 
+        For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion 'fila va desde el primer click hasta el segundo, con incremento o de cremento de 1 dependiendo de la direccion (hecha arriba)
+
+            If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
+                If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+                    Return False
+                End If
+            End If
+
+            Select Case getPosicion(click2nd) 'si la posicion de destino coincide con el posible recorrido, la suelta ahi
+                Case (fila & columna)
                     Return limite(getColor(click1st), getColor(click2nd))
-
             End Select
+
+            If columna < getPosicionColumna(click2nd) Then 'si la columna del primer click es menor que la del segundo, se incrementa, si no, se decrementa 
+                columna += 1
+            Else
+                columna -= 1
+            End If
 
         Next
 
@@ -344,6 +401,7 @@
 
 
     Function MovReina(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+
         If verticales(click1st, click2nd) OrElse diagonales(click1st, click2nd) OrElse horizontales(click1st, click2nd) Then
             Return True
         End If
@@ -389,7 +447,6 @@
     Dim bgcolorClick2nd = ColorTranslator.FromHtml("#57D837") '#4DFC41
 
     Dim colorClicked1st As Integer
-    Dim clicked1st As PictureBox = Nothing
 
     Dim color1st As Color
     Dim color2nd As Color
@@ -403,34 +460,54 @@
     End Sub
 
 
-    'Dim ultimoMov As Integer = 0
     Private Sub moverClick(click As PictureBox)
         color2nd = click.BackColor
 
         click.Tag = clicked1st.Tag
         clicked1st.Tag = 0
 
-        'MsgBox(click.Tag)
-
         click.ImageLocation = clicked1st.ImageLocation
         clicked1st.ImageLocation = Nothing
 
         clicked1st.BackColor = color1st
-        'click.BackColor = bgcolorClick2nd
-        click.BackColor = color2nd 'setea el color de fondo al soltar la pieza
+        click.BackColor = bgcolorClick2nd
 
         clicked1st = Nothing
 
-        'ultimoMov = getPosicion(click)
+        ultimoMov = click.Name
+
+        If getColor(click) = negra Then
+            ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
+        End If
+        If getColor(click) = blanca Then
+            ms_turno_color.BackColor = ColorTranslator.FromHtml("#3F3F3F")
+        End If
+
     End Sub
 
 
+    Private Function getFilaInt(num As String)
+        Return CInt(num.Substring(0, 1))
+    End Function
+    Private Function getColumnaInt(num As String)
+        Return CInt(num.Substring(1, 1))
+    End Function
+
+
+    Dim primerclick As Boolean = True
 
     Private Sub mover(clicked2nd As PictureBox)
+        Dim mov As PictureBox = clicked2nd
         If (getColor(clicked2nd) <> 0) Then
 
             If clicked1st Is Nothing Then
                 guardarPieza(clicked2nd)
+            End If
+
+
+            'marca el ultimo movimiento
+            If ultimoMov <> "-1" Then 'si es el primer movimiento de todos, que no haga nada
+                arrayCas(getFilaInt(ultimoMov), getColumnaInt(ultimoMov)).BackColor = color2nd
             End If
 
 
@@ -443,6 +520,7 @@
             Else 'si no, la come
                 If comprobador(clicked1st, clicked2nd) Then
                     moverClick(clicked2nd)
+                    cambio(clicked2nd, mov)
                 End If
             End If
 
@@ -451,8 +529,10 @@
             If clicked1st IsNot Nothing Then 'si el en el segundo click no hay nada, la mueve libremente
                 If comprobador(clicked1st, clicked2nd) Then
                     moverClick(clicked2nd)
+                    cambio(clicked2nd, mov)
                 End If
             Else
+                primerclick = True
                 'MsgBox("Selecciona una pieza")
             End If
 
@@ -460,42 +540,198 @@
     End Sub
 
 
+    Private Sub colocando(clicked As PictureBox, e As EventArgs)
 
+        If primerclick Then
+            primerclick = False
 
-    'Dim primerclick As Boolean = True
+            If turno Then
 
-    Private Sub colocando(clicked2nd As PictureBox, e As EventArgs)
+                If getColor(clicked) = blanca Then
+                    mover(clicked)
+                    turno = False
+                Else
+                    'MsgBox("Mueve una figura blanca!")
+                    primerclick = True
+                End If
 
-        mover(clicked2nd)
+            Else
 
+                If getColor(clicked) = negra Then
+                    mover(clicked)
+                    turno = True
+                Else
+                    'MsgBox("Mueve una figura negra!")
+                    primerclick = True
+                End If
 
-        'eventos aparte para el primer y segundo click
-        'If primerclick Then
+            End If
 
-        '    'If ultimoMov <> 0 Then
+        Else
+            primerclick = True
 
-        '    '    For Each objeto In Me.Controls
-        '    '        If TypeOf (objeto) Is System.Windows.Forms.PictureBox Then
-        '    '            If getPosicion(objeto) = ultimoMov Then
-        '    '                objeto.BackColor = color2nd
-        '    '                Exit For
-        '    '            End If
-        '    '        End If
-        '    '    Next
+            If getColor(clicked) = blanca And getColor(clicked1st) = blanca Then
+                turno = False
+                primerclick = False
+            End If
 
-        '    'End If
+            If getColor(clicked) = negra And getColor(clicked1st) = negra Then
+                turno = True
+                primerclick = False
+            End If
 
-        '    primerclick = False
-        'Else
+            If comprobador(clicked1st, clicked) = False Then
+                primerclick = False
+            End If
 
-        '    primerclick = True
-        'End If
+            mover(clicked)
+        End If
+
+    End Sub
+
+    Private Sub setTablero(x As Integer, y As Integer)
+
+        If x Mod 2 = 0 Then
+            arrayCas(x, y).BackColor = colorBlancoTablrero
+            If y Mod 2 <> 0 Then
+                arrayCas(x, y).BackColor = colorNegroTablero
+            End If
+        Else
+            arrayCas(x, y).BackColor = colorNegroTablero
+            If y Mod 2 <> 0 Then
+                arrayCas(x, y).BackColor = colorBlancoTablrero
+            End If
+        End If
 
     End Sub
 
 
+    Private Sub ms_nuevapartida_Click(sender As Object, e As EventArgs) Handles ms_archivo_nuevapartida.Click
+        If MsgBox("¿Estás seguro que quieres abandonar la partida actual?", MsgBoxStyle.YesNo) <> 7 Then
+            reset()
+        End If
+    End Sub
 
 
+    Private Sub ms_archivo_salir_Click(sender As Object, e As EventArgs) Handles ms_archivo_salir.Click
+        If MsgBox("¿Estás seguro que quieres salir del juego?", MsgBoxStyle.YesNo) <> 7 Then
+            End
+        End If
+    End Sub
 
+    Function cambio(ByRef nuev As PictureBox, ByVal act As PictureBox)
+        Dim p1 As Integer = getPosicion(nuev).ToString.Substring(0, 1)
+        nue = nuev
+        If getPosicionFila(nuev) = 0 And act.Tag = 21 Then
+            MsgBox("PEON BLANCO EN EL FIN")
+            pb_pb_alfil.Visible = True
+            pb_pb_caballo.Visible = True
+            pb_pb_torre.Visible = True
+            pb_pb_reina.Visible = True
+        End If
+        If getPosicionFila(nuev) = 7 And act.Tag = 11 Then
+            MsgBox("PEON negro EN EL FIN")
+            pb_pn_alfil.Visible = True
+            pb_pn_caballo.Visible = True
+            pb_pn_torre.Visible = True
+            pb_pn_reina.Visible = True
+        End If
+    End Function
+    Dim figuraCambio As Integer = 0
+    Dim nue As PictureBox
+    Sub pb_pb_reina_Click(sender As Object, e As EventArgs) Handles pb_pb_reina.Click
+        figuraCambio = 25
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = 0
+        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pb_alfil.Visible = False
+        pb_pb_caballo.Visible = False
+        pb_pb_torre.Visible = False
+        pb_pb_reina.Visible = False
+    End Sub
 
+    Private Sub pb_pb_torre_Click(sender As Object, e As EventArgs) Handles pb_pb_torre.Click
+        figuraCambio = 22
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = 0
+        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pb_alfil.Visible = False
+        pb_pb_caballo.Visible = False
+        pb_pb_torre.Visible = False
+        pb_pb_reina.Visible = False
+    End Sub
+
+    Private Sub pb_pb_caballo_Click(sender As Object, e As EventArgs) Handles pb_pb_caballo.Click
+        figuraCambio = 23
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = 0
+        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pb_alfil.Visible = False
+        pb_pb_caballo.Visible = False
+        pb_pb_torre.Visible = False
+        pb_pb_reina.Visible = False
+    End Sub
+
+    Private Sub pb_pb_alfil_Click(sender As Object, e As EventArgs) Handles pb_pb_alfil.Click
+        figuraCambio = 24
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = 0
+        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pb_alfil.Visible = False
+        pb_pb_caballo.Visible = False
+        pb_pb_torre.Visible = False
+        pb_pb_reina.Visible = False
+    End Sub
+
+    Private Sub pb_pn_reina_Click(sender As Object, e As EventArgs) Handles pb_pn_reina.Click
+        figuraCambio = 15
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
+        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pn_alfil.Visible = False
+        pb_pn_caballo.Visible = False
+        pb_pn_torre.Visible = False
+        pb_pn_reina.Visible = False
+    End Sub
+
+    Private Sub pb_pn_torre_Click(sender As Object, e As EventArgs) Handles pb_pn_torre.Click
+        figuraCambio = 12
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
+        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pn_alfil.Visible = False
+        pb_pn_caballo.Visible = False
+        pb_pn_torre.Visible = False
+        pb_pn_reina.Visible = False
+    End Sub
+
+    Private Sub pb_pn_caballo_Click(sender As Object, e As EventArgs) Handles pb_pn_caballo.Click
+        figuraCambio = 13
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
+        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pn_alfil.Visible = False
+        pb_pn_caballo.Visible = False
+        pb_pn_torre.Visible = False
+        pb_pn_reina.Visible = False
+    End Sub
+
+    Private Sub pb_pn_alfil_Click(sender As Object, e As EventArgs) Handles pb_pn_alfil.Click
+        figuraCambio = 14
+        nue.Tag = figuraCambio
+        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
+        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
+        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
+        pb_pn_alfil.Visible = False
+        pb_pn_caballo.Visible = False
+        pb_pn_torre.Visible = False
+        pb_pn_reina.Visible = False
+    End Sub
 End Class
