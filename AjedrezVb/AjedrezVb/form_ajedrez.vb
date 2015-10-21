@@ -98,6 +98,7 @@
 
         clicked1st = Nothing
         ultimoMov = "-1"
+        turno = True
 
         For x = 0 To 7
             For y = 0 To 7
