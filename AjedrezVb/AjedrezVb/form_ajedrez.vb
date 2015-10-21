@@ -19,8 +19,8 @@
     Dim colorNegroTablero = ColorTranslator.FromHtml("#C6932D")
     Dim colorBlancoTablrero = ColorTranslator.FromHtml("#FEE8B9")
 
-    Dim arrayCas(8, 8) As PictureBox
-    Dim arrayTablero(8, 8) As PictureBox
+    Dim arrayCas(7, 7) As PictureBox
+    Dim arrayTablero(7, 7) As PictureBox
 
 
     Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -193,13 +193,10 @@
                 End If
             End If
 
-
             Select Case getPosicion(click2nd)
                 Case fila & columna
                     Return limite(getColor(click1st), getColor(click2nd))
             End Select
-
-
 
         Next
 
@@ -271,7 +268,6 @@
 
         For fila = getPosicionFila(click1st) To getPosicionFila(click2nd) Step direccion 'fila va desde el primer click hasta el segundo, con incremento o de cremento de 1 dependiendo de la direccion (hecha arriba)
 
-
             If (fila & columna) <> getPosicion(click1st) And (fila & columna) <> getPosicion(click2nd) Then 'busca en el recorrido todos los picturebox que existan en medio
                 If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
                     Return False
@@ -283,14 +279,13 @@
                     Return limite(getColor(click1st), getColor(click2nd))
             End Select
 
-
             If columna < getPosicionColumna(click2nd) Then 'si la columna del primer click es menor que la del segundo, se incrementa, si no, se decrementa 
                 columna += 1
             Else
                 columna -= 1
             End If
-        Next
 
+        Next
 
         Return False
     End Function

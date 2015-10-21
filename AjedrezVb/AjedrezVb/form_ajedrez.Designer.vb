@@ -24,16 +24,17 @@ Partial Class form_ajedrez
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form_ajedrez))
         Me.panel_ajedrez = New System.Windows.Forms.Panel()
+        Me.lbl_contador_negras = New System.Windows.Forms.Label()
         Me.ms_principal = New System.Windows.Forms.MenuStrip()
         Me.ms_archivo = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_archivo_nuevapartida = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_archivo_salir = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lbl_contador_negras = New System.Windows.Forms.Label()
         Me.ms_opciones = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_opciones_limite = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ms_opciones_limite_10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_opciones_limite_5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ms_opciones_limite_10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_opciones_nolimite = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.panel_ajedrez.SuspendLayout()
         Me.ms_principal.SuspendLayout()
         Me.SuspendLayout()
@@ -41,11 +42,24 @@ Partial Class form_ajedrez
         'panel_ajedrez
         '
         Me.panel_ajedrez.BackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(231, Byte), Integer))
+        Me.panel_ajedrez.Controls.Add(Me.Label1)
         Me.panel_ajedrez.Controls.Add(Me.lbl_contador_negras)
         Me.panel_ajedrez.Location = New System.Drawing.Point(601, 25)
         Me.panel_ajedrez.Name = "panel_ajedrez"
         Me.panel_ajedrez.Size = New System.Drawing.Size(150, 600)
         Me.panel_ajedrez.TabIndex = 0
+        '
+        'lbl_contador_negras
+        '
+        Me.lbl_contador_negras.AutoSize = True
+        Me.lbl_contador_negras.BackColor = System.Drawing.Color.Gainsboro
+        Me.lbl_contador_negras.Font = New System.Drawing.Font("Arial Narrow", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_contador_negras.ForeColor = System.Drawing.Color.DarkGray
+        Me.lbl_contador_negras.Location = New System.Drawing.Point(12, 18)
+        Me.lbl_contador_negras.Name = "lbl_contador_negras"
+        Me.lbl_contador_negras.Size = New System.Drawing.Size(126, 57)
+        Me.lbl_contador_negras.TabIndex = 0
+        Me.lbl_contador_negras.Text = "00:00"
         '
         'ms_principal
         '
@@ -66,26 +80,14 @@ Partial Class form_ajedrez
         'ms_archivo_nuevapartida
         '
         Me.ms_archivo_nuevapartida.Name = "ms_archivo_nuevapartida"
-        Me.ms_archivo_nuevapartida.Size = New System.Drawing.Size(148, 22)
+        Me.ms_archivo_nuevapartida.Size = New System.Drawing.Size(152, 22)
         Me.ms_archivo_nuevapartida.Text = "Nueva partida"
         '
         'ms_archivo_salir
         '
         Me.ms_archivo_salir.Name = "ms_archivo_salir"
-        Me.ms_archivo_salir.Size = New System.Drawing.Size(148, 22)
+        Me.ms_archivo_salir.Size = New System.Drawing.Size(152, 22)
         Me.ms_archivo_salir.Text = "Salir"
-        '
-        'lbl_contador_negras
-        '
-        Me.lbl_contador_negras.AutoSize = True
-        Me.lbl_contador_negras.BackColor = System.Drawing.Color.Gainsboro
-        Me.lbl_contador_negras.Font = New System.Drawing.Font("Arial Narrow", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_contador_negras.ForeColor = System.Drawing.Color.DarkGray
-        Me.lbl_contador_negras.Location = New System.Drawing.Point(12, 18)
-        Me.lbl_contador_negras.Name = "lbl_contador_negras"
-        Me.lbl_contador_negras.Size = New System.Drawing.Size(126, 57)
-        Me.lbl_contador_negras.TabIndex = 0
-        Me.lbl_contador_negras.Text = "00:00"
         '
         'ms_opciones
         '
@@ -101,23 +103,35 @@ Partial Class form_ajedrez
         Me.ms_opciones_limite.Size = New System.Drawing.Size(152, 22)
         Me.ms_opciones_limite.Text = "Límite"
         '
-        'ms_opciones_limite_10
-        '
-        Me.ms_opciones_limite_10.Name = "ms_opciones_limite_10"
-        Me.ms_opciones_limite_10.Size = New System.Drawing.Size(152, 22)
-        Me.ms_opciones_limite_10.Text = "10 min."
-        '
         'ms_opciones_limite_5
         '
         Me.ms_opciones_limite_5.Name = "ms_opciones_limite_5"
-        Me.ms_opciones_limite_5.Size = New System.Drawing.Size(152, 22)
+        Me.ms_opciones_limite_5.Size = New System.Drawing.Size(113, 22)
         Me.ms_opciones_limite_5.Text = "5 min."
+        '
+        'ms_opciones_limite_10
+        '
+        Me.ms_opciones_limite_10.Name = "ms_opciones_limite_10"
+        Me.ms_opciones_limite_10.Size = New System.Drawing.Size(113, 22)
+        Me.ms_opciones_limite_10.Text = "10 min."
         '
         'ms_opciones_nolimite
         '
         Me.ms_opciones_nolimite.Name = "ms_opciones_nolimite"
         Me.ms_opciones_nolimite.Size = New System.Drawing.Size(152, 22)
         Me.ms_opciones_nolimite.Text = "Sin límite"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label1.Font = New System.Drawing.Font("Arial Narrow", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.DarkGray
+        Me.Label1.Location = New System.Drawing.Point(12, 524)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(126, 57)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "00:00"
         '
         'form_ajedrez
         '
@@ -153,4 +167,5 @@ Partial Class form_ajedrez
     Friend WithEvents ms_opciones_limite_5 As ToolStripMenuItem
     Friend WithEvents ms_opciones_limite_10 As ToolStripMenuItem
     Friend WithEvents ms_opciones_nolimite As ToolStripMenuItem
+    Friend WithEvents Label1 As Label
 End Class
