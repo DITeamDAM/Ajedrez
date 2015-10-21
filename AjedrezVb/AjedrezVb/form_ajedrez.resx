@@ -117,14 +117,167 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;pb_pb_alfil.Name" xml:space="preserve">
+    <value>pb_pb_alfil</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_alfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_alfil.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_alfil.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_caballo.Name" xml:space="preserve">
+    <value>pb_pb_caballo</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_caballo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_caballo.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_caballo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_torre.Name" xml:space="preserve">
+    <value>pb_pb_torre</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_torre.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_torre.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_torre.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_reina.Name" xml:space="preserve">
+    <value>pb_pb_reina</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_reina.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_reina.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pb_reina.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_alfil.Name" xml:space="preserve">
+    <value>pb_pn_alfil</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_alfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_alfil.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_alfil.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_caballo.Name" xml:space="preserve">
+    <value>pb_pn_caballo</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_caballo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_caballo.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_caballo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_torre.Name" xml:space="preserve">
+    <value>pb_pn_torre</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_torre.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_torre.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_torre.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_reina.Name" xml:space="preserve">
+    <value>pb_pn_reina</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_reina.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_reina.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;pb_pn_reina.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ms_turno_color.Name" xml:space="preserve">
+    <value>ms_turno_color</value>
+  </data>
+  <data name="&gt;&gt;ms_turno_color.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ms_turno_color.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;ms_turno_color.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_blancas.Name" xml:space="preserve">
+    <value>lbl_contador_blancas</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_blancas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_blancas.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_blancas.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_negras.Name" xml:space="preserve">
+    <value>lbl_contador_negras</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_negras.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_negras.Parent" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;lbl_contador_negras.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="panel_ajedrez.Location" type="System.Drawing.Point, System.Drawing">
+    <value>601, 25</value>
+  </data>
+  <data name="panel_ajedrez.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 600</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel_ajedrez.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel_ajedrez.Name" xml:space="preserve">
+    <value>panel_ajedrez</value>
+  </data>
+  <data name="&gt;&gt;panel_ajedrez.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel_ajedrez.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel_ajedrez.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="pb_pb_alfil.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 539</value>
   </data>
   <data name="pb_pb_alfil.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pb_pb_alfil.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -320,6 +473,27 @@
   <data name="&gt;&gt;ms_turno_color.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="lbl_turno.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lbl_turno.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="lbl_turno.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lbl_turno.Name" xml:space="preserve">
+    <value>lbl_turno</value>
+  </data>
+  <data name="&gt;&gt;lbl_turno.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_turno.Parent" xml:space="preserve">
+    <value>ms_turno_color</value>
+  </data>
+  <data name="&gt;&gt;lbl_turno.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lbl_contador_blancas.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 36.29px, style=Bold</value>
   </data>
@@ -380,48 +554,6 @@
   <data name="&gt;&gt;lbl_contador_negras.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="panel_ajedrez.Location" type="System.Drawing.Point, System.Drawing">
-    <value>601, 25</value>
-  </data>
-  <data name="panel_ajedrez.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 600</value>
-  </data>
-  <data name="panel_ajedrez.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panel_ajedrez.Name" xml:space="preserve">
-    <value>panel_ajedrez</value>
-  </data>
-  <data name="&gt;&gt;panel_ajedrez.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel_ajedrez.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel_ajedrez.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lbl_turno.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="lbl_turno.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="lbl_turno.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.Name" xml:space="preserve">
-    <value>lbl_turno</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.Parent" xml:space="preserve">
-    <value>ms_turno_color</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="ms_principal.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -456,13 +588,13 @@
     <value>Archivo</value>
   </data>
   <data name="ms_archivo_nuevapartida.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="ms_archivo_nuevapartida.Text" xml:space="preserve">
     <value>Nueva partida</value>
   </data>
   <data name="ms_archivo_salir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="ms_archivo_salir.Text" xml:space="preserve">
     <value>Salir</value>
@@ -474,34 +606,46 @@
     <value>Temporizador</value>
   </data>
   <data name="ms_temporizador_limite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="ms_temporizador_limite.Text" xml:space="preserve">
     <value>Límite</value>
   </data>
   <data name="ms_temporizador_limite_5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="ms_temporizador_limite_5.Text" xml:space="preserve">
     <value>5 min.</value>
   </data>
   <data name="ms_temporizador_limite_10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="ms_temporizador_limite_10.Text" xml:space="preserve">
     <value>10 min.</value>
   </data>
   <data name="ms_temporizador_nolimite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="ms_temporizador_nolimite.Text" xml:space="preserve">
     <value>Sin límite</value>
+  </data>
+  <metadata name="timer_blancas.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>136, 17</value>
+  </metadata>
+  <metadata name="timer_negras.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>246, 16</value>
+  </metadata>
+  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>43</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -859,6 +1003,30 @@
   </data>
   <data name="&gt;&gt;ms_temporizador_nolimite.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timer_blancas.Name" xml:space="preserve">
+    <value>timer_blancas</value>
+  </data>
+  <data name="&gt;&gt;timer_blancas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;timer_negras.Name" xml:space="preserve">
+    <value>timer_negras</value>
+  </data>
+  <data name="&gt;&gt;timer_negras.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
+    <value>ToolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
+    <value>ToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>form_ajedrez</value>

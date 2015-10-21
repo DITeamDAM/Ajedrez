@@ -461,6 +461,9 @@
     End Sub
 
 
+
+
+
     Private Sub moverClick(click As PictureBox)
         color2nd = click.BackColor
 
@@ -483,6 +486,9 @@
         If getColor(click) = blanca Then
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#3F3F3F")
         End If
+
+
+        'AQUI EL METODO Q TERMINA EL DECREMENTO DEL CLICKEADO, Y EMPIEZA EL DEL OTRO
 
     End Sub
 
@@ -520,14 +526,21 @@
             Else 'si no, la come
                 If comprobador(clicked1st, clicked2nd) Then
                     If (getTipo(clicked2nd) = 6) Then
+
                         If (getColor(clicked2nd) = blanca) Then
-                            MsgBox("La partida ha terminado, el equipo ganador es el Negro")
-                            reset()
-                            Exit Sub
-                        Else
-                            MsgBox("La partida ha terminado, el equipo ganador es el Blanco")
-                            reset()
-                            Exit Sub
+                            If MsgBox("Gana el jugador2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                                reset()
+                                Exit Sub
+                            Else
+                                End
+                            End If
+                        ElseIf (getColor(clicked2nd) = negra)
+                            If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                                reset()
+                                Exit Sub
+                            Else
+                                End
+                            End If
                         End If
 
                     End If
@@ -560,6 +573,11 @@
                 If getColor(clicked) = blanca Then
                     mover(clicked)
                     turno = False
+
+                    timer_blancas.Start()
+
+
+                    'AQUI EL METODO Q EMPIEZA EL DECREMENTO DEL CLICKEADO, Y TERMINA EL DEL OTRO
                 Else
                     'MsgBox("Mueve una figura blanca!")
                     primerclick = True
@@ -570,6 +588,10 @@
                 If getColor(clicked) = negra Then
                     mover(clicked)
                     turno = True
+
+                    timer_negras.Start()
+
+                    'AQUI EL METODO Q EMPIEZA EL DECREMENTO DEL CLICKEADO, Y TERMINA EL DEL OTRO
                 Else
                     'MsgBox("Mueve una figura negra!")
                     primerclick = True
@@ -628,4 +650,54 @@
         End If
     End Sub
 
+
+
+
+    Dim tempBlancas As Integer = 0
+    Dim tempNegras As Integer = 0
+
+    Private Sub temporizador(color As Integer, tiempo As Integer)
+        Select Case color
+            Case blanca
+                lbl_contador_blancas.Text = tiempo
+            Case negra
+                lbl_contador_negras.Text = tiempo
+        End Select
+
+        'If timepo / 60 Then
+
+        'End If
+
+    End Sub
+
+
+    Private Sub ms_temporizador_limite_5_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_5.Click
+        tempBlancas = 300
+        tempNegras = 300
+
+        lbl_contador_blancas.Text = "5:00"
+        lbl_contador_negras.Text = "5:00"
+
+
+
+    End Sub
+
+    Private Sub ms_temporizador_limite_10_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_10.Click
+        tempBlancas = 600
+        tempNegras = 600
+
+        lbl_contador_blancas.Text = "10:00"
+        lbl_contador_negras.Text = "10:00"
+
+
+
+    End Sub
+
+    Private Sub timer_blancas_Tick(sender As Object, e As EventArgs) Handles timer_blancas.Tick
+        temporizador(blanca, tempBlancas - 1)
+    End Sub
+
+    Private Sub timer_negras_Tick(sender As Object, e As EventArgs) Handles timer_negras.Tick
+        temporizador(negra, tempNegras - 1)
+    End Sub
 End Class

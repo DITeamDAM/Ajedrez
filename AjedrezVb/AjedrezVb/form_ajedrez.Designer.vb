@@ -22,6 +22,7 @@ Partial Class form_ajedrez
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form_ajedrez))
         Me.panel_ajedrez = New System.Windows.Forms.Panel()
         Me.pb_pb_alfil = New System.Windows.Forms.PictureBox()
@@ -45,6 +46,10 @@ Partial Class form_ajedrez
         Me.ms_temporizador_limite_5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_temporizador_limite_10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_temporizador_nolimite = New System.Windows.Forms.ToolStripMenuItem()
+        Me.timer_blancas = New System.Windows.Forms.Timer(Me.components)
+        Me.timer_negras = New System.Windows.Forms.Timer(Me.components)
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.panel_ajedrez.SuspendLayout()
         CType(Me.pb_pb_alfil, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb_pb_caballo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -166,7 +171,7 @@ Partial Class form_ajedrez
         '
         'ms_archivo
         '
-        Me.ms_archivo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_archivo_nuevapartida, Me.ms_archivo_salir})
+        Me.ms_archivo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_archivo_nuevapartida, Me.ToolStripMenuItem2, Me.ms_archivo_salir})
         Me.ms_archivo.Name = "ms_archivo"
         resources.ApplyResources(Me.ms_archivo, "ms_archivo")
         '
@@ -182,7 +187,7 @@ Partial Class form_ajedrez
         '
         'ms_temporizador
         '
-        Me.ms_temporizador.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_temporizador_limite, Me.ms_temporizador_nolimite})
+        Me.ms_temporizador.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ms_temporizador_limite, Me.ToolStripMenuItem1, Me.ms_temporizador_nolimite})
         Me.ms_temporizador.Name = "ms_temporizador"
         resources.ApplyResources(Me.ms_temporizador, "ms_temporizador")
         '
@@ -206,6 +211,24 @@ Partial Class form_ajedrez
         '
         Me.ms_temporizador_nolimite.Name = "ms_temporizador_nolimite"
         resources.ApplyResources(Me.ms_temporizador_nolimite, "ms_temporizador_nolimite")
+        '
+        'timer_blancas
+        '
+        Me.timer_blancas.Interval = 1000
+        '
+        'timer_negras
+        '
+        Me.timer_negras.Interval = 1000
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         '
         'form_ajedrez
         '
@@ -256,4 +279,8 @@ Partial Class form_ajedrez
     Friend WithEvents pb_pn_caballo As PictureBox
     Friend WithEvents pb_pn_torre As PictureBox
     Friend WithEvents pb_pn_reina As PictureBox
+    Friend WithEvents timer_blancas As Timer
+    Friend WithEvents timer_negras As Timer
+    Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
 End Class
