@@ -99,6 +99,9 @@
     <EmbeddedResource Include="form_ajedrez.resx">
       <DependentUpon>form_ajedrez.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form_ajedrez.sl.resx">
+      <DependentUpon>form_ajedrez.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
