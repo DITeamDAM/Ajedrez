@@ -40,16 +40,16 @@ Partial Class form_ajedrez
         Me.ms_principal = New System.Windows.Forms.MenuStrip()
         Me.ms_archivo = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_archivo_nuevapartida = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ms_archivo_salir = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_temporizador = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_temporizador_limite = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_temporizador_limite_5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ms_temporizador_limite_10 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ms_temporizador_nolimite = New System.Windows.Forms.ToolStripMenuItem()
         Me.timer_blancas = New System.Windows.Forms.Timer(Me.components)
         Me.timer_negras = New System.Windows.Forms.Timer(Me.components)
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.panel_ajedrez.SuspendLayout()
         CType(Me.pb_pb_alfil, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb_pb_caballo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,7 +139,6 @@ Partial Class form_ajedrez
         'ms_turno_color
         '
         Me.ms_turno_color.BackColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(248, Byte), Integer))
-        Me.ms_turno_color.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ms_turno_color.Controls.Add(Me.lbl_turno)
         resources.ApplyResources(Me.ms_turno_color, "ms_turno_color")
         Me.ms_turno_color.Name = "ms_turno_color"
@@ -151,16 +150,16 @@ Partial Class form_ajedrez
         '
         'lbl_contador_blancas
         '
-        Me.lbl_contador_blancas.BackColor = System.Drawing.Color.Gainsboro
+        Me.lbl_contador_blancas.BackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(213, Byte), Integer))
         resources.ApplyResources(Me.lbl_contador_blancas, "lbl_contador_blancas")
-        Me.lbl_contador_blancas.ForeColor = System.Drawing.Color.DarkGray
+        Me.lbl_contador_blancas.ForeColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.lbl_contador_blancas.Name = "lbl_contador_blancas"
         '
         'lbl_contador_negras
         '
-        Me.lbl_contador_negras.BackColor = System.Drawing.Color.Gainsboro
+        Me.lbl_contador_negras.BackColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(213, Byte), Integer))
         resources.ApplyResources(Me.lbl_contador_negras, "lbl_contador_negras")
-        Me.lbl_contador_negras.ForeColor = System.Drawing.Color.DarkGray
+        Me.lbl_contador_negras.ForeColor = System.Drawing.Color.FromArgb(CType(CType(229, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.lbl_contador_negras.Name = "lbl_contador_negras"
         '
         'ms_principal
@@ -179,6 +178,11 @@ Partial Class form_ajedrez
         '
         Me.ms_archivo_nuevapartida.Name = "ms_archivo_nuevapartida"
         resources.ApplyResources(Me.ms_archivo_nuevapartida, "ms_archivo_nuevapartida")
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
         '
         'ms_archivo_salir
         '
@@ -207,6 +211,11 @@ Partial Class form_ajedrez
         Me.ms_temporizador_limite_10.Name = "ms_temporizador_limite_10"
         resources.ApplyResources(Me.ms_temporizador_limite_10, "ms_temporizador_limite_10")
         '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
+        '
         'ms_temporizador_nolimite
         '
         Me.ms_temporizador_nolimite.Name = "ms_temporizador_nolimite"
@@ -219,16 +228,6 @@ Partial Class form_ajedrez
         'timer_negras
         '
         Me.timer_negras.Interval = 1000
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         '
         'form_ajedrez
         '

@@ -453,10 +453,10 @@
     <value>0</value>
   </data>
   <data name="ms_turno_color.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 241</value>
+    <value>0, 225</value>
   </data>
   <data name="ms_turno_color.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 120</value>
+    <value>150, 150</value>
   </data>
   <data name="ms_turno_color.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -498,10 +498,10 @@
     <value>Arial Narrow, 36.29px, style=Bold</value>
   </data>
   <data name="lbl_contador_blancas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 383</value>
+    <value>0, 375</value>
   </data>
   <data name="lbl_contador_blancas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 52</value>
+    <value>150, 75</value>
   </data>
   <data name="lbl_contador_blancas.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -528,10 +528,10 @@
     <value>Arial Narrow, 36.29px, style=Bold</value>
   </data>
   <data name="lbl_contador_negras.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 167</value>
+    <value>0, 150</value>
   </data>
   <data name="lbl_contador_negras.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 52</value>
+    <value>150, 75</value>
   </data>
   <data name="lbl_contador_negras.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -588,13 +588,16 @@
     <value>Archivo</value>
   </data>
   <data name="ms_archivo_nuevapartida.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="ms_archivo_nuevapartida.Text" xml:space="preserve">
     <value>Nueva partida</value>
   </data>
+  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 6</value>
+  </data>
   <data name="ms_archivo_salir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="ms_archivo_salir.Text" xml:space="preserve">
     <value>Salir</value>
@@ -606,25 +609,28 @@
     <value>Temporizador</value>
   </data>
   <data name="ms_temporizador_limite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>123, 22</value>
   </data>
   <data name="ms_temporizador_limite.Text" xml:space="preserve">
     <value>Límite</value>
   </data>
   <data name="ms_temporizador_limite_5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>113, 22</value>
   </data>
   <data name="ms_temporizador_limite_5.Text" xml:space="preserve">
     <value>5 min.</value>
   </data>
   <data name="ms_temporizador_limite_10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>113, 22</value>
   </data>
   <data name="ms_temporizador_limite_10.Text" xml:space="preserve">
     <value>10 min.</value>
   </data>
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 6</value>
+  </data>
   <data name="ms_temporizador_nolimite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>123, 22</value>
   </data>
   <data name="ms_temporizador_nolimite.Text" xml:space="preserve">
     <value>Sin límite</value>
@@ -635,12 +641,6 @@
   <metadata name="timer_negras.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>246, 16</value>
   </metadata>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
-  </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -655,7 +655,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>751, 625</value>
+    <value>751, 624</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -968,6 +968,12 @@
   <data name="&gt;&gt;ms_archivo_nuevapartida.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
+    <value>ToolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ms_archivo_salir.Name" xml:space="preserve">
     <value>ms_archivo_salir</value>
   </data>
@@ -998,6 +1004,12 @@
   <data name="&gt;&gt;ms_temporizador_limite_10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
+    <value>ToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ms_temporizador_nolimite.Name" xml:space="preserve">
     <value>ms_temporizador_nolimite</value>
   </data>
@@ -1015,18 +1027,6 @@
   </data>
   <data name="&gt;&gt;timer_negras.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
-    <value>ToolStripMenuItem2</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
-    <value>ToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>form_ajedrez</value>

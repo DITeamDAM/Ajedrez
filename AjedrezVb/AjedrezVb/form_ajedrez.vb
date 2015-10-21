@@ -96,9 +96,13 @@
 
     Private Sub reset()
 
+        resetTemporizador()
+        ms_temporizador.Enabled = True
+
         clicked1st = Nothing
         ultimoMov = "-1"
         turno = True
+        primerclick = True
 
         For x = 0 To 7
             For y = 0 To 7
@@ -465,6 +469,11 @@
 
 
     Private Sub moverClick(click As PictureBox)
+
+        If ms_temporizador.Enabled Then
+            ms_temporizador.Enabled = False
+        End If
+
         color2nd = click.BackColor
 
         click.Tag = clicked1st.Tag
@@ -482,13 +491,20 @@
 
         If getColor(click) = negra Then
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
+            If ms_temporizador_nolimite.Checked = False Then
+                timer_negras.Stop()
+                timer_blancas.Start()
+            End If
         End If
         If getColor(click) = blanca Then
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#3F3F3F")
+            If ms_temporizador_nolimite.Checked = False Then
+                timer_blancas.Stop()
+                timer_negras.Start()
+            End If
         End If
 
 
-        'AQUI EL METODO Q TERMINA EL DECREMENTO DEL CLICKEADO, Y EMPIEZA EL DEL OTRO
 
     End Sub
 
@@ -573,11 +589,6 @@
                 If getColor(clicked) = blanca Then
                     mover(clicked)
                     turno = False
-
-                    timer_blancas.Start()
-
-
-                    'AQUI EL METODO Q EMPIEZA EL DECREMENTO DEL CLICKEADO, Y TERMINA EL DEL OTRO
                 Else
                     'MsgBox("Mueve una figura blanca!")
                     primerclick = True
@@ -588,10 +599,6 @@
                 If getColor(clicked) = negra Then
                     mover(clicked)
                     turno = True
-
-                    timer_negras.Start()
-
-                    'AQUI EL METODO Q EMPIEZA EL DECREMENTO DEL CLICKEADO, Y TERMINA EL DEL OTRO
                 Else
                     'MsgBox("Mueve una figura negra!")
                     primerclick = True
@@ -600,6 +607,7 @@
             End If
 
         Else
+
             primerclick = True
 
             If getColor(clicked) = blanca And getColor(clicked1st) = blanca Then
@@ -634,70 +642,141 @@
                 arrayCas(x, y).BackColor = colorBlancoTablrero
             End If
         End If
+
     End Sub
 
 
     Private Sub ms_nuevapartida_Click(sender As Object, e As EventArgs) Handles ms_archivo_nuevapartida.Click
-        If MsgBox("¿Estás seguro que quieres abandonar la partida actual?", MsgBoxStyle.YesNo) <> 7 Then
+        If MsgBox("¿Seguro que quieres abandonar la partida actual?", MsgBoxStyle.YesNo, "Nueva partida") <> 7 Then
             reset()
         End If
     End Sub
 
 
     Private Sub ms_archivo_salir_Click(sender As Object, e As EventArgs) Handles ms_archivo_salir.Click
-        If MsgBox("¿Estás seguro que quieres salir del juego?", MsgBoxStyle.YesNo) <> 7 Then
+        If MsgBox("¿Seguro que quieres salir del juego?", MsgBoxStyle.YesNo, "Salir del juego") <> 7 Then
             End
         End If
     End Sub
 
 
+    Private Function temporizador(tiempoText As String)
+        Dim min = CInt(tiempoText.Substring(0, 2))
+        Dim seg = CInt(tiempoText.Substring(3, 2))
+
+        Dim comodinMin As String = "0"
+        Dim comodinSeg As String = "0"
 
 
-    Dim tempBlancas As Integer = 0
-    Dim tempNegras As Integer = 0
+        If seg = 0 Then
+            seg = 60
+            min -= 1
+        End If
 
-    Private Sub temporizador(color As Integer, tiempo As Integer)
-        Select Case color
-            Case blanca
-                lbl_contador_blancas.Text = tiempo
-            Case negra
-                lbl_contador_negras.Text = tiempo
-        End Select
+        seg -= 1
 
-        'If timepo / 60 Then
+        If seg >= 10 Then
+            comodinSeg = ""
+        End If
+        If min >= 10 Then
+            comodinMin = ""
+        End If
 
-        'End If
+        If min = 0 And seg = 0 Then
+            timer_blancas.Stop()
+            timer_negras.Stop()
 
-    End Sub
+            If MsgBox("Has perdido, ¿quieres la revancha?", MsgBoxStyle.YesNo, "¡TIEMPO!") <> 7 Then
+                reset()
+            Else
+                End
+            End If
+        End If
+
+
+        Return comodinMin & min & ":" & comodinSeg & seg
+
+    End Function
 
 
     Private Sub ms_temporizador_limite_5_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_5.Click
-        tempBlancas = 300
-        tempNegras = 300
 
-        lbl_contador_blancas.Text = "5:00"
-        lbl_contador_negras.Text = "5:00"
+        lbl_contador_blancas.Text = "05:00"
+        lbl_contador_negras.Text = "05:00"
+        ms_temporizador_limite_5.Checked = True
+        ms_temporizador_limite_10.Checked = False
+        ms_temporizador_nolimite.Checked = False
 
-
+        lbl_contador_blancas.ForeColor = System.Drawing.Color.Silver
+        lbl_contador_negras.ForeColor = System.Drawing.Color.Silver
 
     End Sub
 
     Private Sub ms_temporizador_limite_10_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_10.Click
-        tempBlancas = 600
-        tempNegras = 600
 
         lbl_contador_blancas.Text = "10:00"
         lbl_contador_negras.Text = "10:00"
+        ms_temporizador_limite_10.Checked = True
+        ms_temporizador_limite_5.Checked = False
+        ms_temporizador_nolimite.Checked = False
 
-
+        lbl_contador_blancas.ForeColor = System.Drawing.Color.Silver
+        lbl_contador_negras.ForeColor = System.Drawing.Color.Silver
 
     End Sub
-
     Private Sub timer_blancas_Tick(sender As Object, e As EventArgs) Handles timer_blancas.Tick
-        temporizador(blanca, tempBlancas - 1)
+
+        lbl_contador_negras.ForeColor = ColorTranslator.FromHtml("#AAAAAA")
+
+        If CInt(lbl_contador_blancas.Text.Substring(0, 2)) < 2 Then
+            lbl_contador_blancas.ForeColor = ColorTranslator.FromHtml("#BE432D")
+        Else
+            lbl_contador_blancas.ForeColor = ColorTranslator.FromHtml("#666666")
+        End If
+
+        lbl_contador_blancas.Text = temporizador(lbl_contador_blancas.Text)
+
     End Sub
 
     Private Sub timer_negras_Tick(sender As Object, e As EventArgs) Handles timer_negras.Tick
-        temporizador(negra, tempNegras - 1)
+
+        lbl_contador_blancas.ForeColor = ColorTranslator.FromHtml("#AAAAAA")
+
+
+        If CInt(lbl_contador_negras.Text.Substring(0, 2)) < 2 Then
+            lbl_contador_negras.ForeColor = ColorTranslator.FromHtml("#BE432D")
+        Else
+            lbl_contador_negras.ForeColor = ColorTranslator.FromHtml("#666666")
+        End If
+
+        lbl_contador_negras.Text = temporizador(lbl_contador_negras.Text)
+
+    End Sub
+
+    Private Sub resetTemporizador()
+        timer_blancas.Stop()
+        timer_negras.Stop()
+
+
+        lbl_contador_blancas.Text = "00:00"
+        lbl_contador_negras.Text = "00:00"
+
+        lbl_contador_blancas.ForeColor = ColorTranslator.FromHtml("#E5E5E5")
+        lbl_contador_negras.ForeColor = ColorTranslator.FromHtml("#E5E5E5")
+
+        ms_temporizador_limite_5.Checked = False
+        ms_temporizador_limite_10.Checked = False
+        ms_temporizador_nolimite.Checked = True
+    End Sub
+
+    Private Sub ms_temporizador_nolimite_Click(sender As Object, e As EventArgs) Handles ms_temporizador_nolimite.Click
+
+        resetTemporizador()
+
+    End Sub
+
+    Private Sub ms_principal_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ms_principal.ItemClicked
+        timer_blancas.Stop()
+        timer_negras.Stop()
     End Sub
 End Class
