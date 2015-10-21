@@ -1,6 +1,5 @@
 ﻿Public Class form_ajedrez
-
-
+    
     'Asignacion de valores para cada caso
     Dim blanca As Integer = 2
     Dim negra As Integer = 1
@@ -13,6 +12,8 @@
     Dim rey As Integer = 6
 
     Dim turno As Boolean = True
+    Dim clicked1st As PictureBox = Nothing
+    Dim ultimoMov As String = "-1"
 
 
     'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
@@ -95,6 +96,9 @@
 
     Private Sub reset()
 
+        clicked1st = Nothing
+        ultimoMov = "-1"
+
         For x = 0 To 7
             For y = 0 To 7
 
@@ -141,7 +145,7 @@
 
 
         'Resetea el color inicial del panel lateral
-        panel_ajedrez.BackColor = ColorTranslator.FromHtml("#E7E7E7")
+        ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
     End Sub
 
 
@@ -443,7 +447,6 @@
     Dim bgcolorClick2nd = ColorTranslator.FromHtml("#57D837") '#4DFC41
 
     Dim colorClicked1st As Integer
-    Dim clicked1st As PictureBox = Nothing
 
     Dim color1st As Color
     Dim color2nd As Color
@@ -457,7 +460,6 @@
     End Sub
 
 
-    Dim ultimoMov As String = "-1"
     Private Sub moverClick(click As PictureBox)
         color2nd = click.BackColor
 
@@ -475,10 +477,10 @@
         ultimoMov = click.Name
 
         If getColor(click) = negra Then
-            panel_ajedrez.BackColor = ColorTranslator.FromHtml("#E7E7E7")
+            ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
         End If
         If getColor(click) = blanca Then
-            panel_ajedrez.BackColor = ColorTranslator.FromHtml("#3F3F3F")
+            ms_turno_color.BackColor = ColorTranslator.FromHtml("#3F3F3F")
         End If
 
     End Sub
