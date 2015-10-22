@@ -1,5 +1,5 @@
 ﻿Public Class form_ajedrez
-    
+
     'Asignacion de valores para cada caso
     Dim blanca As Integer = 2
     Dim negra As Integer = 1
@@ -11,32 +11,12 @@
     Dim reina As Integer = 5
     Dim rey As Integer = 6
 
+    Dim arrayRecuento(11)
+
+
     Dim turno As Boolean = True
     Dim clicked1st As PictureBox = Nothing
     Dim ultimoMov As String = "-1"
-
-
-
-
-
-
-    Dim contNPeon As Integer = 0
-    Dim contNAlfil As Integer = 0
-    Dim contNTorre As Integer = 0
-    Dim contNRey As Integer = 0
-    Dim contNReina As Integer = 0
-    Dim contNCaballo As Integer = 0
-
-
-    Dim contBPeon As Integer = 0
-    Dim contBAlfil As Integer = 0
-    Dim contBTorre As Integer = 0
-    Dim contBRey As Integer = 0
-    Dim contBReina As Integer = 0
-    Dim contBCaballo As Integer = 0
-
-
-
 
 
 
@@ -133,28 +113,109 @@
         Return CInt(obj.Name.Substring(1, 1))
     End Function
 
+    'Empieza el recuento de fichas comidas, el reseteo, el set de fichas, y el get
+    Private Sub resetRecuento()
+        For i = 0 To 11
+            arrayRecuento(i) = 0
+        Next
+    End Sub
+
+    Private Sub setRecuento(pieza As PictureBox)
+        Select Case getColor(pieza)
+            Case blanca
+
+                Select Case getTipo(pieza)
+                    Case peon
+                        arrayRecuento(0) += 1
+                    Case torre
+                        arrayRecuento(1) += 1
+                    Case caballo
+                        arrayRecuento(2) += 1
+                    Case alfil
+                        arrayRecuento(3) += 1
+                    Case rey
+                        arrayRecuento(4) += 1
+                    Case reina
+                        arrayRecuento(5) += 1
+                End Select
+
+            Case negra
+
+                Select Case getTipo(pieza)
+                    Case peon
+                        arrayRecuento(6) += 1
+                    Case torre
+                        arrayRecuento(7) += 1
+                    Case caballo
+                        arrayRecuento(8) += 1
+                    Case alfil
+                        arrayRecuento(9) += 1
+                    Case rey
+                        arrayRecuento(10) += 1
+                    Case reina
+                        arrayRecuento(11) += 1
+                End Select
+
+        End Select
+    End Sub
+
+
+
+
+    Private Function getRecuento(color As Integer, tipo As Integer)
+        Select Case color
+            Case blanca
+
+                Select Case tipo
+                    Case peon
+                        Return arrayRecuento(0)
+                    Case torre
+                        Return arrayRecuento(1)
+                    Case caballo
+                        Return arrayRecuento(2)
+                    Case alfil
+                        Return arrayRecuento(3)
+                    Case rey
+                        Return arrayRecuento(4)
+                    Case reina
+                        Return arrayRecuento(5)
+                End Select
+
+            Case negra
+
+                Select Case tipo
+                    Case peon
+                        Return arrayRecuento(6)
+                    Case torre
+                        Return arrayRecuento(7)
+                    Case caballo
+                        Return arrayRecuento(8)
+                    Case alfil
+                        Return arrayRecuento(9)
+                    Case rey
+                        Return arrayRecuento(10)
+                    Case reina
+                        Return arrayRecuento(11)
+                End Select
+        End Select
+
+        Return False
+    End Function
+
+
+
+
+
+
 
     Private Sub reset()
 
-        contNPeon = 0
-        contNAlfil = 0
-        contNTorre = 0
-        contNRey = 0
-        contNReina = 0
-        contNCaballo = 0
-
-
-        contBPeon = 0
-        contBAlfil = 0
-        contBTorre = 0
-        contBRey = 0
-        contBReina = 0
-        contBCaballo = 0
+        'reseta el recuento de las fichas comidas
+        resetRecuento()
 
 
 
-
-
+        'reseta el temporizador
         resetTemporizador()
         ms_temporizador.Enabled = True
 
@@ -428,9 +489,30 @@
     End Function
 
 
+    'Function MovTorre(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+
+    '    If verticales(click1st, click2nd) Or horizontales(click1st, click2nd) Then
+    '        Return True
+    '    End If
+
+    '    Return False
+    'End Function
+
     Function MovTorre(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
         If verticales(click1st, click2nd) Or horizontales(click1st, click2nd) Then
+            If getPosicion(click1st) = 0 Then
+                torremovidaIN = True
+            End If
+            If getPosicion(click1st) = 7 Then
+                torremovidaDN = True
+            End If
+            If getPosicion(click1st) = 70 Then
+                torremovidaIB = True
+            End If
+            If getPosicion(click1st) = 77 Then
+                torremovidaDB = True
+            End If
             Return True
         End If
 
@@ -474,10 +556,96 @@
     End Function
 
 
+    'Function MovRey(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+
+    '    If vertical(click1st, click2nd) Or horizontal(click1st, click2nd) Or diagonal(click1st, click2nd) Then
+    '        Return True
+    '    End If
+
+    '    Return False
+    'End Function
+
+    Dim reymovidoB As Boolean = False
+    Dim reymovidoN As Boolean = False
+    Dim torremovidaDB As Boolean = False
+    Dim torremovidaIB As Boolean = False
+    Dim torremovidaDN As Boolean = False
+    Dim torremovidaIN As Boolean = False
     Function MovRey(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
         If vertical(click1st, click2nd) Or horizontal(click1st, click2nd) Or diagonal(click1st, click2nd) Then
+            If click1st.Tag = 16 Then
+                reymovidoN = True
+            End If
+            If click1st.Tag = 26 Then
+                reymovidoB = True
+            End If
             Return True
+
+        End If
+        If enrroque(click1st) = 1 And reymovidoB = False And torremovidaDB = False And getPosicion(click2nd) = 76 Then
+
+            arrayCas(7, 7).Tag = 0
+            arrayCas(7, 7).Image = Nothing
+            arrayCas(7, 5).Tag = 22
+
+            arrayCas(7, 5).Load(Application.StartupPath & "/img/22.png")
+
+            arrayCas(7, 4).Tag = 0
+            arrayCas(7, 4).Image = Nothing
+            arrayCas(7, 6).Tag = 26
+
+            arrayCas(7, 6).Load(Application.StartupPath & "/img/26.png")
+            Return True
+
+        End If
+        If enrroque(click1st) = 3 And reymovidoN = False And torremovidaDN = False And getPosicion(click2nd) = 6 Then
+
+            arrayCas(0, 7).Tag = 0
+            arrayCas(0, 7).Image = Nothing
+            arrayCas(0, 5).Tag = 12
+
+            arrayCas(0, 5).Load(Application.StartupPath & "/img/12.png")
+
+            arrayCas(0, 4).Tag = 0
+            arrayCas(0, 4).Image = Nothing
+            arrayCas(0, 6).Tag = 16
+
+            arrayCas(0, 6).Load(Application.StartupPath & "/img/16.png")
+            Return True
+
+        End If
+        If enrroque(click1st) = 2 And reymovidoB = False And torremovidaDN = False And getPosicion(click2nd) = 72 Then
+            ' reymovido = True
+            arrayCas(7, 0).Tag = 0
+            arrayCas(7, 0).Image = Nothing
+            arrayCas(7, 3).Tag = 22
+
+            arrayCas(7, 3).Load(Application.StartupPath & "/img/22.png")
+
+            arrayCas(7, 4).Tag = 0
+            arrayCas(7, 4).Image = Nothing
+            arrayCas(7, 2).Tag = 26
+
+            arrayCas(7, 2).Load(Application.StartupPath & "/img/26.png")
+            Return True
+
+        End If
+        If enrroque(click1st) = 4 And reymovidoN = False And torremovidaIN = False And getPosicion(click2nd) = 2 Then
+            ' reymovido = True
+            arrayCas(0, 0).Tag = 0
+            arrayCas(0, 0).Image = Nothing
+            arrayCas(0, 3).Tag = 12
+
+            arrayCas(0, 3).Load(Application.StartupPath & "/img/12.png")
+
+            arrayCas(0, 4).Tag = 0
+            arrayCas(0, 4).Image = Nothing
+            arrayCas(0, 2).Tag = 16
+
+            arrayCas(0, 2).Load(Application.StartupPath & "/img/16.png")
+            Return True
+
         End If
 
         Return False
@@ -601,115 +769,23 @@
                 guardarPieza(clicked2nd)
             Else 'si no, la come
                 If comprobador(clicked1st, clicked2nd) Then
-                    'If (getTipo(clicked2nd) = 6) Then
+                    setRecuento(clicked2nd)
 
-                    '    If (getColor(clicked2nd) = blanca) Then
-                    '        If MsgBox("Gana el jugador2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                    '            reset()
-                    '            Exit Sub
-                    '        Else
-                    '            End
-                    '        End If
-                    '    ElseIf (getColor(clicked2nd) = negra)
-                    '        If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                    '            reset()
-                    '            Exit Sub
-                    '        Else
-                    '            End
-                    '        End If
-                    '    End If
-
-                    'End If
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    Select Case getTipo(clicked2nd)
-                        Case 1
-                            If (getColor(clicked2nd) = blanca) Then
-                                'MsgBox("Te comiste un peon blanco")
-                                contBPeon += 1
-                            Else
-                                'MsgBox("Te comiste un peon negro")
-                                contNPeon += 1
-                            End If
-                        Case 2
-                            If (getColor(clicked2nd) = blanca) Then
-                                'MsgBox("Te comiste una torre blanco")
-                                contBTorre += 1
-                            Else
-                                'MsgBox("Te comiste una torre negro")
-                                contNTorre += 1
-                            End If
-                        Case 3
-                            If (getColor(clicked2nd) = blanca) Then
-                                'MsgBox("Te comiste un caballo blanco")
-                                contBCaballo += 1
-                            Else
-                                'MsgBox("Te comiste un caballo negro")
-                                contNCaballo += 1
-                            End If
-                        Case 4
-                            If (getColor(clicked2nd) = blanca) Then
-                                'MsgBox("Te comiste un alfil blanco")
-                                contBAlfil += 1
-                            Else
-                                'MsgBox("Te comiste un alfil negro")
-                                contNAlfil += 1
-                            End If
-                        Case 6
-                            If (getColor(clicked2nd) = blanca) Then
-                                'MsgBox("Te comiste un rey blanco")
-                                contBRey += 1
-                                MsgBox("Peones comidos " & contBPeon & vbNewLine & "Torres comidas " & contBTorre & vbNewLine & "Caballos comidos " & contBCaballo & vbNewLine & "Alfiles comidos " & contBAlfil & vbNewLine & "Reina comida " & contBReina & vbNewLine & "Rey comido " & contBRey & vbNewLine)
-                                If MsgBox("Gana el jugador 2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                                    reset()
-                                    Exit Sub
-                                Else
-                                    End
-                                End If
-
-                            Else
-                                'MsgBox("Te comiste un rey negro")
-                                contNRey += 1
-                                MsgBox("Peones comidos " & contNPeon & vbNewLine & "Torres comidas " & contNTorre & vbNewLine & "Caballos comidos " & contNCaballo & vbNewLine & "Alfiles comidos " & contNAlfil & vbNewLine & "Reina comida " & contNReina & vbNewLine & "Rey comido " & contNRey & vbNewLine)
-                                If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                                    reset()
-                                    Exit Sub
-                                Else
-                                    End
-                                End If
-                            End If
-                        Case 5
-                            If (getColor(clicked2nd) = blanca) Then
-                                'MsgBox("Te comiste una reina blanco")
-                                contBReina += 1
-                            Else
-                                'MsgBox("Te comiste una reina negro")
-                                contNReina += 1
-                            End If
-
-
-                    End Select
-
-
-
-
-
-
-
+                    If getRecuento(blanca, rey) = 1 Then
+                        If MsgBox("Gana el jugador2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                            reset()
+                            Exit Sub
+                        Else
+                            End
+                        End If
+                    ElseIf getRecuento(negra, rey) = 1 Then
+                        If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                            reset()
+                            Exit Sub
+                        Else
+                            End
+                        End If
+                    End If
 
 
                     moverClick(clicked2nd)
@@ -1084,7 +1160,22 @@
 
 
 
+    Function enrroque(ByVal click1 As PictureBox)
 
+        If arrayCas(7, 6).Tag = 0 And arrayCas(7, 5).Tag = 0 Then
+            Return 1
+        End If
+        If arrayCas(7, 3).Tag = 0 And arrayCas(7, 2).Tag = 0 And arrayCas(7, 1).Tag = 0 Then
+            Return 2
+        End If
+        If arrayCas(0, 6).Tag = 0 And arrayCas(0, 5).Tag = 0 Then
+            Return 3
+        End If
+        If arrayCas(0, 3).Tag = 0 And arrayCas(0, 2).Tag = 0 And arrayCas(0, 1).Tag = 0 Then
+            Return 4
+        End If
+
+    End Function
 
 
 
