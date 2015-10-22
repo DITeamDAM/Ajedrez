@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pb_pb_alfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 540</value>
+    <value>75, 525</value>
   </data>
   <data name="pb_pb_alfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pb_pb_alfil.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
@@ -145,10 +145,10 @@
     <value>0</value>
   </data>
   <data name="pb_pb_caballo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 540</value>
+    <value>0, 525</value>
   </data>
   <data name="pb_pb_caballo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pb_caballo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -169,10 +169,10 @@
     <value>1</value>
   </data>
   <data name="pb_pb_torre.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 474</value>
+    <value>75, 450</value>
   </data>
   <data name="pb_pb_torre.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pb_torre.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -193,10 +193,10 @@
     <value>2</value>
   </data>
   <data name="pb_pb_reina.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 474</value>
+    <value>0, 450</value>
   </data>
   <data name="pb_pb_reina.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pb_reina.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -217,10 +217,10 @@
     <value>3</value>
   </data>
   <data name="pb_pn_alfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 79</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pn_alfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pn_alfil.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -241,10 +241,10 @@
     <value>4</value>
   </data>
   <data name="pb_pn_caballo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 78</value>
+    <value>0, 75</value>
   </data>
   <data name="pb_pn_caballo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pn_caballo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -265,10 +265,10 @@
     <value>5</value>
   </data>
   <data name="pb_pn_torre.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 15</value>
+    <value>75, 0</value>
   </data>
   <data name="pb_pn_torre.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pn_torre.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -289,10 +289,10 @@
     <value>6</value>
   </data>
   <data name="pb_pn_reina.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 15</value>
+    <value>0, 0</value>
   </data>
   <data name="pb_pn_reina.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
+    <value>75, 75</value>
   </data>
   <data name="pb_pn_reina.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
@@ -535,7 +535,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>751, 625</value>
+    <value>751, 624</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
