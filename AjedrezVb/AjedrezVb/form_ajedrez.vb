@@ -583,68 +583,33 @@
             Return True
 
         End If
-        If enrroque(click1st) = 1 And reymovidoB = False And torremovidaDB = False And getPosicion(click2nd) = 76 Then
+        If enroque(click1st) = 1 And reymovidoB = False And torremovidaDB = False And getPosicion(click2nd) = 76 Then
 
-            arrayCas(7, 7).Tag = 0
-            arrayCas(7, 7).Image = Nothing
-            arrayCas(7, 5).Tag = 22
 
-            arrayCas(7, 5).Load(Application.StartupPath & "/img/22.png")
 
-            arrayCas(7, 4).Tag = 0
-            arrayCas(7, 4).Image = Nothing
-            arrayCas(7, 6).Tag = 26
+            Return 1
+            ''  arrayCas(7, 4).Tag = 0
+            'arrayCas(7, 4).Image = Nothing
+            'arrayCas(7, 6).Tag = 26
 
-            arrayCas(7, 6).Load(Application.StartupPath & "/img/26.png")
-            Return True
+            'arrayCas(7, 6).Load(Application.StartupPath & "/img/26.png")
+
+
 
         End If
-        If enrroque(click1st) = 3 And reymovidoN = False And torremovidaDN = False And getPosicion(click2nd) = 6 Then
+        If enroque(click1st) = 3 And reymovidoN = False And torremovidaDN = False And getPosicion(click2nd) = 6 Then
 
-            arrayCas(0, 7).Tag = 0
-            arrayCas(0, 7).Image = Nothing
-            arrayCas(0, 5).Tag = 12
-
-            arrayCas(0, 5).Load(Application.StartupPath & "/img/12.png")
-
-            arrayCas(0, 4).Tag = 0
-            arrayCas(0, 4).Image = Nothing
-            arrayCas(0, 6).Tag = 16
-
-            arrayCas(0, 6).Load(Application.StartupPath & "/img/16.png")
-            Return True
+            Return 3
 
         End If
-        If enrroque(click1st) = 2 And reymovidoB = False And torremovidaDN = False And getPosicion(click2nd) = 72 Then
-            ' reymovido = True
-            arrayCas(7, 0).Tag = 0
-            arrayCas(7, 0).Image = Nothing
-            arrayCas(7, 3).Tag = 22
+        If enroque(click1st) = 2 And reymovidoB = False And torremovidaDN = False And getPosicion(click2nd) = 72 Then
 
-            arrayCas(7, 3).Load(Application.StartupPath & "/img/22.png")
-
-            arrayCas(7, 4).Tag = 0
-            arrayCas(7, 4).Image = Nothing
-            arrayCas(7, 2).Tag = 26
-
-            arrayCas(7, 2).Load(Application.StartupPath & "/img/26.png")
-            Return True
+            Return 2
 
         End If
-        If enrroque(click1st) = 4 And reymovidoN = False And torremovidaIN = False And getPosicion(click2nd) = 2 Then
-            ' reymovido = True
-            arrayCas(0, 0).Tag = 0
-            arrayCas(0, 0).Image = Nothing
-            arrayCas(0, 3).Tag = 12
+        If enroque(click1st) = 4 And reymovidoN = False And torremovidaIN = False And getPosicion(click2nd) = 2 Then
 
-            arrayCas(0, 3).Load(Application.StartupPath & "/img/12.png")
-
-            arrayCas(0, 4).Tag = 0
-            arrayCas(0, 4).Image = Nothing
-            arrayCas(0, 2).Tag = 16
-
-            arrayCas(0, 2).Load(Application.StartupPath & "/img/16.png")
-            Return True
+            Return 4
 
         End If
 
@@ -796,10 +761,42 @@
         Else
 
             If clicked1st IsNot Nothing Then 'si el en el segundo click no hay nada, la mueve libremente
-                If comprobador(clicked1st, clicked2nd) Then
-                    moverClick(clicked2nd)
-                    cambio(clicked2nd, mov)
-                End If
+                Select Case comprobador(clicked1st, clicked2nd)
+                    Case True
+                        moverClick(clicked2nd)
+                        cambio(clicked2nd, mov)
+                    Case 1
+                        moverClick(clicked2nd)
+                        arrayCas(7, 7).Tag = 0
+                        arrayCas(7, 7).Image = Nothing
+                        arrayCas(7, 5).Tag = 22
+                        arrayCas(7, 5).Load(Application.StartupPath & "/img/22.png")
+                    Case 2
+                        moverClick(clicked2nd)
+                        arrayCas(7, 0).Tag = 0
+                        arrayCas(7, 0).Image = Nothing
+                        arrayCas(7, 3).Tag = 22
+                        arrayCas(7, 3).Load(Application.StartupPath & "/img/22.png")
+                    Case 3
+                        moverClick(clicked2nd)
+                        arrayCas(0, 7).Tag = 0
+                        arrayCas(0, 7).Image = Nothing
+                        arrayCas(0, 5).Tag = 12
+                        arrayCas(0, 5).Load(Application.StartupPath & "/img/12.png")
+                    Case 4
+                        moverClick(clicked2nd)
+                        arrayCas(0, 0).Tag = 0
+                        arrayCas(0, 0).Image = Nothing
+                        arrayCas(0, 3).Tag = 12
+
+                        arrayCas(0, 3).Load(Application.StartupPath & "/img/12.png")
+
+                End Select
+
+
+
+
+
             Else
                 primerclick = True
                 'MsgBox("Selecciona una pieza")
@@ -1160,7 +1157,7 @@
 
 
 
-    Function enrroque(ByVal click1 As PictureBox)
+    Function enroque(ByVal click1 As PictureBox)
 
         If arrayCas(7, 6).Tag = 0 And arrayCas(7, 5).Tag = 0 Then
             Return 1
