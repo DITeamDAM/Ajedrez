@@ -16,6 +16,30 @@
     Dim ultimoMov As String = "-1"
 
 
+
+
+
+
+    Dim contNPeon As Integer = 0
+    Dim contNAlfil As Integer = 0
+    Dim contNTorre As Integer = 0
+    Dim contNRey As Integer = 0
+    Dim contNReina As Integer = 0
+    Dim contNCaballo As Integer = 0
+
+
+    Dim contBPeon As Integer = 0
+    Dim contBAlfil As Integer = 0
+    Dim contBTorre As Integer = 0
+    Dim contBRey As Integer = 0
+    Dim contBReina As Integer = 0
+    Dim contBCaballo As Integer = 0
+
+
+
+
+
+
     'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
     Dim colorNegroTablero = ColorTranslator.FromHtml("#C6932D")
     Dim colorBlancoTablrero = ColorTranslator.FromHtml("#FEE8B9")
@@ -111,6 +135,25 @@
 
 
     Private Sub reset()
+
+        contNPeon = 0
+        contNAlfil = 0
+        contNTorre = 0
+        contNRey = 0
+        contNReina = 0
+        contNCaballo = 0
+
+
+        contBPeon = 0
+        contBAlfil = 0
+        contBTorre = 0
+        contBRey = 0
+        contBReina = 0
+        contBCaballo = 0
+
+
+
+
 
         resetTemporizador()
         ms_temporizador.Enabled = True
@@ -558,25 +601,117 @@
                 guardarPieza(clicked2nd)
             Else 'si no, la come
                 If comprobador(clicked1st, clicked2nd) Then
-                    If (getTipo(clicked2nd) = 6) Then
+                    'If (getTipo(clicked2nd) = 6) Then
 
-                        If (getColor(clicked2nd) = blanca) Then
-                            If MsgBox("Gana el jugador2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                                reset()
-                                Exit Sub
-                            Else
-                                End
-                            End If
-                        ElseIf (getColor(clicked2nd) = negra)
-                            If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                                reset()
-                                Exit Sub
-                            Else
-                                End
-                            End If
-                        End If
+                    '    If (getColor(clicked2nd) = blanca) Then
+                    '        If MsgBox("Gana el jugador2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                    '            reset()
+                    '            Exit Sub
+                    '        Else
+                    '            End
+                    '        End If
+                    '    ElseIf (getColor(clicked2nd) = negra)
+                    '        If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                    '            reset()
+                    '            Exit Sub
+                    '        Else
+                    '            End
+                    '        End If
+                    '    End If
 
-                    End If
+                    'End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    Select Case getTipo(clicked2nd)
+                        Case 1
+                            If (getColor(clicked2nd) = blanca) Then
+                                'MsgBox("Te comiste un peon blanco")
+                                contBPeon += 1
+                            Else
+                                'MsgBox("Te comiste un peon negro")
+                                contNPeon += 1
+                            End If
+                        Case 2
+                            If (getColor(clicked2nd) = blanca) Then
+                                'MsgBox("Te comiste una torre blanco")
+                                contBTorre += 1
+                            Else
+                                'MsgBox("Te comiste una torre negro")
+                                contNTorre += 1
+                            End If
+                        Case 3
+                            If (getColor(clicked2nd) = blanca) Then
+                                'MsgBox("Te comiste un caballo blanco")
+                                contBCaballo += 1
+                            Else
+                                'MsgBox("Te comiste un caballo negro")
+                                contNCaballo += 1
+                            End If
+                        Case 4
+                            If (getColor(clicked2nd) = blanca) Then
+                                'MsgBox("Te comiste un alfil blanco")
+                                contBAlfil += 1
+                            Else
+                                'MsgBox("Te comiste un alfil negro")
+                                contNAlfil += 1
+                            End If
+                        Case 6
+                            If (getColor(clicked2nd) = blanca) Then
+                                'MsgBox("Te comiste un rey blanco")
+                                contBRey += 1
+                                MsgBox("Peones comidos " & contBPeon & vbNewLine & "Torres comidas " & contBTorre & vbNewLine & "Caballos comidos " & contBCaballo & vbNewLine & "Alfiles comidos " & contBAlfil & vbNewLine & "Reina comida " & contBReina & vbNewLine & "Rey comido " & contBRey & vbNewLine)
+                                If MsgBox("Gana el jugador 2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                                    reset()
+                                    Exit Sub
+                                Else
+                                    End
+                                End If
+
+                            Else
+                                'MsgBox("Te comiste un rey negro")
+                                contNRey += 1
+                                MsgBox("Peones comidos " & contNPeon & vbNewLine & "Torres comidas " & contNTorre & vbNewLine & "Caballos comidos " & contNCaballo & vbNewLine & "Alfiles comidos " & contNAlfil & vbNewLine & "Reina comida " & contNReina & vbNewLine & "Rey comido " & contNRey & vbNewLine)
+                                If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                                    reset()
+                                    Exit Sub
+                                Else
+                                    End
+                                End If
+                            End If
+                        Case 5
+                            If (getColor(clicked2nd) = blanca) Then
+                                'MsgBox("Te comiste una reina blanco")
+                                contBReina += 1
+                            Else
+                                'MsgBox("Te comiste una reina negro")
+                                contNReina += 1
+                            End If
+
+
+                    End Select
+
+
+
+
+
+
+
+
+
                     moverClick(clicked2nd)
                     cambio(clicked2nd, mov)
                 End If

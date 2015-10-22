@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pb_pb_alfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 539</value>
+    <value>85, 540</value>
   </data>
   <data name="pb_pb_alfil.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
@@ -145,7 +145,7 @@
     <value>0</value>
   </data>
   <data name="pb_pb_caballo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 539</value>
+    <value>20, 540</value>
   </data>
   <data name="pb_pb_caballo.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
@@ -169,7 +169,7 @@
     <value>1</value>
   </data>
   <data name="pb_pb_torre.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 466</value>
+    <value>85, 474</value>
   </data>
   <data name="pb_pb_torre.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
@@ -193,7 +193,7 @@
     <value>2</value>
   </data>
   <data name="pb_pb_reina.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 466</value>
+    <value>20, 474</value>
   </data>
   <data name="pb_pb_reina.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
@@ -217,7 +217,7 @@
     <value>3</value>
   </data>
   <data name="pb_pn_alfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 79</value>
+    <value>85, 79</value>
   </data>
   <data name="pb_pn_alfil.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
@@ -241,7 +241,7 @@
     <value>4</value>
   </data>
   <data name="pb_pn_caballo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 78</value>
+    <value>20, 78</value>
   </data>
   <data name="pb_pn_caballo.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
@@ -265,7 +265,7 @@
     <value>5</value>
   </data>
   <data name="pb_pn_torre.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 16</value>
+    <value>85, 15</value>
   </data>
   <data name="pb_pn_torre.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 45</value>
@@ -311,6 +311,15 @@
   </data>
   <data name="&gt;&gt;pb_pn_reina.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="lbl_turno.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lbl_turno.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="lbl_turno.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;lbl_turno.Name" xml:space="preserve">
     <value>lbl_turno</value>
@@ -426,30 +435,63 @@
   <data name="&gt;&gt;panel_ajedrez.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lbl_turno.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="lbl_turno.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="lbl_turno.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.Name" xml:space="preserve">
-    <value>lbl_turno</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.Parent" xml:space="preserve">
-    <value>ms_turno_color</value>
-  </data>
-  <data name="&gt;&gt;lbl_turno.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="ms_principal.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="ms_archivo_nuevapartida.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="ms_archivo_nuevapartida.Text" xml:space="preserve">
+    <value>Nueva partida</value>
+  </data>
+  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 6</value>
+  </data>
+  <data name="ms_archivo_salir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="ms_archivo_salir.Text" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="ms_archivo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="ms_archivo.Text" xml:space="preserve">
+    <value>Archivo</value>
+  </data>
+  <data name="ms_temporizador_limite_5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="ms_temporizador_limite_5.Text" xml:space="preserve">
+    <value>5 min.</value>
+  </data>
+  <data name="ms_temporizador_limite_10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="ms_temporizador_limite_10.Text" xml:space="preserve">
+    <value>10 min.</value>
+  </data>
+  <data name="ms_temporizador_limite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ms_temporizador_limite.Text" xml:space="preserve">
+    <value>Límite</value>
+  </data>
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 6</value>
+  </data>
+  <data name="ms_temporizador_nolimite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ms_temporizador_nolimite.Text" xml:space="preserve">
+    <value>Sin límite</value>
+  </data>
+  <data name="ms_temporizador.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <data name="ms_temporizador.Text" xml:space="preserve">
+    <value>Temporizador</value>
+  </data>
   <data name="ms_principal.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -473,60 +515,6 @@
   </data>
   <data name="&gt;&gt;ms_principal.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="ms_archivo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="ms_archivo.Text" xml:space="preserve">
-    <value>Archivo</value>
-  </data>
-  <data name="ms_archivo_nuevapartida.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="ms_archivo_nuevapartida.Text" xml:space="preserve">
-    <value>Nueva partida</value>
-  </data>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 6</value>
-  </data>
-  <data name="ms_archivo_salir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="ms_archivo_salir.Text" xml:space="preserve">
-    <value>Salir</value>
-  </data>
-  <data name="ms_temporizador.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
-  </data>
-  <data name="ms_temporizador.Text" xml:space="preserve">
-    <value>Temporizador</value>
-  </data>
-  <data name="ms_temporizador_limite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="ms_temporizador_limite.Text" xml:space="preserve">
-    <value>Límite</value>
-  </data>
-  <data name="ms_temporizador_limite_5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 22</value>
-  </data>
-  <data name="ms_temporizador_limite_5.Text" xml:space="preserve">
-    <value>5 min.</value>
-  </data>
-  <data name="ms_temporizador_limite_10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 22</value>
-  </data>
-  <data name="ms_temporizador_limite_10.Text" xml:space="preserve">
-    <value>10 min.</value>
-  </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 6</value>
-  </data>
-  <data name="ms_temporizador_nolimite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="ms_temporizador_nolimite.Text" xml:space="preserve">
-    <value>Sin límite</value>
   </data>
   <metadata name="timer_blancas.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>136, 17</value>
