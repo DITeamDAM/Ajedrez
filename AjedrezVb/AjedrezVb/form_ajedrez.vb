@@ -361,16 +361,13 @@
 
 
     Private Function diagonal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
         Select Case getPosicion(click2nd)
             Case getPosicion(click1st) - 9,
                  getPosicion(click1st) + 9,
                  getPosicion(click1st) - 11,
                  getPosicion(click1st) + 11
 
-
                 Return limite(getColor(click1st), getColor(click2nd))
-
         End Select
 
         Return False
@@ -1096,7 +1093,7 @@
 
         arrayCas(fila, columna).Load(Application.StartupPath & "/img/" & pieza & ".png")
 
-        If ms_temporizador_nolimite.Enabled = False Then
+        If ms_temporizador_nolimite.Checked = False Then
             If getColor(arrayCas(fila, columna)) = blanca Then
                 timer_negras.Start()
             ElseIf getColor(arrayCas(fila, columna)) = negra Then
@@ -1113,13 +1110,13 @@
 
         If getPosicionFila(piezaClicked2nd) = 0 And piezaClicked2nd.Tag = 21 Then
             setVisibleCambioPeonBlancas()
-            If ms_temporizador_nolimite.Enabled = False Then
+            If ms_temporizador_nolimite.Checked = False Then
                 timer_negras.Stop()
             End If
             cambiandoPeon = True
         ElseIf getPosicionFila(piezaClicked2nd) = 7 And piezaClicked2nd.Tag = 11 Then
             setVisibleCambioPeonNegras()
-            If ms_temporizador_nolimite.Enabled = False Then
+            If ms_temporizador_nolimite.Checked = False Then
                 timer_blancas.Stop()
             End If
             cambiandoPeon = True
