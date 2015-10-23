@@ -698,6 +698,7 @@
         If getColor(click) = negra Then
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
             If ms_temporizador_nolimite.Checked = False Then
+                lbl_contador_blancas.Text = temporizadorIncremento(lbl_contador_blancas.Text)
                 timer_negras.Stop()
                 timer_blancas.Start()
             End If
@@ -705,6 +706,7 @@
         If getColor(click) = blanca Then
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#3F3F3F")
             If ms_temporizador_nolimite.Checked = False Then
+                lbl_contador_negras.Text = temporizadorIncremento(lbl_contador_negras.Text)
                 timer_blancas.Stop()
                 timer_negras.Start()
             End If
@@ -905,6 +907,7 @@
         Dim comodinMin As String = "0"
         Dim comodinSeg As String = "0"
 
+
         If seg = 0 Then
             seg = 60
             min -= 1
@@ -934,6 +937,33 @@
     End Function
 
 
+    Private Function temporizadorIncremento(tiempoText As String)
+        Dim min = CInt(tiempoText.Substring(0, 2))
+        Dim seg = CInt(tiempoText.Substring(3, 2))
+
+        Dim comodinMin As String = "0"
+        Dim comodinSeg As String = "0"
+
+        seg += 5
+
+        If seg > 60 Then
+            seg -= 60
+            min += 1
+        End If
+
+
+        If seg >= 10 Then
+            comodinSeg = ""
+        End If
+        If min >= 10 Then
+            comodinMin = ""
+        End If
+
+        Return comodinMin & min & ":" & comodinSeg & seg
+    End Function
+
+
+
     Private Sub ms_temporizador_limite_5_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_5.Click
 
         lbl_contador_blancas.Text = "05:00"
@@ -960,7 +990,6 @@
 
     End Sub
     Private Sub timer_blancas_Tick(sender As Object, e As EventArgs) Handles timer_blancas.Tick
-
         lbl_contador_negras.ForeColor = ColorTranslator.FromHtml("#AAAAAA")
 
         If CInt(lbl_contador_blancas.Text.Substring(0, 2)) < 2 Then
@@ -970,11 +999,9 @@
         End If
 
         lbl_contador_blancas.Text = temporizador(lbl_contador_blancas.Text)
-
     End Sub
 
     Private Sub timer_negras_Tick(sender As Object, e As EventArgs) Handles timer_negras.Tick
-
         lbl_contador_blancas.ForeColor = ColorTranslator.FromHtml("#AAAAAA")
 
 
@@ -985,7 +1012,6 @@
         End If
 
         lbl_contador_negras.Text = temporizador(lbl_contador_negras.Text)
-
     End Sub
 
     Private Sub resetTemporizador()
