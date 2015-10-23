@@ -560,6 +560,17 @@
     '    Return False
     'End Function
 
+
+
+
+
+
+
+
+
+
+
+
     Dim reymovidoB As Boolean = False
     Dim reymovidoN As Boolean = False
     Dim torremovidaDB As Boolean = False
@@ -583,11 +594,7 @@
 
 
             Return 1
-            ''  arrayCas(7, 4).Tag = 0
-            'arrayCas(7, 4).Image = Nothing
-            'arrayCas(7, 6).Tag = 26
 
-            'arrayCas(7, 6).Load(Application.StartupPath & "/img/26.png")
 
 
 
@@ -610,6 +617,18 @@
 
         Return False
     End Function
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     'Comprueba que se ha seleccionado una figura
@@ -806,13 +825,10 @@
 
 
     Private Sub colocando(clicked As PictureBox, e As EventArgs)
-
         If cambiandoPeon = False Then
 
             If primerclick Then
                 primerclick = False
-
-
                 If turno Then
                     If getColor(clicked) = blanca Then
                         mover(clicked)
@@ -821,9 +837,7 @@
                         'MsgBox("Mueve una figura blanca!")
                         primerclick = True
                     End If
-
                 Else
-
                     If getColor(clicked) = negra Then
                         mover(clicked)
                         turno = True
@@ -832,10 +846,7 @@
                         primerclick = True
                     End If
                 End If
-
-
             Else
-
                 primerclick = True
 
                 If getColor(clicked) = blanca And getColor(clicked1st) = blanca Then
@@ -859,7 +870,6 @@
     End Sub
 
     Private Sub setTablero(x As Integer, y As Integer)
-
         If x Mod 2 = 0 Then
             arrayCas(x, y).BackColor = colorBlancoTablrero
             If y Mod 2 <> 0 Then
@@ -871,7 +881,6 @@
                 arrayCas(x, y).BackColor = colorBlancoTablrero
             End If
         End If
-
     End Sub
 
 
@@ -895,7 +904,6 @@
 
         Dim comodinMin As String = "0"
         Dim comodinSeg As String = "0"
-
 
         If seg = 0 Then
             seg = 60
@@ -922,9 +930,7 @@
             End If
         End If
 
-
         Return comodinMin & min & ":" & comodinSeg & seg
-
     End Function
 
 
@@ -986,7 +992,6 @@
         timer_blancas.Stop()
         timer_negras.Stop()
 
-
         lbl_contador_blancas.Text = "00:00"
         lbl_contador_negras.Text = "00:00"
 
@@ -999,9 +1004,7 @@
     End Sub
 
     Private Sub ms_temporizador_nolimite_Click(sender As Object, e As EventArgs) Handles ms_temporizador_nolimite.Click
-
         resetTemporizador()
-
     End Sub
 
     Private Sub ms_principal_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ms_principal.ItemClicked
@@ -1084,6 +1087,12 @@
 
         arrayCas(fila, columna).Load(Application.StartupPath & "/img/" & pieza & ".png")
 
+        If getColor(arrayCas(fila, columna)) = blanca Then
+            timer_negras.Start()
+        ElseIf getColor(arrayCas(fila, columna)) = negra Then
+            timer_blancas.Start()
+        End If
+
         resetCambioPeon()
     End Sub
 
@@ -1093,9 +1102,11 @@
 
         If getPosicionFila(piezaClicked2nd) = 0 And piezaClicked2nd.Tag = 21 Then
             setVisibleCambioPeonBlancas()
+            timer_negras.Stop()
             cambiandoPeon = True
         ElseIf getPosicionFila(piezaClicked2nd) = 7 And piezaClicked2nd.Tag = 11 Then
             setVisibleCambioPeonNegras()
+            timer_blancas.Stop()
             cambiandoPeon = True
         End If
 
@@ -1134,11 +1145,7 @@
     End Sub
 
 
-
-
-
     'ENROQUE
-
 
     Function enroque(ByVal click1 As PictureBox)
 
@@ -1156,15 +1163,6 @@
         End If
 
     End Function
-
-
-
-
-
-
-
-
-
 
 
 End Class
