@@ -427,56 +427,40 @@
 
     'En el movimiento del peón no hace falta implementar una funcion "interponer" ya que solo come en diagonal, y he tenido que forzarlo directamente para que no coma hacia adelante
     Function MovPeon(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+        Dim normal As Integer = 0
+        Dim doble As Integer = 0
 
-        'CREO que algo se podrá refactorizar aun mas...
         Select Case getColor(click1st)
             Case blanca
                 If getPosicionFila(click1st) = 6 Then
-                    Select Case getPosicion(click2nd)
-                        Case getPosicion(click1st) - 10, getPosicion(click1st) - 20
-                            If getColor(click2nd) = 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                        Case getPosicion(click1st) - 11, getPosicion(click1st) - 9
-                            If getColor(click2nd) <> 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                    End Select
-                Else
-                    Select Case getPosicion(click2nd)
-                        Case getPosicion(click1st) - 10
-                            If getColor(click2nd) = 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                        Case getPosicion(click1st) - 11, getPosicion(click1st) - 9
-                            If getColor(click2nd) <> 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                    End Select
+                    doble = -2
                 End If
+                normal = -1
             Case negra
                 If getPosicionFila(click1st) = 1 Then
-                    Select Case getPosicion(click2nd)
-                        Case getPosicion(click1st) + 10, getPosicion(click1st) + 20
-                            If getColor(click2nd) = 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                        Case getPosicion(click1st) + 11, getPosicion(click1st) + 9
-                            If getColor(click2nd) <> 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                    End Select
-                Else
-                    Select Case getPosicion(click2nd)
-                        Case getPosicion(click1st) + 10
-                            If getColor(click2nd) = 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                        Case getPosicion(click1st) + 11, getPosicion(click1st) + 9
-                            If getColor(click2nd) <> 0 Then
-                                Return limite(getColor(click1st), getColor(click2nd))
-                            End If
-                    End Select
+                    doble = +2
+                End If
+                normal = +1
+        End Select
+
+        Dim paso As PictureBox = arrayCas(getPosicionFila(click1st) + normal, getPosicionColumna(click1st))
+        Dim pasos As PictureBox = arrayCas(getPosicionFila(click1st) + doble, getPosicionColumna(click1st))
+
+        Select Case getPosicion(click2nd)
+            'paso para alante simple
+            Case getPosicion(paso)
+                If getColor(paso) = 0 Then
+                    Return limite(getColor(click1st), getColor(click2nd))
+                End If
+            'paso para alante doble
+            Case getPosicion(pasos)
+                If getColor(paso) = 0 And getColor(pasos) = 0 Then
+                    Return limite(getColor(click1st), getColor(click2nd))
+                End If
+            'comiendo
+            Case getPosicion(paso) - 1, getPosicion(paso) + 1
+                If getColor(click2nd) <> 0 Then
+                    Return limite(getColor(click1st), getColor(click2nd))
                 End If
         End Select
 
@@ -907,7 +891,6 @@
         Dim comodinMin As String = "0"
         Dim comodinSeg As String = "0"
 
-
         If seg = 0 Then
             seg = 60
             min -= 1
@@ -1113,10 +1096,12 @@
 
         arrayCas(fila, columna).Load(Application.StartupPath & "/img/" & pieza & ".png")
 
-        If getColor(arrayCas(fila, columna)) = blanca Then
-            timer_negras.Start()
-        ElseIf getColor(arrayCas(fila, columna)) = negra Then
-            timer_blancas.Start()
+        If ms_temporizador_nolimite.Enabled = False Then
+            If getColor(arrayCas(fila, columna)) = blanca Then
+                timer_negras.Start()
+            ElseIf getColor(arrayCas(fila, columna)) = negra Then
+                timer_blancas.Start()
+            End If
         End If
 
         resetCambioPeon()
@@ -1128,14 +1113,17 @@
 
         If getPosicionFila(piezaClicked2nd) = 0 And piezaClicked2nd.Tag = 21 Then
             setVisibleCambioPeonBlancas()
-            timer_negras.Stop()
+            If ms_temporizador_nolimite.Enabled = False Then
+                timer_negras.Stop()
+            End If
             cambiandoPeon = True
         ElseIf getPosicionFila(piezaClicked2nd) = 7 And piezaClicked2nd.Tag = 11 Then
             setVisibleCambioPeonNegras()
-            timer_blancas.Stop()
+            If ms_temporizador_nolimite.Enabled = False Then
+                timer_blancas.Stop()
+            End If
             cambiandoPeon = True
         End If
-
 
     End Sub
 
@@ -1171,7 +1159,7 @@
     End Sub
 
 
-    'ENROQUE
+    'ENROQUE -->> INTENTAR HACER DE OTRA FORMA (ESTO AFECTA AL METODO DEL MOVIMIENTO DEL REY Y DE LA TORRE, TENER EN CUENTA
 
     Function enroque(ByVal click1 As PictureBox)
 
