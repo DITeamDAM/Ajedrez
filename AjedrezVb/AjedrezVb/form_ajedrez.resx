@@ -118,198 +118,198 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pb_pb_alfil.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c24.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 525</value>
   </data>
-  <data name="pb_pb_alfil.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c24.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pb_pb_alfil.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c24.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pb_pb_alfil.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c24.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;pb_pb_alfil.Name" xml:space="preserve">
-    <value>pb_pb_alfil</value>
+  <data name="&gt;&gt;pb_c24.Name" xml:space="preserve">
+    <value>pb_c24</value>
   </data>
-  <data name="&gt;&gt;pb_pb_alfil.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c24.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pb_alfil.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c24.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pb_alfil.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c24.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="pb_pb_caballo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c23.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 525</value>
   </data>
-  <data name="pb_pb_caballo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c23.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pb_caballo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c23.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="pb_pb_caballo.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c23.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;pb_pb_caballo.Name" xml:space="preserve">
-    <value>pb_pb_caballo</value>
+  <data name="&gt;&gt;pb_c23.Name" xml:space="preserve">
+    <value>pb_c23</value>
   </data>
-  <data name="&gt;&gt;pb_pb_caballo.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c23.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pb_caballo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c23.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pb_caballo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c23.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="pb_pb_torre.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c22.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 450</value>
   </data>
-  <data name="pb_pb_torre.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c22.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pb_torre.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c22.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="pb_pb_torre.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c22.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;pb_pb_torre.Name" xml:space="preserve">
-    <value>pb_pb_torre</value>
+  <data name="&gt;&gt;pb_c22.Name" xml:space="preserve">
+    <value>pb_c22</value>
   </data>
-  <data name="&gt;&gt;pb_pb_torre.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c22.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pb_torre.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c22.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pb_torre.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c22.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="pb_pb_reina.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c26.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 450</value>
   </data>
-  <data name="pb_pb_reina.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c26.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pb_reina.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c26.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="pb_pb_reina.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c26.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;pb_pb_reina.Name" xml:space="preserve">
-    <value>pb_pb_reina</value>
+  <data name="&gt;&gt;pb_c26.Name" xml:space="preserve">
+    <value>pb_c26</value>
   </data>
-  <data name="&gt;&gt;pb_pb_reina.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c26.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pb_reina.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c26.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pb_reina.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c26.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="pb_pn_alfil.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c14.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pn_alfil.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c14.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pn_alfil.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c14.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="pb_pn_alfil.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c14.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;pb_pn_alfil.Name" xml:space="preserve">
-    <value>pb_pn_alfil</value>
+  <data name="&gt;&gt;pb_c14.Name" xml:space="preserve">
+    <value>pb_c14</value>
   </data>
-  <data name="&gt;&gt;pb_pn_alfil.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c14.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pn_alfil.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c14.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pn_alfil.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c14.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="pb_pn_caballo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c13.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 75</value>
   </data>
-  <data name="pb_pn_caballo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c13.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pn_caballo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c13.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="pb_pn_caballo.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c13.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;pb_pn_caballo.Name" xml:space="preserve">
-    <value>pb_pn_caballo</value>
+  <data name="&gt;&gt;pb_c13.Name" xml:space="preserve">
+    <value>pb_c13</value>
   </data>
-  <data name="&gt;&gt;pb_pn_caballo.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c13.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pn_caballo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c13.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pn_caballo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c13.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="pb_pn_torre.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c12.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 0</value>
   </data>
-  <data name="pb_pn_torre.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c12.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pn_torre.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c12.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="pb_pn_torre.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c12.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;pb_pn_torre.Name" xml:space="preserve">
-    <value>pb_pn_torre</value>
+  <data name="&gt;&gt;pb_c12.Name" xml:space="preserve">
+    <value>pb_c12</value>
   </data>
-  <data name="&gt;&gt;pb_pn_torre.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c12.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pn_torre.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c12.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pn_torre.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c12.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="pb_pn_reina.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="pb_c16.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="pb_pn_reina.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="pb_c16.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 75</value>
   </data>
-  <data name="pb_pn_reina.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+  <data name="pb_c16.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
-  <data name="pb_pn_reina.TabIndex" type="System.Int32, mscorlib">
+  <data name="pb_c16.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;pb_pn_reina.Name" xml:space="preserve">
-    <value>pb_pn_reina</value>
+  <data name="&gt;&gt;pb_c16.Name" xml:space="preserve">
+    <value>pb_c16</value>
   </data>
-  <data name="&gt;&gt;pb_pn_reina.Type" xml:space="preserve">
+  <data name="&gt;&gt;pb_c16.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pb_pn_reina.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pb_c16.Parent" xml:space="preserve">
     <value>panel_ajedrez</value>
   </data>
-  <data name="&gt;&gt;pb_pn_reina.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pb_c16.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="lbl_turno.Location" type="System.Drawing.Point, System.Drawing">

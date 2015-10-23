@@ -62,22 +62,16 @@
             x = 0
             y += 75
         Next
-        pb_pb_alfil.Load(Application.StartupPath & "/img/24.png")
-        pb_pb_torre.Load(Application.StartupPath & "/img/22.png")
-        pb_pb_reina.Load(Application.StartupPath & "/img/25.png")
-        pb_pb_caballo.Load(Application.StartupPath & "/img/23.png")
-        pb_pn_alfil.Load(Application.StartupPath & "/img/14.png")
-        pb_pn_caballo.Load(Application.StartupPath & "/img/13.png")
-        pb_pn_reina.Load(Application.StartupPath & "/img/15.png")
-        pb_pn_torre.Load(Application.StartupPath & "/img/12.png")
-        pb_pn_alfil.Visible = False
-        pb_pn_caballo.Visible = False
-        pb_pn_torre.Visible = False
-        pb_pn_reina.Visible = False
-        pb_pb_alfil.Visible = False
-        pb_pb_caballo.Visible = False
-        pb_pb_torre.Visible = False
-        pb_pb_reina.Visible = False
+
+        'Carga las imgs del panel para cambiar el peon
+        pb_c24.Load(Application.StartupPath & "/img/24.png")
+        pb_c22.Load(Application.StartupPath & "/img/22.png")
+        pb_c26.Load(Application.StartupPath & "/img/25.png")
+        pb_c23.Load(Application.StartupPath & "/img/23.png")
+        pb_c14.Load(Application.StartupPath & "/img/14.png")
+        pb_c13.Load(Application.StartupPath & "/img/13.png")
+        pb_c16.Load(Application.StartupPath & "/img/15.png")
+        pb_c12.Load(Application.StartupPath & "/img/12.png")
 
         reset()
 
@@ -213,11 +207,12 @@
         'reseta el recuento de las fichas comidas
         resetRecuento()
 
-
+        'reseta las figuras mostradas en el panel para cambiar el peon
+        resetCambioPeon()
 
         'reseta el temporizador
         resetTemporizador()
-        ms_temporizador.Enabled = True
+        ms_temporizador.Enabled = True 'muestra la opcion del temporizador
 
         clicked1st = Nothing
         ultimoMov = "-1"
@@ -712,7 +707,9 @@
     Dim primerclick As Boolean = True
 
     Private Sub mover(clicked2nd As PictureBox)
-        Dim mov As PictureBox = clicked2nd
+        'Dim mov As PictureBox = clicked2nd
+
+
         If (getColor(clicked2nd) <> 0) Then
 
             If clicked1st Is Nothing Then
@@ -734,6 +731,7 @@
                 guardarPieza(clicked2nd)
             Else 'si no, la come
                 If comprobador(clicked1st, clicked2nd) Then
+
                     setRecuento(clicked2nd)
 
                     If getRecuento(blanca, rey) = 1 Then
@@ -752,9 +750,9 @@
                         End If
                     End If
 
-
                     moverClick(clicked2nd)
-                    cambio(clicked2nd, mov)
+                    setCambioPeon(clicked2nd)
+
                 End If
             End If
 
@@ -764,7 +762,8 @@
                 Select Case comprobador(clicked1st, clicked2nd)
                     Case True
                         moverClick(clicked2nd)
-                        cambio(clicked2nd, mov)
+                        setCambioPeon(clicked2nd)
+
                     Case 1
                         moverClick(clicked2nd)
                         arrayCas(7, 7).Tag = 0
@@ -808,52 +807,55 @@
 
     Private Sub colocando(clicked As PictureBox, e As EventArgs)
 
-        If primerclick Then
-            primerclick = False
+        If cambiandoPeon = False Then
 
-            If turno Then
+            If primerclick Then
+                primerclick = False
 
-                If getColor(clicked) = blanca Then
-                    mover(clicked)
-                    turno = False
+
+                If turno Then
+                    If getColor(clicked) = blanca Then
+                        mover(clicked)
+                        turno = False
+                    Else
+                        'MsgBox("Mueve una figura blanca!")
+                        primerclick = True
+                    End If
+
                 Else
-                    'MsgBox("Mueve una figura blanca!")
-                    primerclick = True
+
+                    If getColor(clicked) = negra Then
+                        mover(clicked)
+                        turno = True
+                    Else
+                        'MsgBox("Mueve una figura negra!")
+                        primerclick = True
+                    End If
                 End If
+
 
             Else
 
-                If getColor(clicked) = negra Then
-                    mover(clicked)
-                    turno = True
-                Else
-                    'MsgBox("Mueve una figura negra!")
-                    primerclick = True
+                primerclick = True
+
+                If getColor(clicked) = blanca And getColor(clicked1st) = blanca Then
+                    turno = False
+                    primerclick = False
                 End If
 
+                If getColor(clicked) = negra And getColor(clicked1st) = negra Then
+                    turno = True
+                    primerclick = False
+                End If
+
+                If comprobador(clicked1st, clicked) = False Then
+                    primerclick = False
+                End If
+
+                mover(clicked)
             End If
 
-        Else
-
-            primerclick = True
-
-            If getColor(clicked) = blanca And getColor(clicked1st) = blanca Then
-                turno = False
-                primerclick = False
-            End If
-
-            If getColor(clicked) = negra And getColor(clicked1st) = negra Then
-                turno = True
-                primerclick = False
-            End If
-
-            If comprobador(clicked1st, clicked) = False Then
-                primerclick = False
-            End If
-
-            mover(clicked)
         End If
-
     End Sub
 
     Private Sub setTablero(x As Integer, y As Integer)
@@ -1009,152 +1011,133 @@
 
 
 
+    'CAMBIO DE PEON
+    Dim settingCambioPeon As PictureBox
+    Dim cambiandoPeon As Boolean = False
 
 
+    Private Sub setVisibleCambioPeonBlancas()
+        Dim setColor = ColorTranslator.FromHtml("#222222")
+
+        pb_c24.BackColor = setColor
+        pb_c23.BackColor = setColor
+        pb_c22.BackColor = setColor
+        pb_c26.BackColor = setColor
+
+        pb_c24.Visible = True
+        pb_c23.Visible = True
+        pb_c22.Visible = True
+        pb_c26.Visible = True
+
+    End Sub
 
 
+    Private Sub setVisibleCambioPeonNegras()
+        Dim setColor = ColorTranslator.FromHtml("#FFFFFF")
+
+        pb_c14.BackColor = setColor
+        pb_c13.BackColor = setColor
+        pb_c12.BackColor = setColor
+        pb_c16.BackColor = setColor
+
+        pb_c14.Visible = True
+        pb_c13.Visible = True
+        pb_c12.Visible = True
+        pb_c16.Visible = True
+
+    End Sub
 
 
+    Private Sub resetCambioPeon()
+        Dim setColor = Color.Transparent
+
+        pb_c24.Visible = False
+        pb_c23.Visible = False
+        pb_c22.Visible = False
+        pb_c26.Visible = False
+
+        pb_c14.Visible = False
+        pb_c13.Visible = False
+        pb_c12.Visible = False
+        pb_c16.Visible = False
 
 
+        pb_c24.BackColor = setColor
+        pb_c23.BackColor = setColor
+        pb_c22.BackColor = setColor
+        pb_c26.BackColor = setColor
+
+        pb_c14.BackColor = setColor
+        pb_c13.BackColor = setColor
+        pb_c12.BackColor = setColor
+        pb_c16.BackColor = setColor
+
+        cambiandoPeon = False
+    End Sub
 
 
+    Private Sub doCambioPeon(pieza As Integer)
+        settingCambioPeon.Tag = pieza
+
+        Dim fila As Integer = getPosicionFila(settingCambioPeon)
+        Dim columna As Integer = getPosicionColumna(settingCambioPeon)
+
+        arrayCas(fila, columna).Load(Application.StartupPath & "/img/" & pieza & ".png")
+
+        resetCambioPeon()
+    End Sub
 
 
+    Private Sub setCambioPeon(ByRef piezaClicked2nd As PictureBox)
+        settingCambioPeon = piezaClicked2nd
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Function cambio(ByRef nuev As PictureBox, ByVal act As PictureBox)
-        Dim p1 As Integer = getPosicion(nuev).ToString.Substring(0, 1)
-        nue = nuev
-        If getPosicionFila(nuev) = 0 And act.Tag = 21 Then
-            ' MsgBox("PEON BLANCO EN EL FIN")
-            pb_pb_alfil.Visible = True
-            pb_pb_caballo.Visible = True
-            pb_pb_torre.Visible = True
-            pb_pb_reina.Visible = True
+        If getPosicionFila(piezaClicked2nd) = 0 And piezaClicked2nd.Tag = 21 Then
+            setVisibleCambioPeonBlancas()
+            cambiandoPeon = True
+        ElseIf getPosicionFila(piezaClicked2nd) = 7 And piezaClicked2nd.Tag = 11 Then
+            setVisibleCambioPeonNegras()
+            cambiandoPeon = True
         End If
-        If getPosicionFila(nuev) = 7 And act.Tag = 11 Then
-            ' MsgBox("PEON negro EN EL FIN")
-            pb_pn_alfil.Visible = True
-            pb_pn_caballo.Visible = True
-            pb_pn_torre.Visible = True
-            pb_pn_reina.Visible = True
-        End If
-    End Function
-    Dim figuraCambio As Integer = 0
-    Dim nue As PictureBox
-    Sub pb_pb_reina_Click(sender As Object, e As EventArgs) Handles pb_pb_reina.Click
-        figuraCambio = 25
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = 0
-        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pb_alfil.Visible = False
-        pb_pb_caballo.Visible = False
-        pb_pb_torre.Visible = False
-        pb_pb_reina.Visible = False
-    End Sub
 
-    Private Sub pb_pb_torre_Click(sender As Object, e As EventArgs) Handles pb_pb_torre.Click
-        figuraCambio = 22
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = 0
-        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pb_alfil.Visible = False
-        pb_pb_caballo.Visible = False
-        pb_pb_torre.Visible = False
-        pb_pb_reina.Visible = False
-    End Sub
 
-    Private Sub pb_pb_caballo_Click(sender As Object, e As EventArgs) Handles pb_pb_caballo.Click
-        figuraCambio = 23
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = 0
-        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pb_alfil.Visible = False
-        pb_pb_caballo.Visible = False
-        pb_pb_torre.Visible = False
-        pb_pb_reina.Visible = False
-    End Sub
-
-    Private Sub pb_pb_alfil_Click(sender As Object, e As EventArgs) Handles pb_pb_alfil.Click
-        figuraCambio = 24
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = 0
-        arrayCas(p0, p1).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pb_alfil.Visible = False
-        pb_pb_caballo.Visible = False
-        pb_pb_torre.Visible = False
-        pb_pb_reina.Visible = False
-    End Sub
-
-    Private Sub pb_pn_reina_Click(sender As Object, e As EventArgs) Handles pb_pn_reina.Click
-        figuraCambio = 15
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
-        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pn_alfil.Visible = False
-        pb_pn_caballo.Visible = False
-        pb_pn_torre.Visible = False
-        pb_pn_reina.Visible = False
-    End Sub
-
-    Private Sub pb_pn_torre_Click(sender As Object, e As EventArgs) Handles pb_pn_torre.Click
-        figuraCambio = 12
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
-        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pn_alfil.Visible = False
-        pb_pn_caballo.Visible = False
-        pb_pn_torre.Visible = False
-        pb_pn_reina.Visible = False
-    End Sub
-
-    Private Sub pb_pn_caballo_Click(sender As Object, e As EventArgs) Handles pb_pn_caballo.Click
-        figuraCambio = 13
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
-        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pn_alfil.Visible = False
-        pb_pn_caballo.Visible = False
-        pb_pn_torre.Visible = False
-        pb_pn_reina.Visible = False
-    End Sub
-
-    Private Sub pb_pn_alfil_Click(sender As Object, e As EventArgs) Handles pb_pn_alfil.Click
-        figuraCambio = 14
-        nue.Tag = figuraCambio
-        Dim p1 As Integer = getPosicion(nue).ToString.Substring(0, 1)
-        Dim p0 As Integer = getPosicion(nue).ToString.Substring(1, 1)
-        arrayCas(p1, p0).Load(Application.StartupPath & "/img/" & figuraCambio & ".png")
-        pb_pn_alfil.Visible = False
-        pb_pn_caballo.Visible = False
-        pb_pn_torre.Visible = False
-        pb_pn_reina.Visible = False
     End Sub
 
 
+    Private Sub pb_pb_torre_Click(sender As Object, e As EventArgs) Handles pb_c22.Click
+        doCambioPeon(22)
+    End Sub
+
+    Private Sub pb_pb_caballo_Click(sender As Object, e As EventArgs) Handles pb_c23.Click
+        doCambioPeon(23)
+    End Sub
+
+    Private Sub pb_pb_alfil_Click(sender As Object, e As EventArgs) Handles pb_c24.Click
+        doCambioPeon(24)
+    End Sub
+    Sub pb_pb_reina_Click(sender As Object, e As EventArgs) Handles pb_c26.Click
+        doCambioPeon(25)
+    End Sub
+
+    Private Sub pb_pn_torre_Click(sender As Object, e As EventArgs) Handles pb_c12.Click
+        doCambioPeon(12)
+    End Sub
+
+    Private Sub pb_pn_caballo_Click(sender As Object, e As EventArgs) Handles pb_c13.Click
+        doCambioPeon(13)
+    End Sub
+
+    Private Sub pb_pn_alfil_Click(sender As Object, e As EventArgs) Handles pb_c14.Click
+        doCambioPeon(14)
+    End Sub
+    Private Sub pb_pn_reina_Click(sender As Object, e As EventArgs) Handles pb_c16.Click
+        doCambioPeon(15)
+    End Sub
+
+
+
+
+
+    'ENROQUE
 
 
     Function enroque(ByVal click1 As PictureBox)

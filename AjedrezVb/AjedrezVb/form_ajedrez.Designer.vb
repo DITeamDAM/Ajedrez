@@ -25,14 +25,14 @@ Partial Class form_ajedrez
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(form_ajedrez))
         Me.panel_ajedrez = New System.Windows.Forms.Panel()
-        Me.pb_pb_alfil = New System.Windows.Forms.PictureBox()
-        Me.pb_pb_caballo = New System.Windows.Forms.PictureBox()
-        Me.pb_pb_torre = New System.Windows.Forms.PictureBox()
-        Me.pb_pb_reina = New System.Windows.Forms.PictureBox()
-        Me.pb_pn_alfil = New System.Windows.Forms.PictureBox()
-        Me.pb_pn_caballo = New System.Windows.Forms.PictureBox()
-        Me.pb_pn_torre = New System.Windows.Forms.PictureBox()
-        Me.pb_pn_reina = New System.Windows.Forms.PictureBox()
+        Me.pb_c24 = New System.Windows.Forms.PictureBox()
+        Me.pb_c23 = New System.Windows.Forms.PictureBox()
+        Me.pb_c22 = New System.Windows.Forms.PictureBox()
+        Me.pb_c26 = New System.Windows.Forms.PictureBox()
+        Me.pb_c14 = New System.Windows.Forms.PictureBox()
+        Me.pb_c13 = New System.Windows.Forms.PictureBox()
+        Me.pb_c12 = New System.Windows.Forms.PictureBox()
+        Me.pb_c16 = New System.Windows.Forms.PictureBox()
         Me.ms_turno_color = New System.Windows.Forms.Panel()
         Me.lbl_turno = New System.Windows.Forms.Label()
         Me.lbl_contador_blancas = New System.Windows.Forms.Label()
@@ -51,14 +51,14 @@ Partial Class form_ajedrez
         Me.timer_blancas = New System.Windows.Forms.Timer(Me.components)
         Me.timer_negras = New System.Windows.Forms.Timer(Me.components)
         Me.panel_ajedrez.SuspendLayout()
-        CType(Me.pb_pb_alfil, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pb_pb_caballo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pb_pb_torre, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pb_pb_reina, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pb_pn_alfil, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pb_pn_caballo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pb_pn_torre, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pb_pn_reina, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c24, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c23, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c22, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c26, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c14, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c13, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c12, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pb_c16, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ms_turno_color.SuspendLayout()
         Me.ms_principal.SuspendLayout()
         Me.SuspendLayout()
@@ -66,75 +66,75 @@ Partial Class form_ajedrez
         'panel_ajedrez
         '
         Me.panel_ajedrez.BackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(231, Byte), Integer))
-        Me.panel_ajedrez.Controls.Add(Me.pb_pb_alfil)
-        Me.panel_ajedrez.Controls.Add(Me.pb_pb_caballo)
-        Me.panel_ajedrez.Controls.Add(Me.pb_pb_torre)
-        Me.panel_ajedrez.Controls.Add(Me.pb_pb_reina)
-        Me.panel_ajedrez.Controls.Add(Me.pb_pn_alfil)
-        Me.panel_ajedrez.Controls.Add(Me.pb_pn_caballo)
-        Me.panel_ajedrez.Controls.Add(Me.pb_pn_torre)
-        Me.panel_ajedrez.Controls.Add(Me.pb_pn_reina)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c24)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c23)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c22)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c26)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c14)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c13)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c12)
+        Me.panel_ajedrez.Controls.Add(Me.pb_c16)
         Me.panel_ajedrez.Controls.Add(Me.ms_turno_color)
         Me.panel_ajedrez.Controls.Add(Me.lbl_contador_blancas)
         Me.panel_ajedrez.Controls.Add(Me.lbl_contador_negras)
         resources.ApplyResources(Me.panel_ajedrez, "panel_ajedrez")
         Me.panel_ajedrez.Name = "panel_ajedrez"
         '
-        'pb_pb_alfil
+        'pb_c24
         '
-        resources.ApplyResources(Me.pb_pb_alfil, "pb_pb_alfil")
-        Me.pb_pb_alfil.Name = "pb_pb_alfil"
-        Me.pb_pb_alfil.TabStop = False
-        Me.pb_pb_alfil.Tag = "24"
+        resources.ApplyResources(Me.pb_c24, "pb_c24")
+        Me.pb_c24.Name = "pb_c24"
+        Me.pb_c24.TabStop = False
+        Me.pb_c24.Tag = "24"
         '
-        'pb_pb_caballo
+        'pb_c23
         '
-        resources.ApplyResources(Me.pb_pb_caballo, "pb_pb_caballo")
-        Me.pb_pb_caballo.Name = "pb_pb_caballo"
-        Me.pb_pb_caballo.TabStop = False
-        Me.pb_pb_caballo.Tag = "23"
+        resources.ApplyResources(Me.pb_c23, "pb_c23")
+        Me.pb_c23.Name = "pb_c23"
+        Me.pb_c23.TabStop = False
+        Me.pb_c23.Tag = "23"
         '
-        'pb_pb_torre
+        'pb_c22
         '
-        resources.ApplyResources(Me.pb_pb_torre, "pb_pb_torre")
-        Me.pb_pb_torre.Name = "pb_pb_torre"
-        Me.pb_pb_torre.TabStop = False
-        Me.pb_pb_torre.Tag = "22"
+        resources.ApplyResources(Me.pb_c22, "pb_c22")
+        Me.pb_c22.Name = "pb_c22"
+        Me.pb_c22.TabStop = False
+        Me.pb_c22.Tag = "22"
         '
-        'pb_pb_reina
+        'pb_c26
         '
-        resources.ApplyResources(Me.pb_pb_reina, "pb_pb_reina")
-        Me.pb_pb_reina.Name = "pb_pb_reina"
-        Me.pb_pb_reina.TabStop = False
-        Me.pb_pb_reina.Tag = "26"
+        resources.ApplyResources(Me.pb_c26, "pb_c26")
+        Me.pb_c26.Name = "pb_c26"
+        Me.pb_c26.TabStop = False
+        Me.pb_c26.Tag = "26"
         '
-        'pb_pn_alfil
+        'pb_c14
         '
-        resources.ApplyResources(Me.pb_pn_alfil, "pb_pn_alfil")
-        Me.pb_pn_alfil.Name = "pb_pn_alfil"
-        Me.pb_pn_alfil.TabStop = False
-        Me.pb_pn_alfil.Tag = "14"
+        resources.ApplyResources(Me.pb_c14, "pb_c14")
+        Me.pb_c14.Name = "pb_c14"
+        Me.pb_c14.TabStop = False
+        Me.pb_c14.Tag = "14"
         '
-        'pb_pn_caballo
+        'pb_c13
         '
-        resources.ApplyResources(Me.pb_pn_caballo, "pb_pn_caballo")
-        Me.pb_pn_caballo.Name = "pb_pn_caballo"
-        Me.pb_pn_caballo.TabStop = False
-        Me.pb_pn_caballo.Tag = "13"
+        resources.ApplyResources(Me.pb_c13, "pb_c13")
+        Me.pb_c13.Name = "pb_c13"
+        Me.pb_c13.TabStop = False
+        Me.pb_c13.Tag = "13"
         '
-        'pb_pn_torre
+        'pb_c12
         '
-        resources.ApplyResources(Me.pb_pn_torre, "pb_pn_torre")
-        Me.pb_pn_torre.Name = "pb_pn_torre"
-        Me.pb_pn_torre.TabStop = False
-        Me.pb_pn_torre.Tag = "12"
+        resources.ApplyResources(Me.pb_c12, "pb_c12")
+        Me.pb_c12.Name = "pb_c12"
+        Me.pb_c12.TabStop = False
+        Me.pb_c12.Tag = "12"
         '
-        'pb_pn_reina
+        'pb_c16
         '
-        resources.ApplyResources(Me.pb_pn_reina, "pb_pn_reina")
-        Me.pb_pn_reina.Name = "pb_pn_reina"
-        Me.pb_pn_reina.TabStop = False
-        Me.pb_pn_reina.Tag = "16"
+        resources.ApplyResources(Me.pb_c16, "pb_c16")
+        Me.pb_c16.Name = "pb_c16"
+        Me.pb_c16.TabStop = False
+        Me.pb_c16.Tag = "16"
         '
         'ms_turno_color
         '
@@ -240,14 +240,14 @@ Partial Class form_ajedrez
         Me.MaximizeBox = False
         Me.Name = "form_ajedrez"
         Me.panel_ajedrez.ResumeLayout(False)
-        CType(Me.pb_pb_alfil, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pb_pb_caballo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pb_pb_torre, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pb_pb_reina, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pb_pn_alfil, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pb_pn_caballo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pb_pn_torre, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pb_pn_reina, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c24, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c23, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c22, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c26, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c14, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c13, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c12, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_c16, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ms_turno_color.ResumeLayout(False)
         Me.ms_principal.ResumeLayout(False)
         Me.ms_principal.PerformLayout()
@@ -270,14 +270,14 @@ Partial Class form_ajedrez
     Friend WithEvents lbl_contador_blancas As Label
     Friend WithEvents ms_turno_color As Panel
     Friend WithEvents lbl_turno As Label
-    Friend WithEvents pb_pb_alfil As PictureBox
-    Friend WithEvents pb_pb_caballo As PictureBox
-    Friend WithEvents pb_pb_torre As PictureBox
-    Friend WithEvents pb_pb_reina As PictureBox
-    Friend WithEvents pb_pn_alfil As PictureBox
-    Friend WithEvents pb_pn_caballo As PictureBox
-    Friend WithEvents pb_pn_torre As PictureBox
-    Friend WithEvents pb_pn_reina As PictureBox
+    Friend WithEvents pb_c24 As PictureBox
+    Friend WithEvents pb_c23 As PictureBox
+    Friend WithEvents pb_c22 As PictureBox
+    Friend WithEvents pb_c26 As PictureBox
+    Friend WithEvents pb_c14 As PictureBox
+    Friend WithEvents pb_c13 As PictureBox
+    Friend WithEvents pb_c12 As PictureBox
+    Friend WithEvents pb_c16 As PictureBox
     Friend WithEvents timer_blancas As Timer
     Friend WithEvents timer_negras As Timer
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
