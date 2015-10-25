@@ -71,7 +71,6 @@
         pb_c16.Load(Application.StartupPath & "/img/15.png")
         pb_c12.Load(Application.StartupPath & "/img/12.png")
 
-
         reset()
     End Sub
 
@@ -376,193 +375,6 @@
         Return False
     End Function
 
-    'Private Function checkingJaque(ByVal fila As Integer, ByVal columna As Integer, ByVal posicion As Integer)
-
-    '    If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
-    '        If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-
-    '            If getTipo(arrayCas(fila, columna)) = 6 Then
-    '                MsgBox("jaque")
-    '                Return True
-    '                Exit Function
-    '            Else
-    '                MsgBox("hay una ficha en medio")
-    '            End If
-
-    '        End If
-    '    End If
-
-    '    Return False
-    'End Function
-
-    Private Sub checkJaqueDiagonales(ByVal click As PictureBox)
-        Dim posicion = getPosicion(click)
-        Dim columna = getPosicionColumna(click)
-
-        Dim direccion As Integer = 0
-        Dim fin As Integer = 0
-
-        For i As Integer = 0 To 3
-
-            Select Case i
-                Case 0, 1
-                    fin = 0
-                    direccion = -1
-                Case 2, 3
-                    fin = 7
-                    direccion = +1
-            End Select
-
-
-
-
-            For fila = getPosicionFila(click) To fin Step direccion
-                Try
-                    If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
-
-
-                        If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-
-                            If getTipo(arrayCas(fila, columna)) = 6 And getColor(click) <> getColor(arrayCas(fila, columna)) Then
-                                MsgBox("Jaque")
-                                arrayCas(fila, columna).BackColor = ColorTranslator.FromHtml("#D92E2E")
-                                Exit Sub
-                            End If
-
-                            Exit For
-                        End If
-                    End If
-
-
-                    Select Case i
-                        Case 0, 3
-                            columna -= 1
-                        Case 1, 2
-                            columna += 1
-                    End Select
-
-                Catch ex As Exception
-                    MsgBox("ha acabado el tablero")
-                    Exit For
-                End Try
-            Next
-
-            columna = getPosicionColumna(click)
-        Next
-
-
-    End Sub
-
-
-
-    Private Sub checkingJaqueDiagonales(ByVal click As PictureBox)
-        Dim posicion = getPosicion(click)
-        Dim columna = getPosicionColumna(click)
-
-
-        MsgBox("ARRIBA IZQUIERDA")
-        'hacia arriba izquierda desde el punto del click
-        For fila = getPosicionFila(click) To 0 Step -1
-            Try
-                If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
-                    If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-
-                        If getTipo(arrayCas(fila, columna)) = 6 And getColor(click) <> getColor(arrayCas(fila, columna)) Then
-                            MsgBox("jaque")
-                            Exit Sub
-                        End If
-
-                        Exit For
-                    End If
-                End If
-
-                columna -= 1
-            Catch ex As Exception
-                MsgBox("ha acabado el tablero")
-                Exit For
-            End Try
-        Next
-
-
-        columna = getPosicionColumna(click)
-        MsgBox("ARRIBA DERECHA")
-        'hacia arriba derecha desde el punto del click
-        For fila = getPosicionFila(click) To 0 Step -1
-            Try
-                If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
-                    If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-
-                        If getTipo(arrayCas(fila, columna)) = 6 And getColor(click) <> getColor(arrayCas(fila, columna)) Then
-                            MsgBox("jaque")
-                            Exit Sub
-                        End If
-
-                        Exit For
-                    End If
-                End If
-
-                columna += 1
-            Catch ex As Exception
-                MsgBox("ha acabado el tablero")
-                Exit For
-            End Try
-        Next
-
-
-        columna = getPosicionColumna(click)
-        MsgBox("ABAJO DERECHA")
-        'hacia abajo derecha desde el punto del click
-        For fila = getPosicionFila(click) To 7 Step +1
-            Try
-                If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
-                    If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-
-                        If getTipo(arrayCas(fila, columna)) = 6 And getColor(click) <> getColor(arrayCas(fila, columna)) Then
-                            MsgBox("jaque")
-                            Exit Sub
-                        End If
-
-                        Exit For
-                    End If
-                End If
-
-                columna += 1
-            Catch ex As Exception
-                MsgBox("ha acabado el tablero")
-                Exit For
-            End Try
-        Next
-
-
-        columna = getPosicionColumna(click)
-        MsgBox("ABAJO IZQUIERDA")
-        'hacia abajo derecha desde el punto del click
-        For fila = getPosicionFila(click) To 7 Step +1
-            Try
-                If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
-                    If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
-
-                        If getTipo(arrayCas(fila, columna)) = 6 And getColor(click) <> getColor(arrayCas(fila, columna)) Then
-                            MsgBox("jaque")
-                            Exit Sub
-                        End If
-
-                        Exit For
-                    End If
-                End If
-
-                columna -= 1
-            Catch ex As Exception
-                MsgBox("ha acabado el tablero")
-                Exit For
-            End Try
-        Next
-
-
-    End Sub
-
-
-
 
     Private Function diagonales(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         Dim direccion As Integer
@@ -611,7 +423,7 @@
     End Function
 
 
-    Function MovPeon(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function MovPeon(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         Dim normal As Integer = 0
         Dim doble As Integer = 0
 
@@ -653,7 +465,7 @@
     End Function
 
 
-    Function MovTorre(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function MovTorre(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         If verticales(click1st, click2nd) Or horizontales(click1st, click2nd) Then
             Return True
         End If
@@ -662,9 +474,241 @@
     End Function
 
 
+    'JAQUE OFENSIVO
+    Private Sub infoJaque()
+        MsgBox("Movimiento de Jaque", MsgBoxStyle.OkOnly, "¡ATENCIÓN!")
+    End Sub
+
+
+    Private Sub checkJaquePeon(ByVal click As PictureBox)
+        Dim columna = getPosicionColumna(click)
+        Dim fila = getPosicionFila(click)
+
+        Dim normal As Integer = 0
+        Dim avance As Integer = -1
+
+        Select Case getColor(click)
+            Case blanca
+                normal = -1
+            Case negra
+                normal = +1
+        End Select
+
+        For i As Integer = 0 To 1
+            Try
+                Dim paso As PictureBox = arrayCas(fila + normal, columna + avance)
+
+                If getTipo(paso) = rey And getColor(click) <> getColor(paso) Then
+                    infoJaque()
+                    Exit For
+                End If
+
+                avance = +1
+            Catch ex As Exception
+                Exit Sub
+            End Try
+        Next
+    End Sub
+
+
+    Private Sub checkJaqueDiagonales(ByVal click As PictureBox)
+        Dim posicion = getPosicion(click)
+        Dim columna = getPosicionColumna(click)
+
+        Dim direccion As Integer = 0
+        Dim fin As Integer = 0
+
+        For i As Integer = 0 To 3
+
+            Select Case i
+                Case 0, 1
+                    fin = 0
+                    direccion = -1
+                Case 2, 3
+                    fin = 7
+                    direccion = +1
+            End Select
+
+            For fila = getPosicionFila(click) To fin Step direccion
+                Try
+                    If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
+                        If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+
+                            If getTipo(arrayCas(fila, columna)) = rey And getColor(click) <> getColor(arrayCas(fila, columna)) Then
+                                arrayCas(fila, columna).BackColor = ColorTranslator.FromHtml("#D92E2E")
+                                infoJaque()
+                                arrayCas(fila, columna).BackColor = arrayTablero(fila, columna)
+                                Exit Sub
+                            End If
+
+                            Exit For
+                        End If
+                    End If
+
+
+                    Select Case i
+                        Case 0, 3
+                            columna -= 1
+                        Case 1, 2
+                            columna += 1
+                    End Select
+
+                Catch ex As Exception 'si se sale del tablero sale del for
+                    Exit For
+                End Try
+            Next
+
+            columna = getPosicionColumna(click)
+        Next
+    End Sub
+
+
+    Private Sub checkJaqueVerticales(ByVal click As PictureBox)
+        Dim posicion = getPosicion(click)
+        Dim columna = getPosicionColumna(click)
+
+        Dim direccion As Integer = 0
+        Dim fin As Integer = 0
+
+        For i As Integer = 0 To 1
+
+            Select Case i
+                Case 0
+                    fin = 0
+                    direccion = -1
+                Case 1
+                    fin = 7
+                    direccion = +1
+            End Select
+
+            For fila = getPosicionFila(click) To fin Step direccion
+
+                Try
+                    If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
+                        If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+
+                            If getTipo(arrayCas(fila, columna)) = rey And getColor(click) <> getColor(arrayCas(fila, columna)) Then
+                                arrayCas(fila, columna).BackColor = ColorTranslator.FromHtml("#D92E2E")
+                                infoJaque()
+                                arrayCas(fila, columna).BackColor = arrayTablero(fila, columna)
+                                Exit Sub
+                            End If
+
+                            Exit For
+                        End If
+                    End If
+
+
+                Catch ex As Exception
+                    Exit For
+                End Try
+            Next
+
+        Next
+    End Sub
+
+
+    Private Sub checkJaqueHorizontales(ByVal click As PictureBox)
+        Dim posicion = getPosicion(click)
+        Dim fila = getPosicionFila(click)
+
+        Dim direccion As Integer = 0
+        Dim fin As Integer = 0
+
+        For i As Integer = 0 To 1
+
+            Select Case i
+                Case 0
+                    fin = 0
+                    direccion = -1
+                Case 1
+                    fin = 7
+                    direccion = +1
+            End Select
+
+            For columna = getPosicionColumna(click) To fin Step direccion
+
+                Try
+                    If (fila & columna) <> posicion Then 'busca sin contar la posicion de la ficha
+                        If getColor(arrayCas(fila, columna)) <> 0 Then 'si ve que hay algo en el recorrido devuelve false y acaba el movimiento
+
+                            If getTipo(arrayCas(fila, columna)) = rey And getColor(click) <> getColor(arrayCas(fila, columna)) Then
+                                arrayCas(fila, columna).BackColor = ColorTranslator.FromHtml("#D92E2E")
+                                infoJaque()
+                                arrayCas(fila, columna).BackColor = arrayTablero(fila, columna)
+                                Exit Sub
+                            End If
+
+                            Exit For
+                        End If
+                    End If
+
+
+                Catch ex As Exception
+                    Exit For
+                End Try
+            Next
+
+        Next
+    End Sub
+
+
+    Private Sub checkJaqueCaballo(ByVal click As PictureBox)
+        Dim posicion As Integer = getPosicion(click)
+        Dim fila = getPosicionFila(click)
+        Dim columna = getPosicionColumna(click)
+
+        For i As Integer = 0 To 7 Step +1
+            Select Case i
+                Case 0
+                    fila += 1
+                    columna -= 2
+                Case 1
+                    fila += 1
+                    columna += 2
+                Case 2
+                    fila += 2
+                    columna -= 1
+                Case 3
+                    fila += 2
+                    columna += 1
+                Case 4
+                    fila -= 1
+                    columna -= 2
+                Case 5
+                    fila -= 1
+                    columna += 2
+                Case 6
+                    fila -= 2
+                    columna += 1
+                Case 7
+                    fila -= 2
+                    columna -= 1
+            End Select
+
+            Try
+                If getPosicion(arrayCas(fila, columna)) <> posicion Then 'busca sin contar la posicion de la ficha
+
+                    If getTipo(arrayCas(fila, columna)) = rey And getColor(click) <> getColor(arrayCas(fila, columna)) Then
+                        arrayCas(fila, columna).BackColor = ColorTranslator.FromHtml("#D92E2E")
+                        infoJaque()
+                        arrayCas(fila, columna).BackColor = arrayTablero(fila, columna)
+                        Exit Sub
+                    End If
+
+                End If
+            Catch ex As Exception
+                'Exit Sub
+            End Try
+
+            fila = getPosicionFila(click)
+            columna = getPosicionColumna(click)
+        Next
+    End Sub
+
+
     'ENROQUE
-    Dim arrayCheckMovido(5) As Boolean
-    '0 rey blanco, 1 rey negro, 2 y 3 torres blancas, 4 y 5 torres negras
+    Dim arrayCheckMovido(5) As Boolean '0 rey blanco, 1 rey negro, 2 y 3 torres blancas, 4 y 5 torres negras
 
 
     Private Sub resetEnroque()
@@ -672,7 +716,6 @@
             arrayCheckMovido(i) = False
         Next
     End Sub
-
 
 
     Private Function doEnroque(ByVal click2nd As PictureBox)
@@ -718,12 +761,11 @@
             End If
         End If
 
-        'MsgBox("HAY ENROQUE")
         Return False
     End Function
 
 
-    Function MovCaballo(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function MovCaballo(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         Select Case getPosicion(click2nd)
             Case getPosicion(click1st) + 8,
                  getPosicion(click1st) + 12,
@@ -741,14 +783,12 @@
     End Function
 
 
-    Function MovAlfil(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
+    Private Function MovAlfil(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         Return diagonales(click1st, click2nd)
-
     End Function
 
 
-    Function MovReina(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function MovReina(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         If verticales(click1st, click2nd) OrElse diagonales(click1st, click2nd) OrElse horizontales(click1st, click2nd) Then
             Return True
         End If
@@ -757,7 +797,7 @@
     End Function
 
 
-    Function MovRey(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function MovRey(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         If vertical(click1st, click2nd) Or horizontal(click1st, click2nd) Or diagonal(click1st, click2nd) Or doEnroque(click2nd) Then
             Return True
         End If
@@ -767,7 +807,7 @@
 
 
     'Comprueba que se ha seleccionado una figura
-    Function comprobador(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
+    Private Function comprobador(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         Select Case getTipo(click1st)
             Case 1
                 Return MovPeon(click1st, click2nd)
@@ -793,7 +833,6 @@
 
 
     Private Sub guardarPieza(ByVal click As PictureBox)
-        'clicked1st = arrayCas(getPosicionFila(click), getPosicionColumna(click))
         clicked1st = click
         clicked1st.BackColor = bgcolorClick1st
     End Sub
@@ -815,13 +854,10 @@
             Select Case getTipo(click)
                 Case rey
                     arrayCheckMovido(1) = True
-                'MsgBox("rey negro movido")
                 Case torre And getPosicion(clicked1st) = 0
                     arrayCheckMovido(4) = True
-                'MsgBox("torre negra izquierda movida")
                 Case torre And getPosicion(clicked1st) = 7
                     arrayCheckMovido(5) = True
-                    'MsgBox("torre negra derecha movida")
             End Select
 
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
@@ -874,9 +910,30 @@
     Private Function getFilaInt(ByVal num As String)
         Return CInt(num.Substring(0, 1))
     End Function
+
+
     Private Function getColumnaInt(ByVal num As String)
         Return CInt(num.Substring(1, 1))
     End Function
+
+
+    Private Sub doJaque(ByVal obj As PictureBox)
+        Select Case getTipo(obj)
+            Case alfil
+                checkJaqueDiagonales(obj)
+            Case reina
+                checkJaqueVerticales(obj)
+                checkJaqueHorizontales(obj)
+                checkJaqueDiagonales(obj)
+            Case torre
+                checkJaqueVerticales(obj)
+                checkJaqueHorizontales(obj)
+            Case caballo
+                checkJaqueCaballo(obj)
+            Case peon
+                checkJaquePeon(obj)
+        End Select
+    End Sub
 
 
     Dim primerclick As Boolean = True
@@ -929,6 +986,7 @@
                         End If
 
                         moviendo(clicked)
+                        doJaque(clicked)
                         setCambioPeon(clicked)
                     Else
                         primerclick = False
@@ -939,14 +997,7 @@
             Else 'si no esta ocupada, mueve la pieza sin hacer nada mas
                 If comprobador(clicked1st, clicked) Then 'comprueba si el movimiento es correcto, y si es correcto:
                     moviendo(clicked)
-
-
-                    Select Case getTipo(clicked)
-                        Case alfil, reina
-                            checkJaqueDiagonales(clicked)
-                    End Select
-
-
+                    doJaque(clicked)
                     setCambioPeon(clicked)
                 Else
                     primerclick = False
@@ -954,7 +1005,6 @@
             End If
 
         End If
-
     End Sub
 
 
@@ -1088,7 +1138,6 @@
             seg -= 60
             min += 1
         End If
-
 
         If seg >= 10 Then
             comodinSeg = ""
@@ -1339,6 +1388,5 @@
 
         panel_pause.Image = Nothing
     End Sub
-
 
 End Class
