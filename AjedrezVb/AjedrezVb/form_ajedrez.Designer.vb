@@ -34,6 +34,7 @@ Partial Class form_ajedrez
         Me.pb_c12 = New System.Windows.Forms.PictureBox()
         Me.pb_c16 = New System.Windows.Forms.PictureBox()
         Me.ms_turno_color = New System.Windows.Forms.Panel()
+        Me.panel_pause = New System.Windows.Forms.PictureBox()
         Me.lbl_turno = New System.Windows.Forms.Label()
         Me.lbl_contador_blancas = New System.Windows.Forms.Label()
         Me.lbl_contador_negras = New System.Windows.Forms.Label()
@@ -60,6 +61,7 @@ Partial Class form_ajedrez
         CType(Me.pb_c12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb_c16, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ms_turno_color.SuspendLayout()
+        CType(Me.panel_pause, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ms_principal.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -139,9 +141,16 @@ Partial Class form_ajedrez
         'ms_turno_color
         '
         Me.ms_turno_color.BackColor = System.Drawing.Color.FromArgb(CType(CType(248, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.ms_turno_color.Controls.Add(Me.panel_pause)
         Me.ms_turno_color.Controls.Add(Me.lbl_turno)
         resources.ApplyResources(Me.ms_turno_color, "ms_turno_color")
         Me.ms_turno_color.Name = "ms_turno_color"
+        '
+        'panel_pause
+        '
+        resources.ApplyResources(Me.panel_pause, "panel_pause")
+        Me.panel_pause.Name = "panel_pause"
+        Me.panel_pause.TabStop = False
         '
         'lbl_turno
         '
@@ -249,6 +258,7 @@ Partial Class form_ajedrez
         CType(Me.pb_c12, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pb_c16, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ms_turno_color.ResumeLayout(False)
+        CType(Me.panel_pause, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ms_principal.ResumeLayout(False)
         Me.ms_principal.PerformLayout()
         Me.ResumeLayout(False)
@@ -282,4 +292,5 @@ Partial Class form_ajedrez
     Friend WithEvents timer_negras As Timer
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
+    Friend WithEvents panel_pause As PictureBox
 End Class

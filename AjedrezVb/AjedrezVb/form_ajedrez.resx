@@ -312,6 +312,27 @@
   <data name="&gt;&gt;pb_c16.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="panel_pause.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panel_pause.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 150</value>
+  </data>
+  <data name="panel_pause.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panel_pause.Name" xml:space="preserve">
+    <value>panel_pause</value>
+  </data>
+  <data name="&gt;&gt;panel_pause.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel_pause.Parent" xml:space="preserve">
+    <value>ms_turno_color</value>
+  </data>
+  <data name="&gt;&gt;panel_pause.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lbl_turno.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -331,7 +352,7 @@
     <value>ms_turno_color</value>
   </data>
   <data name="&gt;&gt;lbl_turno.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ms_turno_color.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 225</value>
@@ -438,60 +459,6 @@
   <metadata name="ms_principal.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="ms_archivo_nuevapartida.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="ms_archivo_nuevapartida.Text" xml:space="preserve">
-    <value>Nueva partida</value>
-  </data>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 6</value>
-  </data>
-  <data name="ms_archivo_salir.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="ms_archivo_salir.Text" xml:space="preserve">
-    <value>Salir</value>
-  </data>
-  <data name="ms_archivo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="ms_archivo.Text" xml:space="preserve">
-    <value>Archivo</value>
-  </data>
-  <data name="ms_temporizador_limite_5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 22</value>
-  </data>
-  <data name="ms_temporizador_limite_5.Text" xml:space="preserve">
-    <value>5 min.</value>
-  </data>
-  <data name="ms_temporizador_limite_10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 22</value>
-  </data>
-  <data name="ms_temporizador_limite_10.Text" xml:space="preserve">
-    <value>10 min.</value>
-  </data>
-  <data name="ms_temporizador_limite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="ms_temporizador_limite.Text" xml:space="preserve">
-    <value>Límite</value>
-  </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 6</value>
-  </data>
-  <data name="ms_temporizador_nolimite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="ms_temporizador_nolimite.Text" xml:space="preserve">
-    <value>Sin límite</value>
-  </data>
-  <data name="ms_temporizador.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
-  </data>
-  <data name="ms_temporizador.Text" xml:space="preserve">
-    <value>Temporizador</value>
-  </data>
   <data name="ms_principal.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -515,6 +482,60 @@
   </data>
   <data name="&gt;&gt;ms_principal.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ms_archivo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="ms_archivo.Text" xml:space="preserve">
+    <value>Archivo</value>
+  </data>
+  <data name="ms_archivo_nuevapartida.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="ms_archivo_nuevapartida.Text" xml:space="preserve">
+    <value>Nueva partida</value>
+  </data>
+  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 6</value>
+  </data>
+  <data name="ms_archivo_salir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="ms_archivo_salir.Text" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="ms_temporizador.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <data name="ms_temporizador.Text" xml:space="preserve">
+    <value>Temporizador</value>
+  </data>
+  <data name="ms_temporizador_limite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ms_temporizador_limite.Text" xml:space="preserve">
+    <value>Límite</value>
+  </data>
+  <data name="ms_temporizador_limite_5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="ms_temporizador_limite_5.Text" xml:space="preserve">
+    <value>5 min.</value>
+  </data>
+  <data name="ms_temporizador_limite_10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 22</value>
+  </data>
+  <data name="ms_temporizador_limite_10.Text" xml:space="preserve">
+    <value>10 min.</value>
+  </data>
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 6</value>
+  </data>
+  <data name="ms_temporizador_nolimite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ms_temporizador_nolimite.Text" xml:space="preserve">
+    <value>Sin límite</value>
   </data>
   <metadata name="timer_blancas.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>136, 17</value>

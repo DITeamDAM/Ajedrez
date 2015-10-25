@@ -71,6 +71,7 @@
         pb_c16.Load(Application.StartupPath & "/img/15.png")
         pb_c12.Load(Application.StartupPath & "/img/12.png")
 
+
         reset()
     End Sub
 
@@ -641,6 +642,11 @@
                 lbl_contador_blancas.Text = temporizadorIncremento(lbl_contador_blancas.Text)
                 timer_negras.Stop()
                 timer_blancas.Start()
+
+                If panel_pause.Image Is Nothing Then
+                    panel_pause.Load(Application.StartupPath & "/img/panel_pause.png")
+                End If
+
             End If
         End If
 
@@ -664,6 +670,11 @@
                 lbl_contador_negras.Text = temporizadorIncremento(lbl_contador_negras.Text)
                 timer_blancas.Stop()
                 timer_negras.Start()
+
+                If panel_pause.Image Is Nothing Then
+                    panel_pause.Load(Application.StartupPath & "/img/panel_pause.png")
+                End If
+
             End If
         End If
 
@@ -904,6 +915,8 @@
 
         lbl_contador_blancas.ForeColor = System.Drawing.Color.Silver
         lbl_contador_negras.ForeColor = System.Drawing.Color.Silver
+
+        panel_pause.Load(Application.StartupPath & "/img/panel_pause.png")
     End Sub
 
 
@@ -916,6 +929,8 @@
 
         lbl_contador_blancas.ForeColor = System.Drawing.Color.Silver
         lbl_contador_negras.ForeColor = System.Drawing.Color.Silver
+
+        panel_pause.Load(Application.StartupPath & "/img/panel_pause.png")
     End Sub
 
 
@@ -956,6 +971,8 @@
         lbl_contador_blancas.ForeColor = ColorTranslator.FromHtml("#E5E5E5")
         lbl_contador_negras.ForeColor = ColorTranslator.FromHtml("#E5E5E5")
 
+        panel_pause.Image = Nothing
+
         ms_temporizador_limite_5.Checked = False
         ms_temporizador_limite_10.Checked = False
         ms_temporizador_nolimite.Checked = True
@@ -970,6 +987,8 @@
     Private Sub ms_principal_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ms_principal.ItemClicked
         timer_blancas.Stop()
         timer_negras.Stop()
+
+        panel_pause.Image = Nothing
     End Sub
 
 
@@ -1113,4 +1132,10 @@
         doCambioPeon(15)
     End Sub
 
+    Private Sub panel_pause_Click(sender As Object, e As EventArgs) Handles panel_pause.Click
+        timer_blancas.Stop()
+        timer_negras.Stop()
+
+        panel_pause.Image = Nothing
+    End Sub
 End Class
