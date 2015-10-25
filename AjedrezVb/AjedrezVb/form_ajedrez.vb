@@ -13,19 +13,17 @@
 
     Dim arrayRecuento(11)
 
-
     Dim turno As Boolean = True
     Dim clicked1st As PictureBox = Nothing
     Dim ultimoMov As String = "-1"
 
 
-
     'Asignacion de color del tablero, por si mas adelante queremos modificar el color, asi como poner imagenes de fondo (si fuera posible sin alterar las img de las figuras)
     Dim colorNegroTablero = ColorTranslator.FromHtml("#C6932D")
-    Dim colorBlancoTablrero = ColorTranslator.FromHtml("#FEE8B9")
+    Dim colorBlancoTablero = ColorTranslator.FromHtml("#FEE8B9")
 
     Dim arrayCas(7, 7) As PictureBox
-    Dim arrayTablero(7, 7) As PictureBox
+    Dim arrayTablero(7, 7) As Color
 
 
     Private Sub form_ajedrez_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,9 +45,9 @@
                     .Tag = 0
 
                     arrayCas(i, j) = casilla
-                    arrayTablero(i, j) = casilla
 
                     setTablero(i, j)
+
 
                     Me.Controls.Add(casilla)
                     AddHandler casilla.MouseClick, AddressOf colocando
@@ -74,14 +72,23 @@
         pb_c12.Load(Application.StartupPath & "/img/12.png")
 
         reset()
-
     End Sub
+
 
     'Para crear las figuras segun los parametros, valido tambien para futuros usos en otros metodos
     Private Sub setFigura(obj As PictureBox, color As Integer, tipo As Integer)
         obj.Tag = color & tipo
         obj.Load(Application.StartupPath & "/img/" & color & tipo & ".png")
     End Sub
+
+
+    Private Sub borrarPieza(obj As PictureBox)
+        Dim casillaClick As PictureBox = arrayCas(getPosicionFila(obj), getPosicionColumna(obj))
+        casillaClick.Tag = 0
+        casillaClick.Image = Nothing
+        casillaClick.BackColor = arrayTablero(getPosicionFila(obj), getPosicionColumna(obj))
+    End Sub
+
 
     Private Function getColor(obj As PictureBox)
         Return CInt(CStr(obj.Tag).Substring(0, 1))
@@ -107,12 +114,14 @@
         Return CInt(obj.Name.Substring(1, 1))
     End Function
 
+
     'Empieza el recuento de fichas comidas, el reseteo, el set de fichas, y el get
     Private Sub resetRecuento()
         For i = 0 To 11
             arrayRecuento(i) = 0
         Next
     End Sub
+
 
     Private Sub setRecuento(pieza As PictureBox)
         Select Case getColor(pieza)
@@ -152,8 +161,6 @@
 
         End Select
     End Sub
-
-
 
 
     Private Function getRecuento(color As Integer, tipo As Integer)
@@ -197,11 +204,6 @@
     End Function
 
 
-
-
-
-
-
     Private Sub reset()
 
         'reseta el recuento de las fichas comidas
@@ -214,6 +216,9 @@
         resetTemporizador()
         ms_temporizador.Enabled = True 'muestra la opcion del temporizador
 
+        'resetea el enroque
+        resetEnroque()
+
         clicked1st = Nothing
         ultimoMov = "-1"
         turno = True
@@ -222,7 +227,7 @@
         For x = 0 To 7
             For y = 0 To 7
 
-                arrayCas(x, y).ImageLocation = Nothing
+                arrayCas(x, y).Image = Nothing
                 arrayCas(x, y).Tag = 0
 
                 setTablero(x, y)
@@ -263,14 +268,12 @@
             Next
         Next
 
-
         'Resetea el color inicial del panel lateral
         ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
     End Sub
 
 
     Private Function horizontal(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
         Select Case getPosicion(click2nd)
             Case getPosicion(click1st) - 1,
                  getPosicion(click1st) + 1
@@ -284,7 +287,6 @@
 
 
     Private Function vertical(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
         Select Case getPosicion(click2nd)
             Case getPosicion(click1st) - 10,
                  getPosicion(click1st) + 10
@@ -413,7 +415,6 @@
 
 
     Private Function limite(ByVal click1st As Integer, click2nd As Integer)
-
         If click1st <> click2nd Then
             Return True
         End If
@@ -422,7 +423,6 @@
     End Function
 
 
-    'En el movimiento del peón no hace falta implementar una funcion "interponer" ya que solo come en diagonal, y he tenido que forzarlo directamente para que no coma hacia adelante
     Function MovPeon(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         Dim normal As Integer = 0
         Dim doble As Integer = 0
@@ -465,38 +465,77 @@
     End Function
 
 
-    'Function MovTorre(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
-    '    If verticales(click1st, click2nd) Or horizontales(click1st, click2nd) Then
-    '        Return True
-    '    End If
-
-    '    Return False
-    'End Function
-
     Function MovTorre(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
         If verticales(click1st, click2nd) Or horizontales(click1st, click2nd) Then
-            If getPosicion(click1st) = 0 Then
-                torremovidaIN = True
-            End If
-            If getPosicion(click1st) = 7 Then
-                torremovidaDN = True
-            End If
-            If getPosicion(click1st) = 70 Then
-                torremovidaIB = True
-            End If
-            If getPosicion(click1st) = 77 Then
-                torremovidaDB = True
-            End If
             Return True
         End If
 
         Return False
     End Function
 
-    Function MovCaballo(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
 
+    'ENROQUE
+    Dim arrayCheckMovido(5) As Boolean
+    '0 rey blanco, 1 rey negro, 2 y 3 torres blancas, 4 y 5 torres negras
+
+
+    Private Sub resetEnroque()
+        For i = 0 To 5
+            arrayCheckMovido(i) = False
+        Next
+    End Sub
+
+
+
+    Private Function doEnroque(click2nd As PictureBox)
+        If arrayCheckMovido(0) = False Then
+            If arrayCheckMovido(2) = False And getPosicion(click2nd) = 71 Then
+                For i = 3 To 2 Step -1
+                    If getColor(arrayCas(7, i)) <> 0 Then
+                        Return False
+                    End If
+                    borrarPieza(arrayCas(7, 0))
+                    setFigura(arrayCas(7, 2), blanca, torre)
+                    Return True
+                Next
+            End If
+            If arrayCheckMovido(3) = False And getPosicion(click2nd) = 76 Then
+                If getColor(arrayCas(7, 5)) <> 0 Then
+                    Return False
+                End If
+                borrarPieza(arrayCas(7, 7))
+                setFigura(arrayCas(7, 5), blanca, torre)
+                Return True
+            End If
+        End If
+
+        If arrayCheckMovido(1) = False Then
+            If arrayCheckMovido(4) = False And getPosicion(click2nd) = 1 Then
+                For i = 3 To 2 Step -1
+                    If getColor(arrayCas(0, i)) <> 0 Then
+                        Return False
+                    End If
+                    borrarPieza(arrayCas(0, 0))
+                    setFigura(arrayCas(0, 2), negra, torre)
+                    Return True
+                Next
+            End If
+            If arrayCheckMovido(5) = False And getPosicion(click2nd) = 6 Then
+                If getColor(arrayCas(0, 5)) <> 0 Then
+                    Return False
+                End If
+                borrarPieza(arrayCas(0, 7))
+                setFigura(arrayCas(0, 5), negra, torre)
+                Return True
+            End If
+        End If
+
+        'MsgBox("HAY ENROQUE")
+        Return False
+    End Function
+
+
+    Function MovCaballo(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
         Select Case getPosicion(click2nd)
             Case getPosicion(click1st) + 8,
                  getPosicion(click1st) + 12,
@@ -508,7 +547,6 @@
                  getPosicion(click1st) - 21
 
                 Return limite(getColor(click1st), getColor(click2nd))
-
         End Select
 
         Return False
@@ -523,7 +561,6 @@
 
 
     Function MovReina(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
         If verticales(click1st, click2nd) OrElse diagonales(click1st, click2nd) OrElse horizontales(click1st, click2nd) Then
             Return True
         End If
@@ -532,89 +569,17 @@
     End Function
 
 
-    'Function MovRey(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
-    '    If vertical(click1st, click2nd) Or horizontal(click1st, click2nd) Or diagonal(click1st, click2nd) Then
-    '        Return True
-    '    End If
-
-    '    Return False
-    'End Function
-
-
-
-
-
-
-
-
-
-
-
-
-    Dim reymovidoB As Boolean = False
-    Dim reymovidoN As Boolean = False
-    Dim torremovidaDB As Boolean = False
-    Dim torremovidaIB As Boolean = False
-    Dim torremovidaDN As Boolean = False
-    Dim torremovidaIN As Boolean = False
     Function MovRey(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
-        If vertical(click1st, click2nd) Or horizontal(click1st, click2nd) Or diagonal(click1st, click2nd) Then
-            If click1st.Tag = 16 Then
-                reymovidoN = True
-            End If
-            If click1st.Tag = 26 Then
-                reymovidoB = True
-            End If
+        If vertical(click1st, click2nd) Or horizontal(click1st, click2nd) Or diagonal(click1st, click2nd) Or doEnroque(click2nd) Then
             Return True
-
-        End If
-        If enroque(click1st) = 1 And reymovidoB = False And torremovidaDB = False And getPosicion(click2nd) = 76 Then
-
-
-
-            Return 1
-
-
-
-
-        End If
-        If enroque(click1st) = 3 And reymovidoN = False And torremovidaDN = False And getPosicion(click2nd) = 6 Then
-
-            Return 3
-
-        End If
-        If enroque(click1st) = 2 And reymovidoB = False And torremovidaDN = False And getPosicion(click2nd) = 72 Then
-
-            Return 2
-
-        End If
-        If enroque(click1st) = 4 And reymovidoN = False And torremovidaIN = False And getPosicion(click2nd) = 2 Then
-
-            Return 4
-
         End If
 
         Return False
     End Function
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     'Comprueba que se ha seleccionado una figura
     Function comprobador(ByVal click1st As PictureBox, ByVal click2nd As PictureBox)
-
         Select Case getTipo(click1st)
             Case 1
                 Return MovPeon(click1st, click2nd)
@@ -638,45 +603,39 @@
     Dim bgcolorClick1st = ColorTranslator.FromHtml("#5DB3FF") '#f3fc41
     Dim bgcolorClick2nd = ColorTranslator.FromHtml("#57D837") '#4DFC41
 
-    Dim colorClicked1st As Integer
-
-    Dim color1st As Color
-    Dim color2nd As Color
-
 
     Private Sub guardarPieza(click As PictureBox)
+        'clicked1st = arrayCas(getPosicionFila(click), getPosicionColumna(click))
         clicked1st = click
-        colorClicked1st = getColor(clicked1st)
-        color1st = clicked1st.BackColor
         clicked1st.BackColor = bgcolorClick1st
     End Sub
 
 
-
-
-
-    Private Sub moverClick(click As PictureBox)
-
+    Private Sub moviendo(click As PictureBox)
         If ms_temporizador.Enabled Then
             ms_temporizador.Enabled = False
         End If
 
-        color2nd = click.BackColor
-
+        'seteando el segundo click con los datos del primero, el efecto de mover
         click.Tag = clicked1st.Tag
-        clicked1st.Tag = 0
-
-        click.ImageLocation = clicked1st.ImageLocation
-        clicked1st.ImageLocation = Nothing
-
-        clicked1st.BackColor = color1st
+        click.Image = clicked1st.Image
         click.BackColor = bgcolorClick2nd
-
-        clicked1st = Nothing
 
         ultimoMov = click.Name
 
         If getColor(click) = negra Then
+            Select Case getTipo(click)
+                Case rey
+                    arrayCheckMovido(1) = True
+                'MsgBox("rey negro movido")
+                Case torre And getPosicion(clicked1st) = 0
+                    arrayCheckMovido(4) = True
+                'MsgBox("torre negra izquierda movida")
+                Case torre And getPosicion(clicked1st) = 7
+                    arrayCheckMovido(5) = True
+                    'MsgBox("torre negra derecha movida")
+            End Select
+
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#F8F8F8")
             If ms_temporizador_nolimite.Checked = False Then
                 lbl_contador_blancas.Text = temporizadorIncremento(lbl_contador_blancas.Text)
@@ -684,7 +643,22 @@
                 timer_blancas.Start()
             End If
         End If
+
         If getColor(click) = blanca Then
+            Select Case getTipo(click)
+                Case rey
+                    arrayCheckMovido(0) = True
+                'MsgBox("rey blanco movido")
+                Case torre
+                    If getPosicion(clicked1st) = 70 Then
+                        arrayCheckMovido(2) = True
+                        'MsgBox("torre blanca izquierda movida")
+                    ElseIf getPosicion(clicked1st) = 77
+                        arrayCheckMovido(3) = True
+                        'MsgBox("torre blanca derecha movida")
+                    End If
+            End Select
+
             ms_turno_color.BackColor = ColorTranslator.FromHtml("#3F3F3F")
             If ms_temporizador_nolimite.Checked = False Then
                 lbl_contador_negras.Text = temporizadorIncremento(lbl_contador_negras.Text)
@@ -694,7 +668,8 @@
         End If
 
 
-
+        borrarPieza(clicked1st)
+        clicked1st = Nothing
     End Sub
 
 
@@ -708,103 +683,78 @@
 
     Dim primerclick As Boolean = True
 
-    Private Sub mover(clicked2nd As PictureBox)
-        'Dim mov As PictureBox = clicked2nd
+    Private Sub mover(clicked As PictureBox)
+        If clicked1st Is Nothing Then
 
-
-        If (getColor(clicked2nd) <> 0) Then
-
-            If clicked1st Is Nothing Then
-                guardarPieza(clicked2nd)
-            End If
-
-
-            'marca el ultimo movimiento
-            If ultimoMov <> "-1" Then 'si es el primer movimiento de todos, que no haga nada
-                arrayCas(getFilaInt(ultimoMov), getColumnaInt(ultimoMov)).BackColor = color2nd
-            End If
-
-
-            Dim colorClicked2nd As Integer = getColor(clicked2nd)
-
-            'si es del mismo color
-            If colorClicked1st = colorClicked2nd Then
-                clicked1st.BackColor = color1st 'setea el color que habia antes de fondo
-                guardarPieza(clicked2nd)
-            Else 'si no, la come
-                If comprobador(clicked1st, clicked2nd) Then
-
-                    setRecuento(clicked2nd)
-
-                    If getRecuento(blanca, rey) = 1 Then
-                        If MsgBox("Gana el jugador2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                            reset()
-                            Exit Sub
-                        Else
-                            End
-                        End If
-                    ElseIf getRecuento(negra, rey) = 1 Then
-                        If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
-                            reset()
-                            Exit Sub
-                        Else
-                            End
-                        End If
-                    End If
-
-                    moverClick(clicked2nd)
-                    setCambioPeon(clicked2nd)
-
-                End If
+            If getColor(clicked) <> 0 Then
+                guardarPieza(clicked)
+                primerclick = False
+                Exit Sub
+            Else
+                primerclick = True
+                clicked1st = Nothing
             End If
 
         Else
+            'marca el ultimo movimiento
+            If ultimoMov <> "-1" Then 'si es el primer movimiento de todos, que no haga nada
+                arrayCas(getFilaInt(ultimoMov), getColumnaInt(ultimoMov)).BackColor = arrayTablero(getFilaInt(ultimoMov), getColumnaInt(ultimoMov))
+            End If
 
-            If clicked1st IsNot Nothing Then 'si el en el segundo click no hay nada, la mueve libremente
-                Select Case comprobador(clicked1st, clicked2nd)
-                    Case True
-                        moverClick(clicked2nd)
-                        setCambioPeon(clicked2nd)
+            If getColor(clicked) <> 0 Then 'si el segundo click esta ocupado mira si es del mismo color, o no
 
-                    Case 1
-                        moverClick(clicked2nd)
-                        arrayCas(7, 7).Tag = 0
-                        arrayCas(7, 7).Image = Nothing
-                        arrayCas(7, 5).Tag = 22
-                        arrayCas(7, 5).Load(Application.StartupPath & "/img/22.png")
-                    Case 2
-                        moverClick(clicked2nd)
-                        arrayCas(7, 0).Tag = 0
-                        arrayCas(7, 0).Image = Nothing
-                        arrayCas(7, 3).Tag = 22
-                        arrayCas(7, 3).Load(Application.StartupPath & "/img/22.png")
-                    Case 3
-                        moverClick(clicked2nd)
-                        arrayCas(0, 7).Tag = 0
-                        arrayCas(0, 7).Image = Nothing
-                        arrayCas(0, 5).Tag = 12
-                        arrayCas(0, 5).Load(Application.StartupPath & "/img/12.png")
-                    Case 4
-                        moverClick(clicked2nd)
-                        arrayCas(0, 0).Tag = 0
-                        arrayCas(0, 0).Image = Nothing
-                        arrayCas(0, 3).Tag = 12
+                If getColor(clicked1st) = getColor(clicked) Then 'si son del mismo equipo
+                    clicked1st.BackColor = getColorTablero(clicked1st) 'setea el color de la casilla
+                    clicked1st = Nothing 'borra el objeto de la pieza guardada
+                    guardarPieza(clicked) 'vuelve a guardar la pieza clickeada
 
-                        arrayCas(0, 3).Load(Application.StartupPath & "/img/12.png")
+                Else 'si no, se la come (borra la pieza y pone la guardada ahi)
 
-                End Select
+                    If comprobador(clicked1st, clicked) Then 'comprueba si el movimiento es correcto, y si es correcto:
 
+                        setRecuento(clicked)
 
+                        If getRecuento(blanca, rey) = 1 Then
+                            If MsgBox("Gana el jugador2, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                                reset()
+                                Exit Sub
+                            Else
+                                End
+                            End If
+                        ElseIf getRecuento(negra, rey) = 1 Then
+                            If MsgBox("Gana el jugador 1, ¿desea la revancha?", MsgBoxStyle.YesNo) <> 7 Then
+                                reset()
+                                Exit Sub
+                            Else
+                                End
+                            End If
+                        End If
 
+                        moviendo(clicked)
+                        setCambioPeon(clicked)
+                    Else
+                        primerclick = False
+                    End If
 
+                End If
 
-            Else
-                primerclick = True
-                'MsgBox("Selecciona una pieza")
+            Else 'si no esta ocupada, mueve la pieza sin hacer nada mas
+                If comprobador(clicked1st, clicked) Then 'comprueba si el movimiento es correcto, y si es correcto:
+                    moviendo(clicked)
+                    setCambioPeon(clicked)
+                Else
+                    primerclick = False
+                End If
             End If
 
         End If
+
     End Sub
+
+
+    Private Function getColorTablero(obj As PictureBox)
+        Return arrayTablero(getPosicionFila(obj), getPosicionColumna(obj))
+    End Function
 
 
     Private Sub colocando(clicked As PictureBox, e As EventArgs)
@@ -812,6 +762,7 @@
 
             If primerclick Then
                 primerclick = False
+
                 If turno Then
                     If getColor(clicked) = blanca Then
                         mover(clicked)
@@ -842,26 +793,27 @@
                     primerclick = False
                 End If
 
-                If comprobador(clicked1st, clicked) = False Then
-                    primerclick = False
-                End If
-
                 mover(clicked)
             End If
 
         End If
     End Sub
 
+
     Private Sub setTablero(x As Integer, y As Integer)
         If x Mod 2 = 0 Then
-            arrayCas(x, y).BackColor = colorBlancoTablrero
+            arrayCas(x, y).BackColor = colorBlancoTablero
+            arrayTablero(x, y) = colorBlancoTablero
             If y Mod 2 <> 0 Then
                 arrayCas(x, y).BackColor = colorNegroTablero
+                arrayTablero(x, y) = colorNegroTablero
             End If
         Else
             arrayCas(x, y).BackColor = colorNegroTablero
+            arrayTablero(x, y) = colorNegroTablero
             If y Mod 2 <> 0 Then
-                arrayCas(x, y).BackColor = colorBlancoTablrero
+                arrayCas(x, y).BackColor = colorBlancoTablero
+                arrayTablero(x, y) = colorBlancoTablero
             End If
         End If
     End Sub
@@ -943,9 +895,7 @@
     End Function
 
 
-
     Private Sub ms_temporizador_limite_5_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_5.Click
-
         lbl_contador_blancas.Text = "05:00"
         lbl_contador_negras.Text = "05:00"
         ms_temporizador_limite_5.Checked = True
@@ -954,11 +904,10 @@
 
         lbl_contador_blancas.ForeColor = System.Drawing.Color.Silver
         lbl_contador_negras.ForeColor = System.Drawing.Color.Silver
-
     End Sub
 
-    Private Sub ms_temporizador_limite_10_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_10.Click
 
+    Private Sub ms_temporizador_limite_10_Click(sender As Object, e As EventArgs) Handles ms_temporizador_limite_10.Click
         lbl_contador_blancas.Text = "10:00"
         lbl_contador_negras.Text = "10:00"
         ms_temporizador_limite_10.Checked = True
@@ -967,8 +916,9 @@
 
         lbl_contador_blancas.ForeColor = System.Drawing.Color.Silver
         lbl_contador_negras.ForeColor = System.Drawing.Color.Silver
-
     End Sub
+
+
     Private Sub timer_blancas_Tick(sender As Object, e As EventArgs) Handles timer_blancas.Tick
         lbl_contador_negras.ForeColor = ColorTranslator.FromHtml("#AAAAAA")
 
@@ -980,6 +930,7 @@
 
         lbl_contador_blancas.Text = temporizador(lbl_contador_blancas.Text)
     End Sub
+
 
     Private Sub timer_negras_Tick(sender As Object, e As EventArgs) Handles timer_negras.Tick
         lbl_contador_blancas.ForeColor = ColorTranslator.FromHtml("#AAAAAA")
@@ -993,6 +944,7 @@
 
         lbl_contador_negras.Text = temporizador(lbl_contador_negras.Text)
     End Sub
+
 
     Private Sub resetTemporizador()
         timer_blancas.Stop()
@@ -1009,15 +961,16 @@
         ms_temporizador_nolimite.Checked = True
     End Sub
 
+
     Private Sub ms_temporizador_nolimite_Click(sender As Object, e As EventArgs) Handles ms_temporizador_nolimite.Click
         resetTemporizador()
     End Sub
+
 
     Private Sub ms_principal_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ms_principal.ItemClicked
         timer_blancas.Stop()
         timer_negras.Stop()
     End Sub
-
 
 
     'CAMBIO DE PEON
@@ -1037,7 +990,6 @@
         pb_c23.Visible = True
         pb_c22.Visible = True
         pb_c26.Visible = True
-
     End Sub
 
 
@@ -1053,7 +1005,6 @@
         pb_c13.Visible = True
         pb_c12.Visible = True
         pb_c16.Visible = True
-
     End Sub
 
 
@@ -1129,9 +1080,11 @@
         doCambioPeon(22)
     End Sub
 
+
     Private Sub pb_pb_caballo_Click(sender As Object, e As EventArgs) Handles pb_c23.Click
         doCambioPeon(23)
     End Sub
+
 
     Private Sub pb_pb_alfil_Click(sender As Object, e As EventArgs) Handles pb_c24.Click
         doCambioPeon(24)
@@ -1140,40 +1093,24 @@
         doCambioPeon(25)
     End Sub
 
+
     Private Sub pb_pn_torre_Click(sender As Object, e As EventArgs) Handles pb_c12.Click
         doCambioPeon(12)
     End Sub
+
 
     Private Sub pb_pn_caballo_Click(sender As Object, e As EventArgs) Handles pb_c13.Click
         doCambioPeon(13)
     End Sub
 
+
     Private Sub pb_pn_alfil_Click(sender As Object, e As EventArgs) Handles pb_c14.Click
         doCambioPeon(14)
     End Sub
+
+
     Private Sub pb_pn_reina_Click(sender As Object, e As EventArgs) Handles pb_c16.Click
         doCambioPeon(15)
     End Sub
-
-
-    'ENROQUE -->> INTENTAR HACER DE OTRA FORMA (ESTO AFECTA AL METODO DEL MOVIMIENTO DEL REY Y DE LA TORRE, TENER EN CUENTA
-
-    Function enroque(ByVal click1 As PictureBox)
-
-        If arrayCas(7, 6).Tag = 0 And arrayCas(7, 5).Tag = 0 Then
-            Return 1
-        End If
-        If arrayCas(7, 3).Tag = 0 And arrayCas(7, 2).Tag = 0 And arrayCas(7, 1).Tag = 0 Then
-            Return 2
-        End If
-        If arrayCas(0, 6).Tag = 0 And arrayCas(0, 5).Tag = 0 Then
-            Return 3
-        End If
-        If arrayCas(0, 3).Tag = 0 And arrayCas(0, 2).Tag = 0 And arrayCas(0, 1).Tag = 0 Then
-            Return 4
-        End If
-
-    End Function
-
 
 End Class
